@@ -1,0 +1,33 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+# Local integration evidence can contain organization data.
+docs/backend-read-check.json
+docs/browser-checks.json
+docs/screenshots/
+docs/PRODUCTION_READINESS_REPORT.md
+docs/API_IMPLEMENTATION_MATRIX.md
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
