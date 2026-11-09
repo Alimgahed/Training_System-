@@ -40,7 +40,7 @@ export function TrainerSubjectDetail() {
       />
 
       <Card title="البيانات التنظيمية">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 'var(--space-5)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
           <InfoField label="المعرّف (ID)" value={data?.id} />
             <InfoField label="المدرب" value={data?.person?.name || data?.person_id} />
             <InfoField label="الموضوع التدريبي" value={data?.learning_subject?.name || data?.learning_subject_id} />

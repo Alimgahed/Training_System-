@@ -46,7 +46,7 @@ export function PathGradeSubjectTermDetail() {
       />
 
       <Card title="بيانات المسار والمناهج">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 'var(--space-5)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
             <InfoField label="المعرّف (ID)" value={data?.id} />
             <InfoField label="الكود" value={data?.code} />
             <InfoField label="المسار التدريبي" value={data?.path_grade_subject?.path_grade?.learning_path?.name} />

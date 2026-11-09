@@ -8,22 +8,23 @@ import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
 import { PageHeader } from '../../../shared/components/PageHeader';
 import { Table } from '../../../shared/components/Table';
 import { Tabs } from '../../../shared/components/Tabs';
+import { trainingVisual } from '../../../shared/trainingVisuals';
 import { useCourse } from '../api/useGetQuery';
 
 const InfoField = ({ label, value }: { label: string, value: any }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
     <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)' }}>{label}</span>
-    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value || '—'}</span>
+    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value ?? '—'}</span>
   </div>
 );
 
 export function CourseDetail() {
   const { id } = useParams<{ id: string }>();
-  const { data: course, isLoading, isError, error } = useCourse(id || '');
+  const { data: course, isLoading, isError, error, refetch } = useCourse(id || '');
   const [activeTab, setActiveTab] = useState('overview');
 
   if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState error={error as Error} />;
+  if (isError) return <ErrorState error={error as Error} onRetry={() => refetch()} />;
   if (!course) return <ErrorState error={new Error("Course not found")} />;
 
   const tabs = [
@@ -41,7 +42,7 @@ export function CourseDetail() {
   );
 
   const overviewTab = (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-4)' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 'var(--space-4)' }}>
       <Card title="معلومات الدورة">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <InfoField label="الاسم" value={course.name} />
@@ -117,7 +118,8 @@ export function CourseDetail() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader 
+      <PageHeader
+        image={`/training/${trainingVisual(course.name ?? '')}.jpg`}
         title={course.name || 'تفاصيل الدورة'} 
         breadcrumbs={[
           { label: 'لوحة التحكم', href: '/' }, 

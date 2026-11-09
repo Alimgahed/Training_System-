@@ -1,3 +1,4 @@
+import { ReferenceActions } from '../../../shared/components/ReferenceActions';
 import { Database,Search } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +37,7 @@ export function DocumentationTypeList() {
       />
 
       <Card>
-        <div style={{ padding: 'var(--space-3) var(--space-4)', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+        <div className="record-search-toolbar" style={{ padding: 'var(--space-3) var(--space-4)', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
           <div style={{ position: 'relative', flex: 1, maxWidth: '320px' }}>
             <Search size={16} style={{ position: 'absolute', right: 'var(--space-3)', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-tertiary)' }} />
             <input
@@ -53,6 +54,7 @@ export function DocumentationTypeList() {
             />
           </div>
           {!isLoading && <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)' }}>{filtered.length} سجل</span>}
+          <ReferenceActions placement="toolbar" />
         </div>
         <Table
           data={filtered}

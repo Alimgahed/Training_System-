@@ -37,7 +37,7 @@ export function PathGradeSubjectCreate() {
   return (
     <div className="legacy-form-workspace" style={{ padding: '30px', maxWidth: '800px', margin: '40px auto', backgroundColor: '#fdfdfd', borderRadius: '12px', boxShadow: '0 8px 30px rgba(0,0,0,0.1)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '30px', borderBottom: '2px solid #eaeaea', paddingBottom: '15px' }}>
-        <h2>بيانات السجل</h2>
+        <h1>بيانات مادة المسار</h1>
         <Link to="/path-grade-subjects"><Button>العودة للقائمة</Button></Link>
       </div>
 

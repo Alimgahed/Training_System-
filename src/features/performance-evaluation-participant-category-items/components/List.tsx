@@ -1,3 +1,4 @@
+import { ReferenceActions } from '../../../shared/components/ReferenceActions';
 import { ClipboardList,Search } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -49,7 +50,7 @@ export function PerformanceEvaluationParticipantCategoryItemList() {
       />
 
       <Card>
-        <div style={{ padding: 'var(--space-3) var(--space-4)', borderBottom: '1px solid var(--color-border)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', alignItems: 'end', gap: 'var(--space-3)' }}>
+        <div className="record-search-toolbar" style={{ padding: 'var(--space-3) var(--space-4)', borderBottom: '1px solid var(--color-border)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', alignItems: 'end', gap: 'var(--space-3)' }}>
           <Select label="نوع المشارك" value={participantType} onChange={(event) => setParticipantType(event.target.value)} isLoading={loadingTypes} options={[{ value: '', label: 'كل الأنواع' }, ...participantTypes.map((type: any) => ({ value: type.id ?? "", label: type.name || `نوع #${type.id}` }))]} />
           <Select label="فئة التقييم" value={evaluationCategory} onChange={(event) => setEvaluationCategory(event.target.value)} isLoading={loadingCategories} options={[{ value: '', label: 'كل الفئات' }, ...evaluationCategories.map((category: any) => ({ value: category.id ?? "", label: category.name || `فئة #${category.id}` }))]} />
           <div style={{ position: 'relative', flex: 1, maxWidth: '320px' }}>
@@ -68,6 +69,7 @@ export function PerformanceEvaluationParticipantCategoryItemList() {
             />
           </div>
           {!isLoading && <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)' }}>{filtered.length} سجل</span>}
+          <ReferenceActions placement="toolbar" />
         </div>
         <Table
           data={filtered}

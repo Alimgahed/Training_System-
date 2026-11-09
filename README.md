@@ -87,3 +87,7 @@ export default defineConfig([
 ])
 
 ```
+
+## UI transformation validation
+
+See `docs/TRAINING_PLATFORM_IMPLEMENTATION_REPORT.md` for scope, screenshots and remaining workflow checks. Run `npm run test:ui` for catalog/filter/artwork regression tests (Node 22.15+ for the TSX render loader). The existing route/form contract checks remain required. Generated imagery and its exact prompts are in `public/training/manifest.json`.

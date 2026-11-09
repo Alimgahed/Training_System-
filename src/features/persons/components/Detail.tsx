@@ -44,7 +44,7 @@ export function PersonDetail() {
         actions={actions}
       />
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-4)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 'var(--space-4)' }}>
         <Card title="البيانات الشخصية">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <InfoField label="الكود" value={person.code} />
@@ -68,7 +68,7 @@ export function PersonDetail() {
 
         <div style={{ gridColumn: '1 / -1' }}>
           <Card title="المسار التدريبي">
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-3)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-3)' }}>
               <InfoField label="المسار التدريبي الحالي" value={relationName(person.current_learning_path, person.current_learning_path_id)} />
               <InfoField label="الدرجة الحالية" value={relationName(person.current_grade_data, person.current_grade_id || person.current_grade)} />
               <InfoField label="تاريخ الدرجة الحالية" value={displayDate(person.date_of_current_grade)} />
@@ -80,7 +80,7 @@ export function PersonDetail() {
         {person.is_trainer && (
           <div style={{ gridColumn: '1 / -1' }}>
             <Card title="بيانات المدرب">
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-3)' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-3)' }}>
                 <InfoField label="الجهة المانحة لشهادة المدرب" value={relationName(person.trainer_certifying_organization, person.trainer_certifying_organization_id)} />
               </div>
             </Card>
@@ -89,7 +89,7 @@ export function PersonDetail() {
 
         <div style={{ gridColumn: '1 / -1' }}>
           <Card title="حساب النظام">
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-3)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-3)' }}>
               <InfoField label="اسم المستخدم" value={person.user_name} />
               <InfoField label="مجموعة الصلاحيات" value={person.group_id} />
             </div>

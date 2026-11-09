@@ -37,14 +37,14 @@ export function PersonList() {
 
   return <div className="people-page">
     <nav className="people-breadcrumb"><Link to="/">الرئيسية</Link><span>‹</span><span>الموارد البشرية</span><span>‹</span><strong>الموظفين</strong></nav>
-    <header className="people-header"><div><h1>إدارة الموظفين</h1><p>عرض وتحديث بيانات الموظفين والمدربين داخل النظام</p></div><Link to="/persons/new"><Button size="lg"><Plus size={20} />إضافة موظف جديد</Button></Link></header>
+    <header className="people-header"><div><h1>إدارة الموظفين</h1><p>عرض وتحديث بيانات الموظفين والمدربين داخل النظام</p></div></header>
     <section className="people-stats">{statCards.map(({ label, value, note, icon: Icon, tone }) => <article className={`people-stat people-stat--${tone}`} key={label}><div className="people-stat-copy"><h2>{label}</h2><strong>{value}</strong><p>{note}</p></div><span className="people-stat-icon"><Icon size={25} /></span></article>)}</section>
     <section className="people-filterbar" aria-label="بحث وفلاتر الموظفين">
       <label className="people-search"><Search size={20} aria-hidden="true" /><input aria-label="البحث عن موظف" value={query} onChange={event => setQuery(event.target.value)} placeholder="الاسم أو الكود أو الهاتف..." /></label>
       <label className="people-select"><span>حالة الموظف</span><select value={status} onChange={event => setStatus(event.target.value)}><option value="all">الكل</option><option value="active">نشط</option><option value="inactive">غير نشط</option></select><ChevronDown size={16} /></label>
       <label className="people-select"><span>مدرب؟</span><select value={trainer} onChange={event => setTrainer(event.target.value)}><option value="all">الكل</option><option value="yes">نعم</option><option value="no">لا</option></select><ChevronDown size={16} /></label>
       <label className="people-select"><span>الإدارة</span><select value={department} onChange={event => setDepartment(event.target.value)}><option value="all">كل الإدارات</option>{departments.map((item: any) => <option key={item.id} value={item.id}>{item.name || `إدارة #${item.id}`}</option>)}</select><ChevronDown size={16} /></label>
-    </section>
+    <div className="toolbar-create"><Link to="/persons/new"><Button size="lg"><Plus size={20} />إضافة موظف جديد</Button></Link></div></section>
     <section className="people-table-card">
       <div className="people-table-top"><span>تم العثور على <strong>{visiblePeople.length}</strong> موظف</span><span className="people-table-total">إجمالي الموظفين: {people.length}</span></div>
       <div className="people-table-scroll"><table className="people-table"><thead><tr><th>#</th><th>اسم الموظف</th><th>الكود</th><th>الإدارة</th><th>الوظيفة</th><th>المسار الحالي</th><th>رقم الهاتف</th><th>تاريخ التعاقد</th><th>الحالة</th><th>مدرب؟</th><th>التفاصيل</th></tr></thead><tbody>

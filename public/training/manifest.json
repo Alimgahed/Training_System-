@@ -1,0 +1,71 @@
+{
+  "method": "Built-in imagegen; no CLI/API fallback",
+  "purpose": "Editorial training illustrations, not actual course participants or venues",
+  "optimization": "macOS sips JPEG quality 75 (hero 78), 1200 px banners (hero 1440), 640 px derivatives at quality 72",
+  "assets": [
+    {
+      "name": "development",
+      "source": "exec-6f261347-f1d2-4ba8-9365-e689d961ee49.png",
+      "banner": "development.jpg",
+      "thumbnail": "development-card.jpg",
+      "usage": "Dashboard hero and mobile hero",
+      "prompt": "Create an original premium corporate training photograph for an Egyptian water utility learning platform homepage. Wide landscape editorial composition, contemporary training laboratory, Egyptian adult engineers and instructor studying a small clean water pump demonstration at a workbench, professional navy workwear, realistic people, soft daylight, subtle blue and teal palette, uncluttered right side for separate HTML Arabic headline overlay. Authentic professional development, beautiful architectural framing, no writing, no text, no logos, no watermark."
+    },
+    {
+      "name": "teamwork",
+      "source": "exec-bec0eafc-b640-46eb-8d55-387866b092e5.png",
+      "banner": "teamwork.jpg",
+      "thumbnail": "teamwork-card.jpg",
+      "usage": "People, participants and user administration banners; collaboration covers",
+      "prompt": "Original premium corporate editorial photograph, wide landscape for a professional Egyptian training platform: three adult colleagues in business casual clothes collaboratively planning a leadership workshop around a table in an airy modern training center, notebooks and simple wooden planning pieces, instructor listening thoughtfully, people concentrated on left half and quiet architectural space on right for HTML text overlay. Consistent navy blue, muted teal and daylight palette, natural authentic candid composition, realistic anatomy, no writing, no logos, no watermark."
+    },
+    {
+      "name": "digital",
+      "source": "exec-aed1daf1-bd88-4b4f-8cba-d611e3492e4e.png",
+      "banner": "digital.jpg",
+      "thumbnail": "digital-card.jpg",
+      "usage": "Settings banners and digital skills covers",
+      "prompt": "Original wide landscape premium editorial photo for a professional digital skills course at an Egyptian water utility. Adult Egyptian woman in navy business casual learning data analysis on a laptop with instructor nearby, bright modern computer training room, screens show only abstract blue teal charts without writing, natural daylight, authentic concentration, clean architectural composition, no text, no logos, no watermark. Cohesive navy and muted teal color grading."
+    },
+    {
+      "name": "technical",
+      "source": "exec-03e4989e-c473-4f0f-a8ed-6d9c259fb46a.png",
+      "banner": "technical.jpg",
+      "thumbnail": "technical-card.jpg",
+      "usage": "Training module banners; technical course and subject covers",
+      "prompt": "Premium original professional training editorial photo, wide landscape. Close view of a clean water pump cutaway and pressure gauge on a technical training laboratory workbench, instructor and adult trainee in navy workwear examining it in soft background, Egyptian utility education context, high quality natural daylight, restrained navy and teal grading. No readable writing, no brand, no watermark, realistic equipment, uncluttered composition suitable for course card cropping."
+    },
+    {
+      "name": "leadership",
+      "source": "exec-c7977561-7254-4a4e-ac94-6d1500da40ad.png",
+      "banner": "leadership.jpg",
+      "thumbnail": "leadership-card.jpg",
+      "usage": "Organization and job module banners; management covers",
+      "prompt": "Original wide premium corporate educational photograph for training platform. Adult Egyptian facilitator leading a small leadership development seminar, three colleagues listening around a round table in a contemporary daylight training center with blue and teal upholstery, warm natural skin tones, balanced elegant composition, focus on confident facilitator, professional business casual, no readable text or writing or logos or watermark. Different composition than a computer course, no laptops."
+    },
+    {
+      "name": "workshop",
+      "source": "exec-20023762-96e9-41db-8762-dfe00b691562.png",
+      "banner": "workshop.jpg",
+      "thumbnail": "workshop-card.jpg",
+      "usage": "Login, rooms and sessions; general course covers",
+      "prompt": "Original premium wide editorial corporate education photograph. Contemporary Egyptian professional classroom, adult learners in navy business casual seated with notebooks, instructor demonstrating a small model of water distribution at front, bright daylight, elegant blue teal architectural details, authentic workshop atmosphere, balanced wide framing with people on left and airy right side for separate webpage text. No readable text, no logos, no watermark, realistic people and hands."
+    },
+    {
+      "name": "certification",
+      "source": "exec-b6c62e8f-6934-4fad-bc5e-f4e7de432aef.png",
+      "banner": "certification.jpg",
+      "thumbnail": "certification-card.jpg",
+      "usage": "Assessment, reports and document banners; certification-related covers",
+      "prompt": "Original premium wide editorial photograph for professional certification and assessment on Egyptian training platform. Close up still life of an elegant navy certificate folder, a blank cream certificate with embossed circular seal but absolutely no writing, brass pen and closed teal notebook on a bright training room desk. Soft daylight, shallow depth of field, refined corporate education visual, navy teal palette, no text, no logos, no watermark, no fake lettering."
+    },
+    {
+      "name": "online",
+      "source": "exec-a31e62c5-bbca-48ec-8f3b-c29976bd2426.png",
+      "banner": "online.jpg",
+      "thumbnail": "online-card.jpg",
+      "usage": "Online-learning course, path and subject covers when named accordingly",
+      "prompt": "Original premium wide editorial photograph for online professional learning. Egyptian adult engineer in navy shirt wearing headphones at a tidy desk, learning remotely on a laptop in a quiet daylight workspace, screen shows small abstract diagram and video lesson with no readable text, notebook and teal ceramic cup, subtle blue teal colors, natural authentic composition suitable for course cover cropping, professional educational atmosphere. No logos, no writing, no watermark."
+    }
+  ]
+}

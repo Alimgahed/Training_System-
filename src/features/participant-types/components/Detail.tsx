@@ -40,7 +40,7 @@ export function ParticipantTypeDetail() {
       />
 
       <Card title="البيانات الأساسية">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 'var(--space-5)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
           <InfoField label="المعرّف (ID)" value={data?.id} />
             <InfoField label="الاسم" value={data?.name} />
         </div>

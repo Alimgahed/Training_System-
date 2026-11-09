@@ -1,6 +1,6 @@
 import { ChevronLeft } from 'lucide-react';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface BreadcrumbItem {
   label: string;
@@ -13,11 +13,17 @@ interface PageHeaderProps {
   breadcrumbs?: BreadcrumbItem[];
   actions?: React.ReactNode;
   badge?: React.ReactNode;
+  image?: string;
 }
 
-export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, breadcrumbs, actions, badge }) => {
+export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, breadcrumbs, actions, badge, image }) => {
+  const { pathname } = useLocation();
+  if (pathname.split('/').filter(Boolean).length === 1) return <>
+    <h1 className="visually-hidden">{title}</h1>
+    {actions && <div className="page-heading__actions">{actions}</div>}
+  </>;
   return (
-    <header className="page-heading page-heading--module">
+    <header className="page-heading page-heading--module" style={image ? { '--module-image': `url(${image})` } as React.CSSProperties : undefined}>
       {breadcrumbs && breadcrumbs.length > 0 && (
         <nav className="page-heading__breadcrumbs" aria-label="مسار التنقل">
           {breadcrumbs.map((crumb, index) => (

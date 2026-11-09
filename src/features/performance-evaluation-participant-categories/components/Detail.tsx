@@ -42,7 +42,7 @@ export function PerformanceEvaluationParticipantCategoryDetail() {
       />
 
       <Card title="بيانات السجل">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 'var(--space-5)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
           <InfoField label="المعرّف (ID)" value={data?.id} />
             <InfoField label="معرف نوع المشارك" value={data?.participant_type_id} />
             <InfoField label="معرف فئة تقييم الأداء" value={data?.performance_evaluation_category_id} />

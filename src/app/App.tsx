@@ -1,13 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
 import { ArrowLeft,BarChart3,BookOpen,Eye,EyeOff,Globe2,LockKeyhole,ShieldCheck,UserRound,UsersRound } from 'lucide-react';
-import { useState } from 'react';
+import { lazy,Suspense,useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { RouterProvider } from 'react-router-dom';
 import { z } from 'zod';
 import { apiClient } from '../core/api/apiClient';
 import { useAuthStore } from '../core/store/useAuthStore';
-import { router } from './router';
+import { LoadingSkeleton } from '../shared/components/LoadingSkeleton';
+const AuthenticatedRoutes = lazy(() => import('./AuthenticatedRoutes'));
 
 const queryClient = new QueryClient({ defaultOptions: { queries: {
   staleTime: 30_000,
@@ -50,7 +50,7 @@ export function App() {
   };
 
   if (isAuthenticated) {
-    return <QueryClientProvider client={queryClient}><RouterProvider router={router} /></QueryClientProvider>;
+    return <QueryClientProvider client={queryClient}><Suspense fallback={<main className="app-bootstrap" aria-label="جارٍ تحميل المنصة" aria-busy="true"><LoadingSkeleton variant="detail" /></main>}><AuthenticatedRoutes /></Suspense></QueryClientProvider>;
   }
 
   return (
@@ -58,7 +58,7 @@ export function App() {
       <section className="login-form-panel" aria-labelledby="login-title">
         <span className="language-switcher" aria-label="لغة الواجهة: العربية"><Globe2 aria-hidden="true" size={18} /><span>العربية</span></span>
         <div className="login-form-content">
-          <img src="/brand/minya-water-training-logo.png" alt="شعار شركة مياه الشرب والصرف الصحي بالمنيا" className="login-form-logo" width="172" height="172" />
+          <img src="/training/organization-logo.png" alt="شعار شركة مياه الشرب والصرف الصحي بالمنيا" className="login-form-logo" width="172" height="172" />
           <header className="login-form-heading">
             <h1 id="login-title">تسجيل الدخول إلى النظام</h1>
             <p>منصة إدارة التدريب والبرامج التدريبية</p>
@@ -98,7 +98,7 @@ export function App() {
       <section className="login-brand-panel" aria-label="منصة إدارة التدريب">
         <div className="login-brand-overlay" />
         <div className="login-brand-content">
-          <img src="/brand/minya-water-training-logo.png" alt="" aria-hidden="true" className="login-brand-logo" width="154" height="154" />
+          <img src="/training/organization-logo.png" alt="" aria-hidden="true" className="login-brand-logo" width="154" height="154" />
           <p className="brand-company">شركة مياه الشرب والصرف الصحي بالمنيا</p>
           <p className="brand-department">إدارة التدريب والتطوير</p><div className="brand-rule" />
           <h2>منصة إدارة التدريب</h2><p className="brand-tagline">بناء الكفاءات .. من أجل مستقبل أفضل</p>

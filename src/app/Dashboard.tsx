@@ -18,12 +18,12 @@ function DashboardLink({ to, children }: { to: string; children: ReactNode }) {
 }
 
 export function Dashboard() {
-  const { data: persons, isLoading: loadingPersons, isError: errorPersons, refetch: refetchPersons } = useQuery({ queryKey: ['dashboard-persons'], queryFn: () => apiClient.get<any[]>('/persons').then((response) => response.data) });
-  const { data: courses, isLoading: loadingCourses, isError: errorCourses, refetch: refetchCourses } = useQuery({ queryKey: ['dashboard-courses'], queryFn: () => apiClient.get<any[]>('/courses').then((response) => response.data) });
+  const { data: persons, isLoading: loadingPersons, isError: errorPersons, refetch: refetchPersons } = useQuery({ queryKey: ['persons'], queryFn: () => apiClient.get<any[]>('/persons').then((response) => response.data) });
+  const { data: courses, isLoading: loadingCourses, isError: errorCourses, refetch: refetchCourses } = useQuery({ queryKey: ['courses'], queryFn: () => apiClient.get<any[]>('/courses').then((response) => response.data) });
   const { data: plannedCourses, isLoading: loadingPlanned, isError: errorPlanned, refetch: refetchPlanned } = useQuery({ queryKey: ['dashboard-planned-courses'], queryFn: () => apiClient.get<any[]>('/get-planned-courses').then((response) => response.data) });
   const { data: executedCourses, isLoading: loadingExecuted, isError: errorExecuted } = useQuery({ queryKey: ['dashboard-executed-courses'], queryFn: () => apiClient.get<any[]>('/get-executed-courses').then((response) => response.data) });
-  const { data: participants, isLoading: loadingParticipants, isError: errorParticipants } = useQuery({ queryKey: ['dashboard-course-participants'], queryFn: () => apiClient.get<any[]>('/course-participants').then((response) => response.data) });
-  const { data: sessions, isLoading: loadingSessions, isError: errorSessions, refetch: refetchSessions } = useQuery({ queryKey: ['dashboard-course-sessions'], queryFn: () => apiClient.get<any[]>('/course-sessions').then((response) => response.data) });
+  const { data: participants, isLoading: loadingParticipants, isError: errorParticipants } = useQuery({ queryKey: ['course-participants'], queryFn: () => apiClient.get<any[]>('/course-participants').then((response) => response.data) });
+  const { data: sessions, isLoading: loadingSessions, isError: errorSessions, refetch: refetchSessions } = useQuery({ queryKey: ['course-sessions'], queryFn: () => apiClient.get<any[]>('/course-sessions').then((response) => response.data) });
 
   const today = dayKey(new Date());
   const allPersons = persons || [];
@@ -47,11 +47,7 @@ export function Dashboard() {
   ];
 
   return <div className="dashboard">
-    <section className="dashboard-hero" aria-labelledby="dashboard-title">
-      <div className="dashboard-hero-content"><span className="dashboard-kicker">إدارة التدريب والتطوير</span><h2 id="dashboard-title">مرحباً بك في نظام التدريب</h2><h3>شركة مياه الشرب والصرف الصحي بالمنيا</h3><p>مساحة موحدة لتخطيط البرامج التدريبية، متابعة التنفيذ، وإدارة بيانات الموظفين والمتدربين.</p></div>
-      <img className="dashboard-hero-logo" src="/brand/minya-water-training-logo.png" alt="شعار شركة مياه الشرب والصرف الصحي بالمنيا" width="145" height="145" />
-    </section>
-
+    <h1 className="visually-hidden">لوحة التحكم</h1>
     <section className="dashboard-stats" aria-label="مؤشرات الموارد والتدريب">
       {stats.map(({ title, value, note, icon: Icon, tone, loading, failed }) => <article className={`dashboard-stat dashboard-stat--${tone}`} key={title} aria-label={`${title}: ${failed ? 'تعذر التحميل' : value}`}><div className="dashboard-stat-icon"><Icon size={25} aria-hidden="true" /></div><div className="dashboard-stat-content"><h3>{title}</h3><strong>{loading ? '…' : failed ? '—' : value.toLocaleString('ar-EG')}</strong><p>{failed ? 'تعذر تحميل البيانات' : note}</p></div></article>)}
     </section>
@@ -60,6 +56,8 @@ export function Dashboard() {
       <Link to="/persons/new" className="dashboard-action dashboard-action--gold"><UserPlus size={22} aria-hidden="true" /><span>إضافة موظف</span></Link>
       <Link to="/courses/new" className="dashboard-action dashboard-action--blue"><BookOpen size={22} aria-hidden="true" /><span>تأسيس دورة تدريبية</span></Link>
       <Link to="/course-sessions/new" className="dashboard-action dashboard-action--purple"><Calendar size={22} aria-hidden="true" /><span>جدولة جلسة</span></Link>
+      <Link to="/courses" className="dashboard-action"><BookOpen size={22} aria-hidden="true" /><span>استكشف الدورات</span></Link>
+      <Link to="/learning-paths" className="dashboard-action"><GraduationCap size={22} aria-hidden="true" /><span>المسارات التدريبية</span></Link>
     </div></section>
 
     <section className="dashboard-panels" id="dashboard-content" aria-label="ملخص النظام">
