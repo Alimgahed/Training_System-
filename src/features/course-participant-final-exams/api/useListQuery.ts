@@ -4,6 +4,6 @@ import { getCourseParticipantFinalExams } from './list';
 export const useCourseParticipantFinalExams = () => {
   return useQuery({
     queryKey: ['course-participant-final-exams'],
-    queryFn: getCourseParticipantFinalExams,
+    queryFn: ({ signal }) => getCourseParticipantFinalExams(signal),
   });
 };

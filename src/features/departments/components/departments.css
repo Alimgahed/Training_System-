@@ -1,0 +1,8 @@
+.department-directory td .enterprise-record-link {display:inline-flex;align-items:center;min-height:44px;}
+.department-code {white-space:nowrap;font-variant-numeric:tabular-nums;}
+
+.department-identity small{display:block;color:var(--color-text-secondary);font-size:12px;}
+.department-editor {display:grid;gap:24px;max-width:760px;width:100%;}
+.department-editor-fields {display:grid;gap:24px;padding:20px;}
+.department-editor .enterprise-skeleton--fields {grid-template-columns:1fr;}
+@media(max-width:600px){.department-editor-fields{padding:16px;}}

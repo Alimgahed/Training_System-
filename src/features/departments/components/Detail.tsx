@@ -1,53 +1,15 @@
 import { ArrowRight } from 'lucide-react';
-import React from 'react';
-import { Link,useParams } from 'react-router-dom';
-import { Button } from '../../../shared/components/Button';
+import { Link, useParams } from 'react-router-dom';
 import { Card } from '../../../shared/components/Card';
+import { EmptyState } from '../../../shared/components/EmptyState';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
-import { PageHeader } from '../../../shared/components/PageHeader';
+import { EnterpriseSkeleton } from '../../../shared/enterprise/Skeleton';
+import { RecordActions } from '../../../shared/enterprise/RecordActions';
 import { useDepartment } from '../api/useGetQuery';
-
-const InfoField: React.FC<{ label: string; value: any }> = ({ label, value }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-    <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', fontWeight: 500 }}>{label}</span>
-    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value ?? '—'}</span>
-  </div>
-);
-
 export function DepartmentDetail() {
-  const { id } = useParams<{ id: string }>();
-  const { data, isLoading, isError, refetch } = useDepartment(id || '');
-
-  if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title={data?.name || 'إدارة'}
-        subtitle={'تفاصيل إدارة — معرّف #' + id}
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'الإدارات', href: '/departments' },
-          { label: data?.name || '#' + id },
-        ]}
-        actions={
-          <Link to="/departments">
-            <Button variant="outline" size="sm"><ArrowRight size={16} /> العودة للقائمة</Button>
-          </Link>
-        }
-      />
-
-      <Card title="البيانات التنظيمية">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
-          <InfoField label="المعرّف (ID)" value={data?.id} />
-            <InfoField label="الكود" value={data?.code} />
-            <InfoField label="اسم الإدارة" value={data?.name} />
-            <InfoField label="معرف الجهة التابعة لها" value={data?.organization_id} />
-        </div>
-      </Card>
-
-    </div>
-  );
+  const {id=''}=useParams();const {data,isLoading,isError,refetch}=useDepartment(id);
+  return <div className="enterprise-page"><nav className="enterprise-breadcrumbs" aria-label="مسار التنقل"><Link to="/departments">الإدارات</Link><span aria-hidden="true">/</span><span aria-current="page">إدارة <bdi>#{id}</bdi></span></nav>
+    <header className="enterprise-heading"><div><span className="enterprise-kicker">الهيكل التنظيمي / بيانات الإدارة</span><h1>{data?.name||'تفاصيل الإدارة'}</h1><p>راجع كود الإدارة والجهة التابعة لها قبل تعديل بياناتها.</p></div><Link className="enterprise-link-button" to="/departments"><ArrowRight size={18} aria-hidden="true"/>العودة للإدارات</Link></header>
+    {isLoading?<Card title="البيانات التنظيمية"><EnterpriseSkeleton variant="fields" columns={4}/></Card>:isError?<ErrorState title="تعذر تحميل الإدارة" onRetry={()=>refetch()}/>:!data?<EmptyState title="الإدارة غير متاحة" description="ارجع إلى دليل الإدارات لاختيار سجل متاح."/>:<Card title="البيانات التنظيمية" action={<RecordActions resource="departments" singular="department" id={id} name={data.name||`الإدارة #${id}`}/>}><dl className="enterprise-data"><div><dt>اسم الإدارة</dt><dd>{data.name||'غير محدد'}</dd></div><div><dt>كود الإدارة</dt><dd><bdi>{data.code||'غير محدد'}</bdi></dd></div><div><dt>الجهة التابعة لها</dt><dd>{data.organization_id!=null?<Link className="enterprise-record-link" to={`/organizations/${data.organization_id}`}>تفاصيل الجهة <bdi>#{data.organization_id}</bdi></Link>:'غير محددة'}</dd></div><div><dt>رقم السجل</dt><dd><bdi>#{data.id??id}</bdi></dd></div></dl></Card>}
+  </div>;
 }

@@ -1,57 +1,26 @@
-import { ArrowRight } from 'lucide-react';
-import React from 'react';
-import { Link,useParams } from 'react-router-dom';
-import { Button } from '../../../shared/components/Button';
+import { ArrowRight, FileText } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 import { Card } from '../../../shared/components/Card';
+import { EmptyState } from '../../../shared/components/EmptyState';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
-import { PageHeader } from '../../../shared/components/PageHeader';
+import { RecordActions } from '../../../shared/enterprise/RecordActions';
+import { EnterpriseSkeleton } from '../../../shared/enterprise/Skeleton';
 import { useDocumentation } from '../api/useGetQuery';
-
-const InfoField: React.FC<{ label: string; value: any }> = ({ label, value }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-    <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', fontWeight: 500 }}>{label}</span>
-    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value ?? '—'}</span>
-  </div>
-);
-
+import './archive.css';
 export function DocumentationDetail() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{id:string}>();
   const { data, isLoading, isError, refetch } = useDocumentation(id || '');
-
-  if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title={data?.name || 'وثيقة #' + id}
-        subtitle="سجل تفاصيل ومتابعة وثيقة"
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'الأرشيف والملفات' },
-          { label: 'الوثائق والمستندات', href: '/documentations' },
-          { label: data?.name || '#' + id },
-        ]}
-        actions={
-          <Link to="/documentations">
-            <Button variant="outline" size="sm"><ArrowRight size={16} /> العودة للقائمة</Button>
-          </Link>
-        }
-      />
-
-      <Card title="بيانات السجل">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
-          <InfoField label="المعرّف (ID)" value={data?.id} />
-            <InfoField label="اسم الوثيقة" value={data?.name} />
-            <InfoField label="مسار الملف" value={data?.file_path} />
-            <InfoField label="معرف نوع الوثيقة" value={data?.documentation_type_id} />
-            <InfoField label="معرف الدورة التدريبية" value={data?.course_id} />
-            <InfoField label="معرف الجلسة التدريبية" value={data?.course_session_id} />
-            <InfoField label="معرف المادة التدريبية" value={data?.learning_subject_id} />
-        </div>
-      </Card>
-
-    </div>
-  );
+  const relationships = [
+    { label:'نوع الوثيقة', value:data?.documentation_type_id, resource:'documentation-types' },
+    { label:'الدورة التدريبية', value:data?.course_id, resource:'courses' },
+    { label:'الجلسة التدريبية', value:data?.course_session_id, resource:'course-sessions' },
+    { label:'الموضوع التدريبي', value:data?.learning_subject_id, resource:'learning-subjects' },
+    { label:'مادة درجة المسار', value:data?.path_grade_subject_id, resource:'path-grade-subjects' },
+    { label:'مادة الفصل التدريبي', value:data?.path_grade_subject_term_id, resource:'path-grade-subject-terms' },
+  ];
+  return <div className="enterprise-page archive-detail">
+    <nav className="enterprise-breadcrumbs" aria-label="مسار التنقل"><Link to="/">لوحة التحكم</Link><span aria-hidden="true">/</span><Link to="/documentations">الوثائق والمستندات</Link><span aria-hidden="true">/</span><span aria-current="page">تفاصيل الوثيقة</span></nav>
+    <header className="enterprise-heading"><div><span className="enterprise-kicker">الوثائق والأرشفة / سجل <bdi>#{id}</bdi></span><h1>{data?.name || 'تفاصيل الوثيقة'}</h1><p>بيانات الوثيقة ومسار ملفها وارتباطاتها التدريبية.</p></div><Link className="enterprise-link-button" to="/documentations"><ArrowRight size={18} aria-hidden="true"/>العودة للقائمة</Link></header>
+    {isLoading?<><Card title="بيانات الوثيقة"><EnterpriseSkeleton variant="fields" columns={3}/></Card><Card title="الارتباطات"><EnterpriseSkeleton variant="fields" columns={6}/></Card></>:isError?<ErrorState title="تعذر تحميل الوثيقة" message="تحقق من الاتصال وتوفر السجل ثم أعد المحاولة أو ارجع إلى الأرشيف." onRetry={()=>refetch()}/>:!data?<EmptyState title="الوثيقة غير متاحة" description="ارجع إلى الأرشيف واختر سجلاً متاحاً."/>:<><Card title="بيانات الوثيقة" action={<RecordActions resource="documentations" singular="documentation" id={id||''} name={data.name||'الوثيقة'}/>}><dl className="enterprise-data archive-basic"><div><dt>اسم الوثيقة</dt><dd>{data.name||'لم يُحدد الاسم'}</dd></div><div><dt>رقم السجل</dt><dd><bdi>{data.id?.toLocaleString('ar-EG')??'—'}</bdi></dd></div></dl><div className="archive-path-panel"><FileText size={24} aria-hidden="true"/><div><h2>مسار الملف</h2><p dir="auto">{data.file_path?.trim()||'لم يُسجّل مسار لهذه الوثيقة'}</p></div></div></Card><Card title="الارتباطات"><dl className="enterprise-data">{relationships.map(item=><div key={item.resource}><dt>{item.label}</dt><dd>{item.value?<Link className="enterprise-record-link" to={`/${item.resource}/${item.value}`}>{item.label} <bdi>#{item.value}</bdi></Link>:'غير مرتبط'}</dd></div>)}</dl></Card></>}
+  </div>;
 }

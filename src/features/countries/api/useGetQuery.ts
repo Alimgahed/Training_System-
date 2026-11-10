@@ -4,7 +4,7 @@ import { getCountry } from './get';
 export const useCountry = (id: string | number) => {
   return useQuery({
     queryKey: ['country', id],
-    queryFn: () => getCountry(id),
+    queryFn: ({ signal }) => getCountry(id, signal),
     enabled: !!id,
   });
 };

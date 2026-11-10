@@ -84,7 +84,6 @@ const PerformanceEvaluationWorkspace = lazy(() => import('../features/performanc
 
 import { Layout } from './components/Layout';
 import { referenceRoutes } from './referenceRoutes';
-import { ReferenceEditor } from '../shared/components/ReferenceEditor';
 const EvaluationReport = lazy(() => import('../features/performance-evaluations/components/Report').then(m => ({ default: m.EvaluationReport })));
 const TrainerSubjectList = lazy(() => import('../features/trainer-subjects/components/List').then(m => ({ default: m.TrainerSubjectList })));
 const TrainerSubjectDetail = lazy(() => import('../features/trainer-subjects/components/Detail').then(m => ({ default: m.TrainerSubjectDetail })));
@@ -160,8 +159,8 @@ export const router = createBrowserRouter([
       { path: '/persons/:id/edit', element: <PersonCreate /> },
       { path: '/persons/:id', element: <PersonDetail /> },
       { path: '/courses', element: <CourseList /> },
-      { path: '/courses/new', element: <ReferenceEditor resource="courses" singular="course"><CourseCreate /></ReferenceEditor> },
-      { path: '/courses/:id/edit', element: <ReferenceEditor resource="courses" singular="course"><CourseCreate /></ReferenceEditor> },
+      { path: '/courses/new', element: <CourseCreate /> },
+      { path: '/courses/:id/edit', element: <CourseCreate /> },
       { path: '/courses/:id', element: <CourseDetail /> },
       { path: '/course-sessions', element: <CourseSessionList /> },
       { path: '/course-sessions/new', element: <CourseSessionCreate /> },

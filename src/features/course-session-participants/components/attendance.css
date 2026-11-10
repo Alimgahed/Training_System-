@@ -1,0 +1,7 @@
+.attendance-form { width:100%; max-width:800px; display:grid; gap:var(--space-5); }
+.attendance-fields { display:grid; gap:var(--space-3); padding:var(--space-5); }
+.attendance-hint { margin:0 0 var(--space-4); color:var(--color-text-secondary); font-size:var(--font-size-sm); line-height:1.8; }
+.attendance-fields select { max-width:100%; text-overflow:ellipsis; }
+@media(max-width:600px) { .attendance-fields { padding:var(--space-3); } }
+
+.attendance-form .enterprise-skeleton--fields { grid-template-columns:1fr; }

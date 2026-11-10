@@ -4,7 +4,7 @@ import { getCourseSession } from './get';
 export const useCourseSession = (id: string | number) => {
   return useQuery({
     queryKey: ['course-session', id],
-    queryFn: () => getCourseSession(id),
+    queryFn: ({ signal }) => getCourseSession(id, signal),
     enabled: !!id,
   });
 };

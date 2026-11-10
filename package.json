@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:ui": "node --test scripts/verify-training-ui.mjs && node scripts/verify-training-render.mjs"
+    "test:ui": "node --test scripts/verify-training-ui.mjs && node scripts/verify-training-render.mjs",
+    "test:enterprise": "node scripts/verify-login.mjs && node scripts/verify-dashboard.mjs && node scripts/verify-clients.mjs && node scripts/verify-countries.mjs && node scripts/verify-enterprise-training.mjs",
+    "dev:fixtures": "node scripts/fixture-preview.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.5.7",

@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCourseSessions } from './list';
 
-export const useCourseSessions = () => {
+export const useCourseSessions = (enabled = true) => {
   return useQuery({
+    enabled,
     queryKey: ['course-sessions'],
-    queryFn: getCourseSessions,
+    queryFn: ({ signal }) => getCourseSessions(signal),
   });
 };

@@ -1,81 +1,29 @@
-import { ArrowRight } from 'lucide-react';
-import React from 'react';
-import { Link,useParams } from 'react-router-dom';
-import { Button } from '../../../shared/components/Button';
+import { ArrowRight, Award, ClipboardCheck } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 import { Card } from '../../../shared/components/Card';
+import { EmptyState } from '../../../shared/components/EmptyState';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
-import { PageHeader } from '../../../shared/components/PageHeader';
 import { Table } from '../../../shared/components/Table';
+import { EnterpriseSkeleton } from '../../../shared/enterprise/Skeleton';
 import { useCourseParticipant } from '../api/useGetQuery';
+import type { CourseParticipantFinalExam } from '../../course-participant-final-exams/types';
+import { examDate, examScore } from '../../course-participant-final-exams/utils/results';
 
-const InfoField: React.FC<{ label: string; value: any }> = ({ label, value }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-    <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', fontWeight: 500 }}>{label}</span>
-    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value ?? '—'}</span>
-  </div>
-);
-
+type Evaluation = { score?: number | null; notes?: string | null; entered_at?: string | null };
+const timestamp = new Intl.DateTimeFormat('ar-EG', { dateStyle:'medium', timeStyle:'short' });
+function enteredAt(value?: string | null) { const date=value?new Date(value):null;return date&&!Number.isNaN(date.getTime())?timestamp.format(date):'غير محدد'; }
 export function CourseParticipantDetail() {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading, isError, refetch } = useCourseParticipant(id || '');
-
-  if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title={'تفاصيل مشارك دورة #' + id}
-        subtitle="سجل تفاصيل ومتابعة مشارك دورة"
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'شئون التدريب والعمليات' },
-          { label: 'مشاركو الدورات التدريبية', href: '/course-participants' },
-          { label: '#' + id },
-        ]}
-        actions={
-          <Link to="/course-participants">
-            <Button variant="outline" size="sm"><ArrowRight size={16} /> العودة للقائمة</Button>
-          </Link>
-        }
-      />
-
-      <Card title="بيانات السجل">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
-          <InfoField label="المعرّف (ID)" value={data?.id} />
-            <InfoField label="معرف المتدرب / الشخص" value={data?.person_id} />
-            <InfoField label="معرف الدورة التدريبية" value={data?.course_id} />
-        </div>
-      </Card>
-
-      {data?.final_exams && data.final_exams.length > 0 && (
-        <Card title="الاختبارات النهائية للمتدرب">
-          <Table
-            data={data.final_exams}
-            columns={[
-              { header: 'تاريخ الاختبار', accessor: (r: any) => r.exam_date !== undefined ? String(r.exam_date) : '—' },
-              { header: 'الجهة المنظمة', accessor: (r: any) => r.organized_by !== undefined ? String(r.organized_by) : '—' },
-              { header: 'الدرجة', accessor: (r: any) => r.exam_score !== undefined ? String(r.exam_score) : '—' }
-            ]}
-            compact
-          />
-        </Card>
-      )}
-
-      {data?.performance_evaluation_details && data.performance_evaluation_details.length > 0 && (
-        <Card title="تفاصيل تقييم أداء المتدرب">
-          <Table
-            data={data.performance_evaluation_details}
-            columns={[
-              { header: 'الدرجة المستحقة', accessor: (r: any) => r.score !== undefined ? String(r.score) : '—' },
-              { header: 'ملاحظات التقييم', accessor: (r: any) => r.notes !== undefined ? String(r.notes) : '—' },
-              { header: 'تاريخ الإدخال', accessor: (r: any) => r.entered_at !== undefined ? String(r.entered_at) : '—' }
-            ]}
-            compact
-          />
-        </Card>
-      )}
-    </div>
-  );
+  const exams: CourseParticipantFinalExam[] = data?.final_exams || [];
+  const evaluations: Evaluation[] = data?.performance_evaluation_details || [];
+  return <div className="enterprise-page">
+    <nav className="enterprise-breadcrumbs" aria-label="مسار التنقل"><Link to="/">لوحة التحكم</Link><span aria-hidden="true">/</span><Link to="/course-participants">مشاركو الدورات</Link><span aria-hidden="true">/</span><span aria-current="page">سجل <bdi>#{id}</bdi></span></nav>
+    <header className="enterprise-heading"><div><span className="enterprise-kicker">شئون المتدربين / متابعة المتدرب</span><h1>تفاصيل المشاركة التدريبية</h1><p>تابع اختبارات المتدرب وتقييماته في الدورة، وانتقل إلى ملف الموظف أو الدورة عند الحاجة.</p></div><Link className="enterprise-link-button" to="/course-participants"><ArrowRight size={18} aria-hidden="true"/>العودة للمشاركات</Link></header>
+    {isLoading?<><Card title="بيانات المشاركة"><EnterpriseSkeleton variant="fields" columns={3}/></Card><Card title="الاختبارات النهائية"><EnterpriseSkeleton columns={3} rows={3}/></Card><Card title="تقييمات الأداء"><EnterpriseSkeleton columns={3} rows={3}/></Card></>:isError?<ErrorState title="تعذر تحميل سجل المشاركة" onRetry={()=>refetch()}/>:!data?<EmptyState title="سجل المشاركة غير متاح" description="ارجع إلى المشاركات لاختيار سجل متاح."/>:<>
+      <Card title="بيانات المشاركة"><dl className="enterprise-data"><div><dt>رقم المشاركة</dt><dd><bdi>{data.id?.toLocaleString('ar-EG') ?? id}</bdi></dd></div><div><dt>الموظف</dt><dd>{data.person_id!=null?<Link className="enterprise-record-link" to={`/persons/${data.person_id}`}>ملف الموظف <bdi>#{data.person_id}</bdi></Link>:'غير محدد'}</dd></div><div><dt>الدورة التدريبية</dt><dd>{data.course_id!=null?<Link className="enterprise-record-link" to={`/courses/${data.course_id}`}>تفاصيل الدورة <bdi>#{data.course_id}</bdi></Link>:'غير محددة'}</dd></div></dl></Card>
+      <Card title="الاختبارات النهائية" action={<span>{exams.length.toLocaleString('ar-EG')} اختبار</span>}><Table data={exams} compact showOverview={false} columns={[{header:'تاريخ الاختبار',accessor:row=>row.id!=null?<Link className="enterprise-record-link" to={`/course-participant-final-exams/${row.id}`}>{examDate(row.exam_date)}</Link>:examDate(row.exam_date)},{header:'الجهة المنظمة',accessor:row=>row.organized_by||'غير محددة'},{header:'الدرجة',accessor:row=><span>{examScore(row.exam_score)?.toLocaleString('ar-EG') ?? 'لم تُرصد'}</span>}]} emptyTitle="لا توجد اختبارات مسجلة" emptyDescription="ستظهر نتائج الاختبارات هنا بعد تسجيلها لهذه المشاركة." emptyIcon={<Award size={28} aria-hidden="true"/>}/></Card>
+      <Card title="تقييمات الأداء" action={<span>{evaluations.length.toLocaleString('ar-EG')} تقييم</span>}><Table data={evaluations} compact showOverview={false} columns={[{header:'الدرجة المستحقة',accessor:row=>examScore(row.score)?.toLocaleString('ar-EG')??'لم تُرصد'},{header:'ملاحظات التقييم',accessor:row=>row.notes||'لا توجد ملاحظات'},{header:'تاريخ الإدخال',accessor:row=>enteredAt(row.entered_at)}]} emptyTitle="لا توجد تقييمات مسجلة" emptyDescription="ستظهر تقييمات أداء المتدرب هنا عند توفرها." emptyIcon={<ClipboardCheck size={28} aria-hidden="true"/>}/></Card>
+    </>}
+  </div>;
 }

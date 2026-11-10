@@ -1,0 +1,6 @@
+.governorate-directory .enterprise-record-link { display:inline-flex; align-items:center; min-height:44px; }
+.governorate-editor { display:grid; gap:24px; max-width:960px; }
+.governorate-editor-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; padding:20px; }
+@media(max-width:700px) { .governorate-editor-fields { grid-template-columns:minmax(0,1fr); padding:16px; } }
+
+.governorate-detail .enterprise-record-link { display:inline-flex; align-items:center; gap:6px; min-height:44px; }

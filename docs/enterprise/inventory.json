@@ -1,0 +1,5636 @@
+{
+  "date": "2026-11-09",
+  "routes": [
+    {
+      "route": "unauthenticated (all paths)",
+      "component": "SignIn",
+      "source": "src/app/App.tsx",
+      "kind": "page",
+      "components": [
+        "HTMLDivElement",
+        "LoginFormInputs",
+        "QueryClientProvider",
+        "Suspense",
+        "LoadingSkeleton",
+        "AuthenticatedRoutes",
+        "Globe2",
+        "UserRound",
+        "LockKeyhole",
+        "EyeOff",
+        "Eye",
+        "ArrowLeft",
+        "ShieldCheck",
+        "Icon"
+      ],
+      "apis": [
+        "POST /login"
+      ],
+      "dependencies": [
+        "src/features/auth/loginFeedback.ts"
+      ],
+      "headings": [
+        "جارٍ تحميل المنصة",
+        "لغة الواجهة: العربية",
+        "تسجيل الدخول إلى النظام",
+        "منصة إدارة التدريب",
+        "منصة إدارة التدريب"
+      ],
+      "overlays": [],
+      "findings": [],
+      "status": "Implemented; earlier local checks passed; see PROGRESS.md for outstanding browser/live verification"
+    },
+    {
+      "route": "/",
+      "component": "Dashboard",
+      "source": "src/app/Dashboard.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "Link",
+        "ArrowLeft",
+        "Icon",
+        "UserPlus",
+        "BookOpen",
+        "Calendar",
+        "GraduationCap",
+        "Card",
+        "DashboardLink",
+        "LoadingSkeleton",
+        "Button",
+        "RefreshCw",
+        "Table",
+        "Badge",
+        "Users",
+        "CalendarClock"
+      ],
+      "apis": [
+        "GET /persons",
+        "GET /courses",
+        "GET /get-planned-courses",
+        "GET /get-executed-courses",
+        "GET /course-participants",
+        "GET /course-sessions"
+      ],
+      "dependencies": [],
+      "headings": [
+        "لوحة التحكم",
+        "مؤشرات الموارد والتدريب",
+        "إجراءات سريعة",
+        "ملخص النظام",
+        "الدورات التدريبية",
+        "الجلسات المجدولة اليوم",
+        "أحدث الموظفين",
+        "الدورات القادمة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing"
+      ],
+      "status": "Implemented; earlier local checks passed; see PROGRESS.md for outstanding browser/live verification"
+    },
+    {
+      "route": "/:resource/new",
+      "component": "ReadOnlyCreateRedirect",
+      "source": "src/app/router.tsx",
+      "kind": "redirect",
+      "wrapper": false,
+      "components": [
+        "Navigate",
+        "Layout",
+        "RouteErrorBoundary",
+        "EvaluationReport",
+        "TrainerSubjectList",
+        "TrainerSubjectDetail",
+        "Dashboard",
+        "ClientList",
+        "ClientDetail",
+        "CountryList",
+        "CountryDetail",
+        "GovernorateList",
+        "GovernorateDetail",
+        "OrganizationTypeList",
+        "OrganizationTypeDetail",
+        "OrganizationList",
+        "OrganizationDetail",
+        "WorkGroupList",
+        "WorkGroupDetail",
+        "JobTypeGroupList",
+        "JobTypeGroupDetail",
+        "WorkCenterList",
+        "WorkCenterDetail",
+        "WorkSiteList",
+        "WorkSiteDetail",
+        "DepartmentList",
+        "DepartmentDetail",
+        "QualificationTypeList",
+        "QualificationTypeDetail",
+        "QualificationList",
+        "QualificationDetail",
+        "JobList",
+        "JobDetail",
+        "GradeList",
+        "GradeDetail",
+        "LearningPathList",
+        "LearningPathDetail",
+        "LearningTermList",
+        "LearningTermDetail",
+        "LearningSubjectList",
+        "LearningSubjectDetail",
+        "PathGradeList",
+        "PathGradeDetail",
+        "PathGradeSubjectList",
+        "PathGradeSubjectDetail",
+        "PathGradeSubjectTermList",
+        "PathGradeSubjectTermDetail",
+        "EvaluationTypeList",
+        "EvaluationTypeDetail",
+        "ParticipantTypeList",
+        "ParticipantTypeDetail",
+        "TrainingRoomList",
+        "TrainingRoomDetail",
+        "PersonList",
+        "PersonCreate",
+        "PersonDetail",
+        "CourseList",
+        "ReferenceEditor",
+        "CourseCreate",
+        "CourseDetail",
+        "CourseSessionList",
+        "CourseSessionCreate",
+        "CourseSessionEdit",
+        "CourseSessionDetail",
+        "CourseParticipantList",
+        "CourseParticipantDetail",
+        "CourseSessionParticipantList",
+        "CourseSessionParticipantCreate",
+        "CourseSessionParticipantEdit",
+        "CourseSessionParticipantDetail",
+        "CourseParticipantFinalExamList",
+        "CourseParticipantFinalExamDetail",
+        "DocumentationList",
+        "DocumentationDetail",
+        "DocumentationTypeList",
+        "DocumentationTypeDetail",
+        "PerformanceEvaluationCategoryList",
+        "PerformanceEvaluationCategoryDetail",
+        "PerformanceEvaluationItemList",
+        "PerformanceEvaluationItemDetail",
+        "PerformanceEvaluationParticipantCategoryList",
+        "PerformanceEvaluationParticipantCategoryDetail",
+        "PerformanceEvaluationParticipantCategoryItemList",
+        "PathGradeCandidateList",
+        "UserManagement",
+        "PerformanceEvaluationWorkspace",
+        "ReadOnlyCreateRedirect",
+        "PerformanceEvaluationParticipantCategoryItemDetail"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/clients",
+      "component": "ClientList",
+      "source": "src/features/clients/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /clients"
+      ],
+      "dependencies": [
+        "src/features/clients/api/useListQuery.ts",
+        "src/features/clients/api/list.ts",
+        "src/features/clients/types/index.ts"
+      ],
+      "headings": [
+        "العملاء",
+        "بيانات العملاء المسجلة في النظام."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; earlier local checks passed; see PROGRESS.md for outstanding browser/live verification"
+    },
+    {
+      "route": "/clients/:id",
+      "component": "ClientDetail",
+      "source": "src/features/clients/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /client/"
+      ],
+      "dependencies": [
+        "src/features/clients/api/useGetQuery.ts",
+        "src/features/clients/api/get.ts",
+        "src/features/clients/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; earlier local checks passed; see PROGRESS.md for outstanding browser/live verification"
+    },
+    {
+      "route": "/countries",
+      "component": "CountryList",
+      "source": "src/features/countries/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /countries"
+      ],
+      "dependencies": [
+        "src/features/countries/api/useListQuery.ts",
+        "src/features/countries/api/list.ts",
+        "src/features/countries/types/index.ts"
+      ],
+      "headings": [
+        "الدول",
+        "إدارة بيانات الدول المرجعية في النظام."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/countries/:id",
+      "component": "CountryDetail",
+      "source": "src/features/countries/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField",
+        "Table"
+      ],
+      "apis": [
+        "GET /country/"
+      ],
+      "dependencies": [
+        "src/features/countries/api/useGetQuery.ts",
+        "src/features/countries/api/get.ts",
+        "src/features/countries/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم",
+        "المحافظات"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/countries/:id/edit",
+      "component": "CountryCreate",
+      "source": "src/features/countries/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Globe2",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "Input",
+        "Save"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "إضافة دولة",
+        "بيانات الدولة",
+        "اسم الدولة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/countries/new",
+      "component": "CountryCreate",
+      "source": "src/features/countries/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Globe2",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "Input",
+        "Save"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "إضافة دولة",
+        "بيانات الدولة",
+        "اسم الدولة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-participant-final-exams",
+      "component": "CourseParticipantFinalExamList",
+      "source": "src/features/course-participant-final-exams/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "Award",
+        "CheckCircle2",
+        "Trophy",
+        "Search",
+        "XCircle",
+        "CalendarDays"
+      ],
+      "apis": [
+        "GET /course-participant-final-exams"
+      ],
+      "dependencies": [
+        "src/features/course-participant-final-exams/api/useListQuery.ts",
+        "src/features/course-participant-final-exams/api/list.ts",
+        "src/features/course-participant-final-exams/types/index.ts"
+      ],
+      "headings": [
+        "نتائج الاختبارات النهائية",
+        "المشارك #{exam.course_participant_id || '—'}"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-participant-final-exams/:id",
+      "component": "CourseParticipantFinalExamDetail",
+      "source": "src/features/course-participant-final-exams/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /course-participant-final-exam/"
+      ],
+      "dependencies": [
+        "src/features/course-participant-final-exams/api/useGetQuery.ts",
+        "src/features/course-participant-final-exams/api/get.ts",
+        "src/features/course-participant-final-exams/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة اختبار نهائي",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "تاريخ الاختبار",
+        "الجهة المنظمة",
+        "الدرجة المحققة",
+        "معرف ملف الوثيقة المرفقة",
+        "معرف مشارك الدورة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-participants",
+      "component": "CourseParticipantList",
+      "source": "src/features/course-participants/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "Users",
+        "Award",
+        "ClipboardCheck",
+        "Search",
+        "UserRoundCheck"
+      ],
+      "apis": [
+        "GET /course-participants"
+      ],
+      "dependencies": [
+        "src/features/course-participants/api/useListQuery.ts",
+        "src/features/course-participants/api/list.ts",
+        "src/features/course-participants/types/index.ts"
+      ],
+      "headings": [
+        "مشاركو الدورات التدريبية",
+        "الموظف #{participant.person_id || '—'}"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-participants/:id",
+      "component": "CourseParticipantDetail",
+      "source": "src/features/course-participants/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField",
+        "Table"
+      ],
+      "apis": [
+        "GET /course-participant/"
+      ],
+      "dependencies": [
+        "src/features/course-participants/api/useGetQuery.ts",
+        "src/features/course-participants/api/get.ts",
+        "src/features/course-participants/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة مشارك دورة",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "معرف المتدرب / الشخص",
+        "معرف الدورة التدريبية",
+        "الاختبارات النهائية للمتدرب",
+        "تفاصيل تقييم أداء المتدرب"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-session-participants",
+      "component": "CourseSessionParticipantList",
+      "source": "src/features/course-session-participants/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "Plus",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Calendar"
+      ],
+      "apis": [
+        "GET /course-session-participants"
+      ],
+      "dependencies": [
+        "src/features/course-session-participants/api/useListQuery.ts",
+        "src/features/course-session-participants/api/list.ts",
+        "src/features/course-session-participants/types/index.ts"
+      ],
+      "headings": [
+        "حضور جلسات التدريب",
+        "سجلات الحضور والتواجد الفعلي للمتدربين في الجلسات التدريبية."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-session-participants/:id",
+      "component": "CourseSessionParticipantDetail",
+      "source": "src/features/course-session-participants/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "Pencil",
+        "Trash2",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "DELETE /course-session-participant/${id}",
+        "GET /course-session-participant/"
+      ],
+      "dependencies": [
+        "src/features/course-session-participants/api/delete.ts",
+        "src/features/course-session-participants/api/useGetQuery.ts",
+        "src/features/course-session-participants/api/get.ts",
+        "src/features/course-session-participants/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة حضور جلسة",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "معرف الجلسة التدريبية",
+        "معرف تسجيل المتدرب في الدورة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-session-participants/:id/edit",
+      "component": "CourseSessionParticipantEdit",
+      "source": "src/features/course-session-participants/components/Edit.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "Values",
+        "LoadingSkeleton",
+        "ErrorState",
+        "UserRoundCheck",
+        "Link",
+        "Button",
+        "Select",
+        "Save"
+      ],
+      "apis": [
+        "GET /course-participants",
+        "GET /course-sessions",
+        "PUT /course-session-participant/${id}",
+        "GET /course-session-participant/"
+      ],
+      "dependencies": [
+        "src/features/course-participants/api/useListQuery.ts",
+        "src/features/course-participants/api/list.ts",
+        "src/features/course-participants/types/index.ts",
+        "src/features/course-sessions/api/useListQuery.ts",
+        "src/features/course-sessions/api/list.ts",
+        "src/features/course-sessions/types/index.ts",
+        "src/features/course-session-participants/api/update.ts",
+        "src/features/course-session-participants/types/index.ts",
+        "src/features/course-session-participants/api/useGetQuery.ts",
+        "src/features/course-session-participants/api/get.ts"
+      ],
+      "headings": [
+        "تعديل تسجيل الحضور",
+        "الجلسة التدريبية *",
+        "المتدرب المسجل بالدورة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-session-participants/new",
+      "component": "CourseSessionParticipantCreate",
+      "source": "src/features/course-session-participants/components/Create.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "FormInputs",
+        "UserRoundCheck",
+        "Link",
+        "Button",
+        "Select",
+        "CalendarDays"
+      ],
+      "apis": [
+        "GET /course-participants",
+        "GET /course-sessions",
+        "POST /new-course-session-participant"
+      ],
+      "dependencies": [
+        "src/features/course-participants/api/useListQuery.ts",
+        "src/features/course-participants/api/list.ts",
+        "src/features/course-participants/types/index.ts",
+        "src/features/course-sessions/api/useListQuery.ts",
+        "src/features/course-sessions/api/list.ts",
+        "src/features/course-sessions/types/index.ts",
+        "src/features/course-session-participants/api/useCreateMutation.ts",
+        "src/features/course-session-participants/api/create.ts",
+        "src/features/course-session-participants/types/index.ts"
+      ],
+      "headings": [
+        "تسجيل حضور متدرب",
+        "الجلسة التدريبية *",
+        "المتدرب المسجل في الدورة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-sessions",
+      "component": "CourseSessionList",
+      "source": "src/features/course-sessions/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "CalendarDays",
+        "Clock3",
+        "TimerReset",
+        "Search",
+        "Button",
+        "Plus",
+        "MapPin"
+      ],
+      "apis": [
+        "GET /course-sessions"
+      ],
+      "dependencies": [
+        "src/features/course-sessions/api/useListQuery.ts",
+        "src/features/course-sessions/api/list.ts",
+        "src/features/course-sessions/types/index.ts"
+      ],
+      "headings": [
+        "الجلسات التدريبية",
+        "البحث في الجلسات",
+        "جدول الجلسات التدريبية"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-sessions/:id",
+      "component": "CourseSessionDetail",
+      "source": "src/features/course-sessions/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "Pencil",
+        "Trash2",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "DELETE /course-session/${id}",
+        "GET /course-session/"
+      ],
+      "dependencies": [
+        "src/features/course-sessions/api/delete.ts",
+        "src/features/course-sessions/api/useGetQuery.ts",
+        "src/features/course-sessions/api/get.ts",
+        "src/features/course-sessions/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة جلسة تدريبية",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "تاريخ انعقاد الجلسة",
+        "وقت البدء",
+        "وقت الانتهاء",
+        "معرف الدورة التدريبية"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-sessions/:id/edit",
+      "component": "CourseSessionEdit",
+      "source": "src/features/course-sessions/components/Edit.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "Values",
+        "LoadingSkeleton",
+        "ErrorState",
+        "CalendarDays",
+        "Link",
+        "Button",
+        "Select",
+        "Input",
+        "Save"
+      ],
+      "apis": [
+        "GET /get-executed-courses",
+        "GET /get-planned-courses",
+        "PUT /course-session/${id}",
+        "GET /course-session/"
+      ],
+      "dependencies": [
+        "src/features/courses/api/executedCourses.ts",
+        "src/features/courses/types/index.ts",
+        "src/features/courses/api/plannedCourses.ts",
+        "src/features/course-sessions/api/update.ts",
+        "src/features/course-sessions/types/index.ts",
+        "src/features/course-sessions/api/useGetQuery.ts",
+        "src/features/course-sessions/api/get.ts"
+      ],
+      "headings": [
+        "تعديل الجلسة التدريبية",
+        "الدورة المنفذة *",
+        "تاريخ الجلسة *",
+        "وقت البدء *",
+        "وقت الانتهاء *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/course-sessions/new",
+      "component": "CourseSessionCreate",
+      "source": "src/features/course-sessions/components/Create.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "FormInputs",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "Select",
+        "Input",
+        "Check"
+      ],
+      "apis": [
+        "GET /get-executed-courses",
+        "GET /get-planned-courses",
+        "POST /new-course-session"
+      ],
+      "dependencies": [
+        "src/features/courses/api/executedCourses.ts",
+        "src/features/courses/types/index.ts",
+        "src/features/courses/api/plannedCourses.ts",
+        "src/features/course-sessions/api/useCreateMutation.ts",
+        "src/features/course-sessions/api/create.ts",
+        "src/features/course-sessions/types/index.ts"
+      ],
+      "headings": [
+        "جدولة جلسة تدريبية جديدة",
+        "إضافة جلسة أو محاضرة جديدة ضمن الدورات التدريبية المنفذة",
+        "بيانات وموعد الجلسة التدريبية",
+        "الدورة التدريبية المنفذة *",
+        "تاريخ الجلسة *",
+        "وقت البدء *",
+        "وقت الانتهاء *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/courses",
+      "component": "CourseList",
+      "source": "src/features/courses/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "Icon",
+        "Search",
+        "Plus",
+        "Badge",
+        "Clock3",
+        "Users",
+        "BookOpen"
+      ],
+      "apis": [
+        "GET /learning-subjects",
+        "GET /courses"
+      ],
+      "dependencies": [
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts",
+        "src/features/courses/api/useListQuery.ts",
+        "src/features/courses/api/list.ts",
+        "src/features/courses/types/index.ts",
+        "src/features/courses/catalog.ts"
+      ],
+      "headings": [
+        "مسار التنقل",
+        "التعلّم يبدأ بخطوة.",
+        "إحصاءات الدورات",
+        "{label}",
+        "البحث والتصفية",
+        "البحث في الدورات",
+        "الدورات التدريبية",
+        "{course.id != null ? ",
+        "{courses.length ? 'لا توجد دورات مطابقة' : 'مساحة لفرص تعلّم جديدة'}",
+        "صفحات الدورات"
+      ],
+      "overlays": [],
+      "findings": [],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/courses/:id",
+      "component": "CourseDetail",
+      "source": "src/features/courses/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Info",
+        "Clock",
+        "Users",
+        "FileText",
+        "Badge",
+        "Card",
+        "InfoField",
+        "Table",
+        "PageHeader",
+        "Tabs"
+      ],
+      "apis": [
+        "GET /course/"
+      ],
+      "dependencies": [
+        "src/features/courses/api/useGetQuery.ts",
+        "src/features/courses/api/get.ts",
+        "src/features/courses/types/index.ts"
+      ],
+      "headings": [
+        "معلومات الدورة",
+        "الاسم",
+        "مسار التدريب",
+        "فصل المسار",
+        "مادة التعلم",
+        "التواريخ والمدة",
+        "المدة (أيام)",
+        "تاريخ البدء",
+        "تاريخ الانتهاء",
+        "الطاقم التدريبي",
+        "المدرب",
+        "المدرب الاحتياطي",
+        "المنسق",
+        "التكلفة والتمويل",
+        "التكلفة",
+        "جهة التمويل",
+        "عدد المشاركين الداخليين",
+        "عدد المشاركين الخارجيين"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/courses/:id/edit",
+      "component": "CourseCreate",
+      "source": "src/features/courses/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "CreateCourseRequest",
+        "Link",
+        "Button",
+        "Card",
+        "Select",
+        "Input"
+      ],
+      "apis": [
+        "GET /get-planned-courses",
+        "GET /learning-subjects",
+        "GET /organizations",
+        "GET /path-grade-subject-terms",
+        "GET /path-grade-subjects",
+        "GET /persons",
+        "GET /rooms"
+      ],
+      "dependencies": [
+        "src/features/courses/api/plannedCourses.ts",
+        "src/features/courses/types/index.ts",
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts",
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts",
+        "src/features/path-grade-subject-terms/api/useListQuery.ts",
+        "src/features/path-grade-subject-terms/api/list.ts",
+        "src/features/path-grade-subject-terms/types/index.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/learning-paths/types/index.ts",
+        "src/features/path-grade-subjects/api/useListQuery.ts",
+        "src/features/path-grade-subjects/api/list.ts",
+        "src/features/path-grade-subjects/types/index.ts",
+        "src/features/persons/api/useListQuery.ts",
+        "src/features/persons/api/list.ts",
+        "src/features/persons/types/index.ts",
+        "src/features/rooms/api/useListQuery.ts",
+        "src/features/rooms/api/list.ts",
+        "src/features/rooms/types/index.ts"
+      ],
+      "headings": [
+        "تأسيس دورة تدريبية",
+        "معلومات الحالة (Lifecycle)",
+        "الكورس المخطط له مسبقاً *",
+        "محتوى الدورة (اختر نوعاً واحداً)",
+        "الموضوع التدريبي *",
+        "مادة المسار *",
+        "مادة الترم *",
+        "البيانات الأساسية",
+        "اسم الدورة *",
+        "المدة (بالأيام) *",
+        "عدد المشاركين الداخليين",
+        "عدد المشاركين الخارجيين",
+        "التكلفة",
+        "الجهة الممولة",
+        "المواعيد والمكان",
+        "تاريخ البداية *",
+        "تاريخ النهاية",
+        "قاعة التدريب *",
+        "طاقم التدريب",
+        "المدرب الأساسي *",
+        "المدرب الاحتياطي",
+        "منسق الدورة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/courses/new",
+      "component": "CourseCreate",
+      "source": "src/features/courses/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "CreateCourseRequest",
+        "Link",
+        "Button",
+        "Card",
+        "Select",
+        "Input"
+      ],
+      "apis": [
+        "GET /get-planned-courses",
+        "GET /learning-subjects",
+        "GET /organizations",
+        "GET /path-grade-subject-terms",
+        "GET /path-grade-subjects",
+        "GET /persons",
+        "GET /rooms"
+      ],
+      "dependencies": [
+        "src/features/courses/api/plannedCourses.ts",
+        "src/features/courses/types/index.ts",
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts",
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts",
+        "src/features/path-grade-subject-terms/api/useListQuery.ts",
+        "src/features/path-grade-subject-terms/api/list.ts",
+        "src/features/path-grade-subject-terms/types/index.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/learning-paths/types/index.ts",
+        "src/features/path-grade-subjects/api/useListQuery.ts",
+        "src/features/path-grade-subjects/api/list.ts",
+        "src/features/path-grade-subjects/types/index.ts",
+        "src/features/persons/api/useListQuery.ts",
+        "src/features/persons/api/list.ts",
+        "src/features/persons/types/index.ts",
+        "src/features/rooms/api/useListQuery.ts",
+        "src/features/rooms/api/list.ts",
+        "src/features/rooms/types/index.ts"
+      ],
+      "headings": [
+        "تأسيس دورة تدريبية",
+        "معلومات الحالة (Lifecycle)",
+        "الكورس المخطط له مسبقاً *",
+        "محتوى الدورة (اختر نوعاً واحداً)",
+        "الموضوع التدريبي *",
+        "مادة المسار *",
+        "مادة الترم *",
+        "البيانات الأساسية",
+        "اسم الدورة *",
+        "المدة (بالأيام) *",
+        "عدد المشاركين الداخليين",
+        "عدد المشاركين الخارجيين",
+        "التكلفة",
+        "الجهة الممولة",
+        "المواعيد والمكان",
+        "تاريخ البداية *",
+        "تاريخ النهاية",
+        "قاعة التدريب *",
+        "طاقم التدريب",
+        "المدرب الأساسي *",
+        "المدرب الاحتياطي",
+        "منسق الدورة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/departments",
+      "component": "DepartmentList",
+      "source": "src/features/departments/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /departments"
+      ],
+      "dependencies": [
+        "src/features/departments/api/useListQuery.ts",
+        "src/features/departments/api/list.ts",
+        "src/features/departments/types/index.ts"
+      ],
+      "headings": [
+        "الإدارات",
+        "الإدارات والأقسام التابعة للجهات."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/departments/:id",
+      "component": "DepartmentDetail",
+      "source": "src/features/departments/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /department/"
+      ],
+      "dependencies": [
+        "src/features/departments/api/useGetQuery.ts",
+        "src/features/departments/api/get.ts",
+        "src/features/departments/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "الكود",
+        "اسم الإدارة",
+        "معرف الجهة التابعة لها"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/departments/:id/edit",
+      "component": "DepartmentCreate",
+      "source": "src/features/departments/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /organizations"
+      ],
+      "dependencies": [
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts"
+      ],
+      "headings": [
+        "بيانات الإدارة",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "الجهة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/departments/new",
+      "component": "DepartmentCreate",
+      "source": "src/features/departments/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /organizations"
+      ],
+      "dependencies": [
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts"
+      ],
+      "headings": [
+        "بيانات الإدارة",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "الجهة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/documentation-types",
+      "component": "DocumentationTypeList",
+      "source": "src/features/documentation-types/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /documentation-types"
+      ],
+      "dependencies": [
+        "src/features/documentation-types/api/useListQuery.ts",
+        "src/features/documentation-types/api/list.ts",
+        "src/features/documentation-types/types/index.ts"
+      ],
+      "headings": [
+        "أنواع الوثائق",
+        "التصنيفات المرجعية لأنواع الوثائق والمستندات."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/documentation-types/:id",
+      "component": "DocumentationTypeDetail",
+      "source": "src/features/documentation-types/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /documentation-type/"
+      ],
+      "dependencies": [
+        "src/features/documentation-types/api/useGetQuery.ts",
+        "src/features/documentation-types/api/get.ts",
+        "src/features/documentation-types/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/documentation-types/:id/edit",
+      "component": "DocumentationTypeCreate",
+      "source": "src/features/documentation-types/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات نوع الوثيقة",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/documentation-types/new",
+      "component": "DocumentationTypeCreate",
+      "source": "src/features/documentation-types/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات نوع الوثيقة",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/documentations",
+      "component": "DocumentationList",
+      "source": "src/features/documentations/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "Search",
+        "FolderOpen",
+        "ReferenceActions",
+        "FileText",
+        "ArrowLeft",
+        "File"
+      ],
+      "apis": [
+        "GET /documentations"
+      ],
+      "dependencies": [
+        "src/features/documentations/api/useListQuery.ts",
+        "src/features/documentations/api/list.ts",
+        "src/features/documentations/types/index.ts"
+      ],
+      "headings": [
+        "الوثائق والمستندات"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/documentations/:id",
+      "component": "DocumentationDetail",
+      "source": "src/features/documentations/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /documentation/"
+      ],
+      "dependencies": [
+        "src/features/documentations/api/useGetQuery.ts",
+        "src/features/documentations/api/get.ts",
+        "src/features/documentations/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة وثيقة",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "اسم الوثيقة",
+        "مسار الملف",
+        "معرف نوع الوثيقة",
+        "معرف الدورة التدريبية",
+        "معرف الجلسة التدريبية",
+        "معرف المادة التدريبية"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/documentations/:id/edit",
+      "component": "DocumentationCreate",
+      "source": "src/features/documentations/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /course-sessions",
+        "GET /courses",
+        "GET /documentation-types",
+        "GET /learning-subjects",
+        "GET /path-grade-subject-terms",
+        "GET /path-grade-subjects"
+      ],
+      "dependencies": [
+        "src/features/course-sessions/api/useListQuery.ts",
+        "src/features/course-sessions/api/list.ts",
+        "src/features/course-sessions/types/index.ts",
+        "src/features/courses/api/useListQuery.ts",
+        "src/features/courses/api/list.ts",
+        "src/features/courses/types/index.ts",
+        "src/features/documentation-types/api/useListQuery.ts",
+        "src/features/documentation-types/api/list.ts",
+        "src/features/documentation-types/types/index.ts",
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts",
+        "src/features/path-grade-subject-terms/api/useListQuery.ts",
+        "src/features/path-grade-subject-terms/api/list.ts",
+        "src/features/path-grade-subject-terms/types/index.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/learning-paths/types/index.ts",
+        "src/features/path-grade-subjects/api/useListQuery.ts",
+        "src/features/path-grade-subjects/api/list.ts",
+        "src/features/path-grade-subjects/types/index.ts"
+      ],
+      "headings": [
+        "بيانات الوثيقة",
+        "الاسم / الوصف *",
+        "مسار الملف *",
+        "نوع الوثيقة (اختياري)",
+        "ارتباط بموضوع تدريبي",
+        "ارتباط بمادة درجة المسار",
+        "ارتباط بمادة فصل تدريبي",
+        "ارتباط بدورة تدريبية",
+        "ارتباط بجلسة تدريبية"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/documentations/new",
+      "component": "DocumentationCreate",
+      "source": "src/features/documentations/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /course-sessions",
+        "GET /courses",
+        "GET /documentation-types",
+        "GET /learning-subjects",
+        "GET /path-grade-subject-terms",
+        "GET /path-grade-subjects"
+      ],
+      "dependencies": [
+        "src/features/course-sessions/api/useListQuery.ts",
+        "src/features/course-sessions/api/list.ts",
+        "src/features/course-sessions/types/index.ts",
+        "src/features/courses/api/useListQuery.ts",
+        "src/features/courses/api/list.ts",
+        "src/features/courses/types/index.ts",
+        "src/features/documentation-types/api/useListQuery.ts",
+        "src/features/documentation-types/api/list.ts",
+        "src/features/documentation-types/types/index.ts",
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts",
+        "src/features/path-grade-subject-terms/api/useListQuery.ts",
+        "src/features/path-grade-subject-terms/api/list.ts",
+        "src/features/path-grade-subject-terms/types/index.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/learning-paths/types/index.ts",
+        "src/features/path-grade-subjects/api/useListQuery.ts",
+        "src/features/path-grade-subjects/api/list.ts",
+        "src/features/path-grade-subjects/types/index.ts"
+      ],
+      "headings": [
+        "بيانات الوثيقة",
+        "الاسم / الوصف *",
+        "مسار الملف *",
+        "نوع الوثيقة (اختياري)",
+        "ارتباط بموضوع تدريبي",
+        "ارتباط بمادة درجة المسار",
+        "ارتباط بمادة فصل تدريبي",
+        "ارتباط بدورة تدريبية",
+        "ارتباط بجلسة تدريبية"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/evaluation-types",
+      "component": "EvaluationTypeList",
+      "source": "src/features/evaluation-types/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /evaluation-types"
+      ],
+      "dependencies": [
+        "src/features/evaluation-types/api/useListQuery.ts",
+        "src/features/evaluation-types/api/list.ts",
+        "src/features/evaluation-types/types/index.ts"
+      ],
+      "headings": [
+        "أنواع التقييم",
+        "التصنيفات المرجعية لأنواع التقييم."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/evaluation-types/:id",
+      "component": "EvaluationTypeDetail",
+      "source": "src/features/evaluation-types/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /evaluation-type/"
+      ],
+      "dependencies": [
+        "src/features/evaluation-types/api/useGetQuery.ts",
+        "src/features/evaluation-types/api/get.ts",
+        "src/features/evaluation-types/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/evaluation-types/:id/edit",
+      "component": "EvaluationTypeCreate",
+      "source": "src/features/evaluation-types/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات نوع التقييم",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/evaluation-types/new",
+      "component": "EvaluationTypeCreate",
+      "source": "src/features/evaluation-types/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات نوع التقييم",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/governorates",
+      "component": "GovernorateList",
+      "source": "src/features/governorates/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /governorates"
+      ],
+      "dependencies": [
+        "src/features/governorates/api/useListQuery.ts",
+        "src/features/governorates/api/list.ts",
+        "src/features/governorates/types/index.ts"
+      ],
+      "headings": [
+        "المحافظات",
+        "المحافظات المسجلة في النظام."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/governorates/:id",
+      "component": "GovernorateDetail",
+      "source": "src/features/governorates/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /governorate/"
+      ],
+      "dependencies": [
+        "src/features/governorates/api/useGetQuery.ts",
+        "src/features/governorates/api/get.ts",
+        "src/features/governorates/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم",
+        "رقم الدولة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/governorates/:id/edit",
+      "component": "GovernorateCreate",
+      "source": "src/features/governorates/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /countries"
+      ],
+      "dependencies": [
+        "src/features/countries/api/useListQuery.ts",
+        "src/features/countries/api/list.ts",
+        "src/features/countries/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المحافظة",
+        "الاسم / الوصف *",
+        "الدولة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/governorates/new",
+      "component": "GovernorateCreate",
+      "source": "src/features/governorates/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /countries"
+      ],
+      "dependencies": [
+        "src/features/countries/api/useListQuery.ts",
+        "src/features/countries/api/list.ts",
+        "src/features/countries/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المحافظة",
+        "الاسم / الوصف *",
+        "الدولة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/grades",
+      "component": "GradeList",
+      "source": "src/features/grades/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "RecordKpis",
+        "Card",
+        "Search",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /grades"
+      ],
+      "dependencies": [
+        "src/features/grades/api/useListQuery.ts",
+        "src/features/grades/api/list.ts",
+        "src/features/grades/types/index.ts"
+      ],
+      "headings": [
+        "الدرجات الوظيفية",
+        "الدرجات الوظيفية والمدد البينية."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/grades/:id",
+      "component": "GradeDetail",
+      "source": "src/features/grades/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /grade/"
+      ],
+      "dependencies": [
+        "src/features/grades/api/useGetQuery.ts",
+        "src/features/grades/api/get.ts",
+        "src/features/grades/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الكود",
+        "الاسم",
+        "المدة البينية"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Implemented; synthetic browser verification passed; live API pending"
+    },
+    {
+      "route": "/grades/:id/edit",
+      "component": "GradeCreate",
+      "source": "src/features/grades/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات الدرجة الوظيفية",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "المدة البينية *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/grades/new",
+      "component": "GradeCreate",
+      "source": "src/features/grades/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات الدرجة الوظيفية",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "المدة البينية *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/job-type-groups",
+      "component": "JobTypeGroupList",
+      "source": "src/features/job-type-groups/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /job-type-groups"
+      ],
+      "dependencies": [
+        "src/features/job-type-groups/api/useListQuery.ts",
+        "src/features/job-type-groups/api/list.ts",
+        "src/features/job-type-groups/types/index.ts"
+      ],
+      "headings": [
+        "المجموعات الوظيفية النوعية",
+        "تصنيف المجموعات التخصصية والوظيفية للمهن."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/job-type-groups/:id",
+      "component": "JobTypeGroupDetail",
+      "source": "src/features/job-type-groups/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /job-type-group/"
+      ],
+      "dependencies": [
+        "src/features/job-type-groups/api/useGetQuery.ts",
+        "src/features/job-type-groups/api/get.ts",
+        "src/features/job-type-groups/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "الكود",
+        "اسم المجموعة الوظيفية",
+        "معرف مجموعة العمل"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/jobs",
+      "component": "JobList",
+      "source": "src/features/jobs/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "RecordKpis",
+        "Card",
+        "Search",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /jobs"
+      ],
+      "dependencies": [
+        "src/features/jobs/api/useListQuery.ts",
+        "src/features/jobs/api/list.ts",
+        "src/features/jobs/types/index.ts"
+      ],
+      "headings": [
+        "الوظائف",
+        "قائمة المسميات الوظيفية المعتمدة."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/jobs/:id",
+      "component": "JobDetail",
+      "source": "src/features/jobs/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /job/"
+      ],
+      "dependencies": [
+        "src/features/jobs/api/useGetQuery.ts",
+        "src/features/jobs/api/get.ts",
+        "src/features/jobs/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الكود",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/jobs/:id/edit",
+      "component": "JobCreate",
+      "source": "src/features/jobs/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات الوظيفة",
+        "الكود (Code) *",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/jobs/new",
+      "component": "JobCreate",
+      "source": "src/features/jobs/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات الوظيفة",
+        "الكود (Code) *",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-paths",
+      "component": "LearningPathList",
+      "source": "src/features/learning-paths/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "GraduationCap",
+        "ChevronLeft",
+        "Layers3",
+        "BookOpenCheck",
+        "Search",
+        "ReferenceActions",
+        "ArrowLeft"
+      ],
+      "apis": [
+        "GET /learning-paths"
+      ],
+      "dependencies": [
+        "src/features/learning-paths/api/useListQuery.ts",
+        "src/features/learning-paths/api/list.ts",
+        "src/features/learning-paths/types/index.ts"
+      ],
+      "headings": [
+        "المسارات التدريبية",
+        "تسلسل المحتوى التدريبي",
+        "البحث في المسارات"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-paths/:id",
+      "component": "LearningPathDetail",
+      "source": "src/features/learning-paths/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Badge",
+        "Link",
+        "Button",
+        "ArrowLeft",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /learning-path/"
+      ],
+      "dependencies": [
+        "src/features/learning-paths/api/useGetQuery.ts",
+        "src/features/learning-paths/api/get.ts",
+        "src/features/learning-paths/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المسار والمناهج",
+        "المعرّف (ID)",
+        "كود المسار",
+        "اسم المسار التدريبي",
+        "معرف نوع المؤهل"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-paths/:id/edit",
+      "component": "LearningPathCreate",
+      "source": "src/features/learning-paths/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /qualification-types"
+      ],
+      "dependencies": [
+        "src/features/qualification-types/api/useListQuery.ts",
+        "src/features/qualification-types/api/list.ts",
+        "src/features/qualification-types/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المسار التدريبي",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "نوع المؤهل *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-paths/new",
+      "component": "LearningPathCreate",
+      "source": "src/features/learning-paths/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /qualification-types"
+      ],
+      "dependencies": [
+        "src/features/qualification-types/api/useListQuery.ts",
+        "src/features/qualification-types/api/list.ts",
+        "src/features/qualification-types/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المسار التدريبي",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "نوع المؤهل *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-subjects",
+      "component": "LearningSubjectList",
+      "source": "src/features/learning-subjects/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /learning-subjects"
+      ],
+      "dependencies": [
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts"
+      ],
+      "headings": [
+        "المواضيع التدريبية",
+        "المواضيع والمواد المتاحة للتدريب.",
+        "البحث في المواضيع التدريبية"
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-subjects/:id",
+      "component": "LearningSubjectDetail",
+      "source": "src/features/learning-subjects/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /learning-subject/"
+      ],
+      "dependencies": [
+        "src/features/learning-subjects/api/useGetQuery.ts",
+        "src/features/learning-subjects/api/get.ts",
+        "src/features/learning-subjects/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-subjects/:id/edit",
+      "component": "LearningSubjectCreate",
+      "source": "src/features/learning-subjects/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات الموضوع التدريبي",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-subjects/new",
+      "component": "LearningSubjectCreate",
+      "source": "src/features/learning-subjects/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات الموضوع التدريبي",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-terms",
+      "component": "LearningTermList",
+      "source": "src/features/learning-terms/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /learning-terms"
+      ],
+      "dependencies": [
+        "src/features/learning-terms/api/useListQuery.ts",
+        "src/features/learning-terms/api/list.ts",
+        "src/features/learning-terms/types/index.ts"
+      ],
+      "headings": [
+        "الفصول التدريبية",
+        "الفصول والتراكيب الزمنية للبرامج التدريبية."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-terms/:id",
+      "component": "LearningTermDetail",
+      "source": "src/features/learning-terms/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /learning-term/"
+      ],
+      "dependencies": [
+        "src/features/learning-terms/api/useGetQuery.ts",
+        "src/features/learning-terms/api/get.ts",
+        "src/features/learning-terms/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-terms/:id/edit",
+      "component": "LearningTermCreate",
+      "source": "src/features/learning-terms/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات الفصل التدريبي",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/learning-terms/new",
+      "component": "LearningTermCreate",
+      "source": "src/features/learning-terms/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات الفصل التدريبي",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/organization-types",
+      "component": "OrganizationTypeList",
+      "source": "src/features/organization-types/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /organization-types"
+      ],
+      "dependencies": [
+        "src/features/organization-types/api/useListQuery.ts",
+        "src/features/organization-types/api/list.ts",
+        "src/features/organization-types/types/index.ts"
+      ],
+      "headings": [
+        "أنواع الجهات",
+        "التصنيفات المعتمدة للجهات والمؤسسات."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/organization-types/:id",
+      "component": "OrganizationTypeDetail",
+      "source": "src/features/organization-types/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /organization-type/"
+      ],
+      "dependencies": [
+        "src/features/organization-types/api/useGetQuery.ts",
+        "src/features/organization-types/api/get.ts",
+        "src/features/organization-types/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/organization-types/:id/edit",
+      "component": "OrganizationTypeCreate",
+      "source": "src/features/organization-types/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات نوع الجهة",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/organization-types/new",
+      "component": "OrganizationTypeCreate",
+      "source": "src/features/organization-types/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات نوع الجهة",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/organizations",
+      "component": "OrganizationList",
+      "source": "src/features/organizations/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /organizations"
+      ],
+      "dependencies": [
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts"
+      ],
+      "headings": [
+        "الجهات والمؤسسات",
+        "الهيكل الرئيسي للجهات والشركات التابعة والشريكة."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/organizations/:id",
+      "component": "OrganizationDetail",
+      "source": "src/features/organizations/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField",
+        "Table"
+      ],
+      "apis": [
+        "GET /organization/"
+      ],
+      "dependencies": [
+        "src/features/organizations/api/useGetQuery.ts",
+        "src/features/organizations/api/get.ts",
+        "src/features/organizations/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "الكود",
+        "الاسم",
+        "العنوان",
+        "معرف نوع الجهة",
+        "معرف المحافظة",
+        "الإدارات التابعة",
+        "مراكز العمل التابعة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/organizations/:id/edit",
+      "component": "OrganizationCreate",
+      "source": "src/features/organizations/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /governorates",
+        "GET /organization-types"
+      ],
+      "dependencies": [
+        "src/features/governorates/api/useListQuery.ts",
+        "src/features/governorates/api/list.ts",
+        "src/features/governorates/types/index.ts",
+        "src/features/organization-types/api/useListQuery.ts",
+        "src/features/organization-types/api/list.ts",
+        "src/features/organization-types/types/index.ts"
+      ],
+      "headings": [
+        "بيانات الجهة",
+        "الاسم / الوصف *",
+        "الكود (Code) *",
+        "العنوان *",
+        "نوع الجهة *",
+        "المحافظة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/organizations/new",
+      "component": "OrganizationCreate",
+      "source": "src/features/organizations/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /governorates",
+        "GET /organization-types"
+      ],
+      "dependencies": [
+        "src/features/governorates/api/useListQuery.ts",
+        "src/features/governorates/api/list.ts",
+        "src/features/governorates/types/index.ts",
+        "src/features/organization-types/api/useListQuery.ts",
+        "src/features/organization-types/api/list.ts",
+        "src/features/organization-types/types/index.ts"
+      ],
+      "headings": [
+        "بيانات الجهة",
+        "الاسم / الوصف *",
+        "الكود (Code) *",
+        "العنوان *",
+        "نوع الجهة *",
+        "المحافظة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/participant-types",
+      "component": "ParticipantTypeList",
+      "source": "src/features/participant-types/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /participant-types"
+      ],
+      "dependencies": [
+        "src/features/participant-types/api/useListQuery.ts",
+        "src/features/participant-types/api/list.ts",
+        "src/features/participant-types/types/index.ts"
+      ],
+      "headings": [
+        "أنواع المشاركين",
+        "التصنيفات المرجعية لأنواع المشاركين في التدريب.",
+        "البحث في أنواع المشاركين"
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/participant-types/:id",
+      "component": "ParticipantTypeDetail",
+      "source": "src/features/participant-types/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /participant-type/"
+      ],
+      "dependencies": [
+        "src/features/participant-types/api/useGetQuery.ts",
+        "src/features/participant-types/api/get.ts",
+        "src/features/participant-types/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-candidates",
+      "component": "PathGradeCandidateList",
+      "source": "src/features/path-grade-candidates/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "Values",
+        "Plus",
+        "Select",
+        "Button",
+        "Save",
+        "ArrowDownUp",
+        "UserRound",
+        "Pencil",
+        "Trash2",
+        "Award"
+      ],
+      "apis": [
+        "GET /evaluation-types",
+        "GET /learning-terms",
+        "GET /path-grades",
+        "GET /persons",
+        "POST /new-path-grade-candidate",
+        "PUT /path-grade-candidate/${id}",
+        "DELETE /path-grade-candidate/${id}",
+        "GET /path-grade-candidates"
+      ],
+      "dependencies": [
+        "src/features/evaluation-types/api/useListQuery.ts",
+        "src/features/evaluation-types/api/list.ts",
+        "src/features/evaluation-types/types/index.ts",
+        "src/features/learning-terms/api/useListQuery.ts",
+        "src/features/learning-terms/api/list.ts",
+        "src/features/learning-terms/types/index.ts",
+        "src/features/path-grades/api/useListQuery.ts",
+        "src/features/path-grades/api/list.ts",
+        "src/features/path-grades/types/index.ts",
+        "src/features/persons/api/useListQuery.ts",
+        "src/features/persons/api/list.ts",
+        "src/features/persons/types/index.ts",
+        "src/features/path-grade-candidates/api/create.ts",
+        "src/features/path-grade-candidates/types/index.ts",
+        "src/features/path-grade-candidates/api/update.ts",
+        "src/features/path-grade-candidates/api/useDeleteMutation.ts",
+        "src/features/path-grade-candidates/api/delete.ts",
+        "src/features/path-grade-candidates/api/useListQuery.ts",
+        "src/features/path-grade-candidates/api/list.ts"
+      ],
+      "headings": [
+        "المرشحون للمسارات التدريبية",
+        "{editingId ? 'تعديل ترشيح' : 'إضافة مرشح جديد'}",
+        "الموظف *",
+        "المسار والدرجة *",
+        "الفصل التدريبي *",
+        "التقييم النهائي *",
+        "سجلات الترشيح",
+        "تعديل الترشيح",
+        "حذف الترشيح"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-subject-terms",
+      "component": "PathGradeSubjectTermList",
+      "source": "src/features/path-grade-subject-terms/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "GraduationCap"
+      ],
+      "apis": [
+        "GET /path-grade-subject-terms"
+      ],
+      "dependencies": [
+        "src/features/path-grade-subject-terms/api/useListQuery.ts",
+        "src/features/path-grade-subject-terms/api/list.ts",
+        "src/features/path-grade-subject-terms/types/index.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/learning-paths/types/index.ts"
+      ],
+      "headings": [
+        "مواد الفصول التدريبية",
+        "توزيع المواد التدريبية على الفصول (الترمات) المحددة."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-subject-terms/:id",
+      "component": "PathGradeSubjectTermDetail",
+      "source": "src/features/path-grade-subject-terms/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Badge",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /path-grade-subject-term/"
+      ],
+      "dependencies": [
+        "src/features/path-grade-subject-terms/api/useGetQuery.ts",
+        "src/features/path-grade-subject-terms/api/get.ts",
+        "src/features/path-grade-subject-terms/types/index.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/learning-paths/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المسار والمناهج",
+        "المعرّف (ID)",
+        "الكود",
+        "المسار التدريبي",
+        "الدرجة الوظيفية",
+        "المادة التدريبية",
+        "معرف مادة مرحلة المسار",
+        "الفصل التدريبي (الترم)",
+        "ملاحظات"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-subject-terms/:id/edit",
+      "component": "PathGradeSubjectTermCreate",
+      "source": "src/features/path-grade-subject-terms/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Select",
+        "Input"
+      ],
+      "apis": [
+        "GET /learning-terms",
+        "GET /path-grade-subjects"
+      ],
+      "dependencies": [
+        "src/features/learning-terms/api/useListQuery.ts",
+        "src/features/learning-terms/api/list.ts",
+        "src/features/learning-terms/types/index.ts",
+        "src/features/path-grade-subjects/api/useListQuery.ts",
+        "src/features/path-grade-subjects/api/list.ts",
+        "src/features/path-grade-subjects/types/index.ts"
+      ],
+      "headings": [
+        "بيانات مادة الفصل التدريبي",
+        "مادة درجة المسار *",
+        "الترم *",
+        "الكود (Code) *",
+        "ملاحظات *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-subject-terms/new",
+      "component": "PathGradeSubjectTermCreate",
+      "source": "src/features/path-grade-subject-terms/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Select",
+        "Input"
+      ],
+      "apis": [
+        "GET /learning-terms",
+        "GET /path-grade-subjects"
+      ],
+      "dependencies": [
+        "src/features/learning-terms/api/useListQuery.ts",
+        "src/features/learning-terms/api/list.ts",
+        "src/features/learning-terms/types/index.ts",
+        "src/features/path-grade-subjects/api/useListQuery.ts",
+        "src/features/path-grade-subjects/api/list.ts",
+        "src/features/path-grade-subjects/types/index.ts"
+      ],
+      "headings": [
+        "بيانات مادة الفصل التدريبي",
+        "مادة درجة المسار *",
+        "الترم *",
+        "الكود (Code) *",
+        "ملاحظات *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-subjects",
+      "component": "PathGradeSubjectList",
+      "source": "src/features/path-grade-subjects/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowLeft",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "GraduationCap"
+      ],
+      "apis": [
+        "GET /path-grade-subjects"
+      ],
+      "dependencies": [
+        "src/features/path-grade-subjects/api/useListQuery.ts",
+        "src/features/path-grade-subjects/api/list.ts",
+        "src/features/path-grade-subjects/types/index.ts"
+      ],
+      "headings": [
+        "مواد مراحل المسارات",
+        "المناهج والمواد المخصصة لكل مرحلة بالمسار التدريبي."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-subjects/:id",
+      "component": "PathGradeSubjectDetail",
+      "source": "src/features/path-grade-subjects/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Badge",
+        "Link",
+        "Button",
+        "ArrowLeft",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /path-grade-subject/"
+      ],
+      "dependencies": [
+        "src/features/path-grade-subjects/api/useGetQuery.ts",
+        "src/features/path-grade-subjects/api/get.ts",
+        "src/features/path-grade-subjects/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المسار والمناهج",
+        "المعرّف (ID)",
+        "كود المادة",
+        "اسم المادة التدريبية",
+        "معرف مرحلة المسار",
+        "معرف المادة التدريبية العامة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-subjects/:id/edit",
+      "component": "PathGradeSubjectCreate",
+      "source": "src/features/path-grade-subjects/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /learning-subjects",
+        "GET /path-grades"
+      ],
+      "dependencies": [
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts",
+        "src/features/path-grades/api/useListQuery.ts",
+        "src/features/path-grades/api/list.ts",
+        "src/features/path-grades/types/index.ts"
+      ],
+      "headings": [
+        "بيانات مادة المسار",
+        "الاسم / الوصف *",
+        "الكود (Code) *",
+        "مرحلة المسار (Path Grade) *",
+        "الموضوع التدريبي *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grade-subjects/new",
+      "component": "PathGradeSubjectCreate",
+      "source": "src/features/path-grade-subjects/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /learning-subjects",
+        "GET /path-grades"
+      ],
+      "dependencies": [
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts",
+        "src/features/path-grades/api/useListQuery.ts",
+        "src/features/path-grades/api/list.ts",
+        "src/features/path-grades/types/index.ts"
+      ],
+      "headings": [
+        "بيانات مادة المسار",
+        "الاسم / الوصف *",
+        "الكود (Code) *",
+        "مرحلة المسار (Path Grade) *",
+        "الموضوع التدريبي *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grades",
+      "component": "PathGradeList",
+      "source": "src/features/path-grades/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowLeft",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "GraduationCap"
+      ],
+      "apis": [
+        "GET /path-grades"
+      ],
+      "dependencies": [
+        "src/features/path-grades/api/useListQuery.ts",
+        "src/features/path-grades/api/list.ts",
+        "src/features/path-grades/types/index.ts"
+      ],
+      "headings": [
+        "درجات ومراحل المسارات",
+        "ربط المسار التدريبي بالدرجات الوظيفية المحددة."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grades/:id",
+      "component": "PathGradeDetail",
+      "source": "src/features/path-grades/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Badge",
+        "Link",
+        "Button",
+        "ArrowLeft",
+        "ArrowRight",
+        "Card",
+        "InfoField",
+        "Table"
+      ],
+      "apis": [
+        "GET /path-grade/"
+      ],
+      "dependencies": [
+        "src/features/path-grades/api/useGetQuery.ts",
+        "src/features/path-grades/api/get.ts",
+        "src/features/path-grades/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المسار والمناهج",
+        "المعرّف (ID)",
+        "معرف المسار التدريبي",
+        "معرف الدرجة الوظيفية",
+        "المواد التدريبية المقررة لهذه الدرجة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grades/:id/edit",
+      "component": "PathGradeCreate",
+      "source": "src/features/path-grades/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Select"
+      ],
+      "apis": [
+        "GET /grades",
+        "GET /learning-paths"
+      ],
+      "dependencies": [
+        "src/features/grades/api/useListQuery.ts",
+        "src/features/grades/api/list.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/learning-paths/api/useListQuery.ts",
+        "src/features/learning-paths/api/list.ts",
+        "src/features/learning-paths/types/index.ts"
+      ],
+      "headings": [
+        "بيانات درجة المسار",
+        "المسار التدريبي *",
+        "الدرجة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/path-grades/new",
+      "component": "PathGradeCreate",
+      "source": "src/features/path-grades/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Select"
+      ],
+      "apis": [
+        "GET /grades",
+        "GET /learning-paths"
+      ],
+      "dependencies": [
+        "src/features/grades/api/useListQuery.ts",
+        "src/features/grades/api/list.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/learning-paths/api/useListQuery.ts",
+        "src/features/learning-paths/api/list.ts",
+        "src/features/learning-paths/types/index.ts"
+      ],
+      "headings": [
+        "بيانات درجة المسار",
+        "المسار التدريبي *",
+        "الدرجة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-categories",
+      "component": "PerformanceEvaluationCategoryList",
+      "source": "src/features/performance-evaluation-categories/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "ClipboardList"
+      ],
+      "apis": [
+        "GET /performance-evaluation-categories"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-categories/api/list.ts",
+        "src/features/performance-evaluation-categories/types/index.ts"
+      ],
+      "headings": [
+        "فئات تقييم الأداء",
+        "المحاور والفئات الرئيسية لتقييم أداء المشاركين والبرامج التدريبية."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-categories/:id",
+      "component": "PerformanceEvaluationCategoryDetail",
+      "source": "src/features/performance-evaluation-categories/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /performance-evaluation-category/"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-categories/api/useGetQuery.ts",
+        "src/features/performance-evaluation-categories/api/get.ts",
+        "src/features/performance-evaluation-categories/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة فئة تقييم أداء",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "اسم فئة التقييم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-categories/:id/edit",
+      "component": "PerformanceEvaluationCategoryCreate",
+      "source": "src/features/performance-evaluation-categories/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات فئة التقييم",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-categories/new",
+      "component": "PerformanceEvaluationCategoryCreate",
+      "source": "src/features/performance-evaluation-categories/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات فئة التقييم",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-course-details",
+      "component": "EvaluationReport",
+      "source": "src/features/performance-evaluations/components/Report.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "PerformanceEvaluationRecord",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Table"
+      ],
+      "apis": [
+        "GET /available-performance-evaluation-items",
+        "GET /performance-evaluation-course-details",
+        "GET /performance-evaluation-course-detail/${id}",
+        "GET /performance-evaluation-course-participant-details",
+        "GET /performance-evaluation-course-participant-detail/${id}",
+        "POST /new-performance-evaluation",
+        "PUT /performance-evaluation/${id}",
+        "DELETE /performance-evaluation/${id}"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluations/api.ts"
+      ],
+      "headings": [],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-course-details/:id",
+      "component": "EvaluationReport",
+      "source": "src/features/performance-evaluations/components/Report.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "PerformanceEvaluationRecord",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Table"
+      ],
+      "apis": [
+        "GET /available-performance-evaluation-items",
+        "GET /performance-evaluation-course-details",
+        "GET /performance-evaluation-course-detail/${id}",
+        "GET /performance-evaluation-course-participant-details",
+        "GET /performance-evaluation-course-participant-detail/${id}",
+        "POST /new-performance-evaluation",
+        "PUT /performance-evaluation/${id}",
+        "DELETE /performance-evaluation/${id}"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluations/api.ts"
+      ],
+      "headings": [],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-course-participant-details",
+      "component": "EvaluationReport",
+      "source": "src/features/performance-evaluations/components/Report.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "PerformanceEvaluationRecord",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Table"
+      ],
+      "apis": [
+        "GET /available-performance-evaluation-items",
+        "GET /performance-evaluation-course-details",
+        "GET /performance-evaluation-course-detail/${id}",
+        "GET /performance-evaluation-course-participant-details",
+        "GET /performance-evaluation-course-participant-detail/${id}",
+        "POST /new-performance-evaluation",
+        "PUT /performance-evaluation/${id}",
+        "DELETE /performance-evaluation/${id}"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluations/api.ts"
+      ],
+      "headings": [],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-course-participant-details/:id",
+      "component": "EvaluationReport",
+      "source": "src/features/performance-evaluations/components/Report.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "PerformanceEvaluationRecord",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Table"
+      ],
+      "apis": [
+        "GET /available-performance-evaluation-items",
+        "GET /performance-evaluation-course-details",
+        "GET /performance-evaluation-course-detail/${id}",
+        "GET /performance-evaluation-course-participant-details",
+        "GET /performance-evaluation-course-participant-detail/${id}",
+        "POST /new-performance-evaluation",
+        "PUT /performance-evaluation/${id}",
+        "DELETE /performance-evaluation/${id}"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluations/api.ts"
+      ],
+      "headings": [],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-items",
+      "component": "PerformanceEvaluationItemList",
+      "source": "src/features/performance-evaluation-items/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "ClipboardList"
+      ],
+      "apis": [
+        "GET /performance-evaluation-items"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-items/api/useListQuery.ts",
+        "src/features/performance-evaluation-items/api/list.ts",
+        "src/features/performance-evaluation-items/types/index.ts"
+      ],
+      "headings": [
+        "عناصر ومعايير تقييم الأداء",
+        "بنود التقييم المحددة مع الحدود الدنيا والقصوى للدرجات."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-items/:id",
+      "component": "PerformanceEvaluationItemDetail",
+      "source": "src/features/performance-evaluation-items/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /performance-evaluation-item/"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-items/api/useGetQuery.ts",
+        "src/features/performance-evaluation-items/api/get.ts",
+        "src/features/performance-evaluation-items/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة عنصر تقييم",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "اسم معيار التقييم",
+        "الحد الأدنى للدرجة",
+        "الحد الأقصى للدرجة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-items/:id/edit",
+      "component": "PerformanceEvaluationItemCreate",
+      "source": "src/features/performance-evaluation-items/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات معيار التقييم",
+        "الاسم / الوصف *",
+        "الحد الأدنى *",
+        "الحد الأقصى *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-items/new",
+      "component": "PerformanceEvaluationItemCreate",
+      "source": "src/features/performance-evaluation-items/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات معيار التقييم",
+        "الاسم / الوصف *",
+        "الحد الأدنى *",
+        "الحد الأقصى *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-participant-categories",
+      "component": "PerformanceEvaluationParticipantCategoryList",
+      "source": "src/features/performance-evaluation-participant-categories/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "ClipboardList"
+      ],
+      "apis": [
+        "GET /performance-evaluation-participant-categories"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-participant-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-participant-categories/api/list.ts",
+        "src/features/performance-evaluation-participant-categories/types/index.ts"
+      ],
+      "headings": [
+        "ربط فئات المشاركين بتقييم الأداء",
+        "تخصيص نماذج وفئات التقييم لأنواع معينة من المشاركين."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-participant-categories/:id",
+      "component": "PerformanceEvaluationParticipantCategoryDetail",
+      "source": "src/features/performance-evaluation-participant-categories/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField",
+        "Table"
+      ],
+      "apis": [
+        "GET /performance-evaluation-participant-category/"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-participant-categories/api/useGetQuery.ts",
+        "src/features/performance-evaluation-participant-categories/api/get.ts",
+        "src/features/performance-evaluation-participant-categories/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة فئة مشارك التقييم",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "معرف نوع المشارك",
+        "معرف فئة تقييم الأداء",
+        "عناصر التقييم المرتبطة بهذه الفئة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-participant-categories/:id/edit",
+      "component": "PerformanceEvaluationParticipantCategoryCreate",
+      "source": "src/features/performance-evaluation-participant-categories/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Select"
+      ],
+      "apis": [
+        "GET /participant-types",
+        "GET /performance-evaluation-categories"
+      ],
+      "dependencies": [
+        "src/features/participant-types/api/useListQuery.ts",
+        "src/features/participant-types/api/list.ts",
+        "src/features/participant-types/types/index.ts",
+        "src/features/performance-evaluation-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-categories/api/list.ts",
+        "src/features/performance-evaluation-categories/types/index.ts"
+      ],
+      "headings": [
+        "بيانات فئة تقييم المشاركين",
+        "نوع المشارك *",
+        "فئة تقييم الأداء *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-participant-categories/new",
+      "component": "PerformanceEvaluationParticipantCategoryCreate",
+      "source": "src/features/performance-evaluation-participant-categories/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Select"
+      ],
+      "apis": [
+        "GET /participant-types",
+        "GET /performance-evaluation-categories"
+      ],
+      "dependencies": [
+        "src/features/participant-types/api/useListQuery.ts",
+        "src/features/participant-types/api/list.ts",
+        "src/features/participant-types/types/index.ts",
+        "src/features/performance-evaluation-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-categories/api/list.ts",
+        "src/features/performance-evaluation-categories/types/index.ts"
+      ],
+      "headings": [
+        "بيانات فئة تقييم المشاركين",
+        "نوع المشارك *",
+        "فئة تقييم الأداء *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-participant-category-items",
+      "component": "PerformanceEvaluationParticipantCategoryItemList",
+      "source": "src/features/performance-evaluation-participant-category-items/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Select",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "ClipboardList"
+      ],
+      "apis": [
+        "GET /participant-types",
+        "GET /performance-evaluation-categories",
+        "GET /performance-evaluation-participant-category-items"
+      ],
+      "dependencies": [
+        "src/features/participant-types/api/useListQuery.ts",
+        "src/features/participant-types/api/list.ts",
+        "src/features/participant-types/types/index.ts",
+        "src/features/performance-evaluation-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-categories/api/list.ts",
+        "src/features/performance-evaluation-categories/types/index.ts",
+        "src/features/performance-evaluation-participant-category-items/api/useListQuery.ts",
+        "src/features/performance-evaluation-participant-category-items/api/list.ts",
+        "src/features/performance-evaluation-participant-category-items/types/index.ts"
+      ],
+      "headings": [
+        "بنود فئات تقييم المشاركين",
+        "عناصر التقييم التفصيلية التابعة لكل فئة مشاركين.",
+        "نوع المشارك",
+        "فئة التقييم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-participant-category-items/:id",
+      "component": "PerformanceEvaluationParticipantCategoryItemDetail",
+      "source": "src/features/performance-evaluation-participant-category-items/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /performance-evaluation-participant-category-item/"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-participant-category-items/api/useGetQuery.ts",
+        "src/features/performance-evaluation-participant-category-items/api/get.ts",
+        "src/features/performance-evaluation-participant-category-items/types/index.ts"
+      ],
+      "headings": [
+        "سجل تفاصيل ومتابعة بند فئة التقييم",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "معرف فئة مشارك التقييم",
+        "معرف عنصر تقييم الأداء"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-participant-category-items/:id/edit",
+      "component": "PerformanceEvaluationParticipantCategoryItemCreate",
+      "source": "src/features/performance-evaluation-participant-category-items/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Select"
+      ],
+      "apis": [
+        "GET /performance-evaluation-items",
+        "GET /performance-evaluation-participant-categories"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-items/api/useListQuery.ts",
+        "src/features/performance-evaluation-items/api/list.ts",
+        "src/features/performance-evaluation-items/types/index.ts",
+        "src/features/performance-evaluation-participant-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-participant-categories/api/list.ts",
+        "src/features/performance-evaluation-participant-categories/types/index.ts"
+      ],
+      "headings": [
+        "بيانات بند تقييم المشاركين",
+        "فئة مشارك التقييم *",
+        "عنصر تقييم الأداء *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluation-participant-category-items/new",
+      "component": "PerformanceEvaluationParticipantCategoryItemCreate",
+      "source": "src/features/performance-evaluation-participant-category-items/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Select"
+      ],
+      "apis": [
+        "GET /performance-evaluation-items",
+        "GET /performance-evaluation-participant-categories"
+      ],
+      "dependencies": [
+        "src/features/performance-evaluation-items/api/useListQuery.ts",
+        "src/features/performance-evaluation-items/api/list.ts",
+        "src/features/performance-evaluation-items/types/index.ts",
+        "src/features/performance-evaluation-participant-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-participant-categories/api/list.ts",
+        "src/features/performance-evaluation-participant-categories/types/index.ts"
+      ],
+      "headings": [
+        "بيانات بند تقييم المشاركين",
+        "فئة مشارك التقييم *",
+        "عنصر تقييم الأداء *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/performance-evaluations",
+      "component": "PerformanceEvaluationWorkspace",
+      "source": "src/features/performance-evaluations/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "EditingRecord",
+        "FormValues",
+        "ClipboardCheck",
+        "Award",
+        "Select",
+        "Input",
+        "Button",
+        "Save",
+        "Pencil",
+        "Trash2",
+        "CheckCircle2"
+      ],
+      "apis": [
+        "GET /course-participants",
+        "GET /get-executed-courses",
+        "GET /get-planned-courses",
+        "GET /performance-evaluation-categories",
+        "GET /performance-evaluation-participant-categories",
+        "GET /participant-types",
+        "GET /available-performance-evaluation-items",
+        "GET /performance-evaluation-course-details",
+        "GET /performance-evaluation-course-detail/${id}",
+        "GET /performance-evaluation-course-participant-details",
+        "GET /performance-evaluation-course-participant-detail/${id}",
+        "POST /new-performance-evaluation",
+        "PUT /performance-evaluation/${id}",
+        "DELETE /performance-evaluation/${id}"
+      ],
+      "dependencies": [
+        "src/features/course-participants/api/useListQuery.ts",
+        "src/features/course-participants/api/list.ts",
+        "src/features/course-participants/types/index.ts",
+        "src/features/courses/api/executedCourses.ts",
+        "src/features/courses/types/index.ts",
+        "src/features/courses/api/plannedCourses.ts",
+        "src/features/performance-evaluation-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-categories/api/list.ts",
+        "src/features/performance-evaluation-categories/types/index.ts",
+        "src/features/performance-evaluation-participant-categories/api/useListQuery.ts",
+        "src/features/performance-evaluation-participant-categories/api/list.ts",
+        "src/features/performance-evaluation-participant-categories/types/index.ts",
+        "src/features/participant-types/api/useListQuery.ts",
+        "src/features/participant-types/api/list.ts",
+        "src/features/participant-types/types/index.ts",
+        "src/features/performance-evaluations/api.ts"
+      ],
+      "headings": [
+        "تقييم الأداء التدريبي",
+        "{editing ? 'تعديل تقييم' : 'إضافة تقييم جديد'}",
+        "الدورة التدريبية المنفذة *",
+        "فئة التقييم *",
+        "المتدرب محل التقييم *",
+        "بند التقييم المتاح *",
+        "الدرجة *",
+        "ملاحظات",
+        "التقييمات المسجلة",
+        "تعديل التقييم",
+        "حذف التقييم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/persons",
+      "component": "PersonList",
+      "source": "src/features/persons/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "Button",
+        "Link",
+        "Icon",
+        "Search",
+        "ChevronDown",
+        "Plus",
+        "Badge",
+        "Eye",
+        "Users"
+      ],
+      "apis": [
+        "GET /departments",
+        "GET /persons"
+      ],
+      "dependencies": [
+        "src/features/departments/api/useListQuery.ts",
+        "src/features/departments/api/list.ts",
+        "src/features/departments/types/index.ts",
+        "src/features/persons/api/useListQuery.ts",
+        "src/features/persons/api/list.ts",
+        "src/features/persons/types/index.ts"
+      ],
+      "headings": [
+        "إدارة الموظفين",
+        "{label}",
+        "بحث وفلاتر الموظفين",
+        "البحث عن موظف"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/persons/:id",
+      "component": "PersonDetail",
+      "source": "src/features/persons/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "Badge",
+        "PageHeader",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /person/"
+      ],
+      "dependencies": [
+        "src/features/persons/api/useGetQuery.ts",
+        "src/features/persons/api/get.ts",
+        "src/features/persons/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الشخصية",
+        "الكود",
+        "الاسم",
+        "الهاتف",
+        "العنوان",
+        "المحافظة",
+        "بيانات العمل",
+        "جهة العمل",
+        "الإدارة",
+        "الوظيفة",
+        "المجموعة الوظيفية",
+        "موقع العمل",
+        "تاريخ التعاقد",
+        "المسار التدريبي",
+        "المسار التدريبي الحالي",
+        "الدرجة الحالية",
+        "تاريخ الدرجة الحالية",
+        "المؤهل",
+        "بيانات المدرب",
+        "الجهة المانحة لشهادة المدرب",
+        "حساب النظام",
+        "اسم المستخدم",
+        "مجموعة الصلاحيات"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/persons/:id/edit",
+      "component": "PersonCreate",
+      "source": "src/features/persons/components/Create.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "Button",
+        "Card",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "PUT /person/${id}",
+        "GET /person/",
+        "POST /new-person",
+        "GET /departments",
+        "GET /governorates",
+        "GET /grades",
+        "GET /job-type-groups",
+        "GET /jobs",
+        "GET /learning-paths",
+        "GET /organizations",
+        "GET /qualifications",
+        "GET /work-sites"
+      ],
+      "dependencies": [
+        "src/features/persons/api/useGetQuery.ts",
+        "src/features/persons/api/get.ts",
+        "src/features/persons/types/index.ts",
+        "src/features/persons/api/useCreateMutation.ts",
+        "src/features/persons/api/create.ts",
+        "src/features/departments/api/useListQuery.ts",
+        "src/features/departments/api/list.ts",
+        "src/features/departments/types/index.ts",
+        "src/features/governorates/api/useListQuery.ts",
+        "src/features/governorates/api/list.ts",
+        "src/features/governorates/types/index.ts",
+        "src/features/grades/api/useListQuery.ts",
+        "src/features/grades/api/list.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/job-type-groups/api/useListQuery.ts",
+        "src/features/job-type-groups/api/list.ts",
+        "src/features/job-type-groups/types/index.ts",
+        "src/features/jobs/api/useListQuery.ts",
+        "src/features/jobs/api/list.ts",
+        "src/features/jobs/types/index.ts",
+        "src/features/learning-paths/api/useListQuery.ts",
+        "src/features/learning-paths/api/list.ts",
+        "src/features/learning-paths/types/index.ts",
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts",
+        "src/features/qualifications/api/useListQuery.ts",
+        "src/features/qualifications/api/list.ts",
+        "src/features/qualifications/types/index.ts",
+        "src/features/work-sites/api/useListQuery.ts",
+        "src/features/work-sites/api/list.ts",
+        "src/features/work-sites/types/index.ts"
+      ],
+      "headings": [
+        "{id ? 'تعديل بيانات الموظف' : 'إضافة موظف / متدرب جديد'}",
+        "البيانات الأساسية ومعلومات الدخول",
+        "كود الموظف",
+        "الاسم الرباعي *",
+        "رقم الهاتف / واتساب",
+        "العنوان السكني",
+        "المحافظة *",
+        "المؤهل العلمي *",
+        "بيانات العمل والإدارة",
+        "جهة العمل (Organization) *",
+        "الإدارة (Department)",
+        "الوظيفة (Job)",
+        "المجموعة الوظيفية",
+        "موقع العمل (اختياري)",
+        "تاريخ التعاقد",
+        "المسار التدريبي والدرجة",
+        "المسار التدريبي الحالي",
+        "الدرجة الحالية",
+        "تاريخ الدرجة الحالية",
+        "الصلاحيات والخيارات",
+        "جهة الاعتماد للمدرب"
+      ],
+      "overlays": [],
+      "findings": [
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/persons/new",
+      "component": "PersonCreate",
+      "source": "src/features/persons/components/Create.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "Link",
+        "Button",
+        "Card",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "PUT /person/${id}",
+        "GET /person/",
+        "POST /new-person",
+        "GET /departments",
+        "GET /governorates",
+        "GET /grades",
+        "GET /job-type-groups",
+        "GET /jobs",
+        "GET /learning-paths",
+        "GET /organizations",
+        "GET /qualifications",
+        "GET /work-sites"
+      ],
+      "dependencies": [
+        "src/features/persons/api/useGetQuery.ts",
+        "src/features/persons/api/get.ts",
+        "src/features/persons/types/index.ts",
+        "src/features/persons/api/useCreateMutation.ts",
+        "src/features/persons/api/create.ts",
+        "src/features/departments/api/useListQuery.ts",
+        "src/features/departments/api/list.ts",
+        "src/features/departments/types/index.ts",
+        "src/features/governorates/api/useListQuery.ts",
+        "src/features/governorates/api/list.ts",
+        "src/features/governorates/types/index.ts",
+        "src/features/grades/api/useListQuery.ts",
+        "src/features/grades/api/list.ts",
+        "src/features/grades/types/index.ts",
+        "src/features/job-type-groups/api/useListQuery.ts",
+        "src/features/job-type-groups/api/list.ts",
+        "src/features/job-type-groups/types/index.ts",
+        "src/features/jobs/api/useListQuery.ts",
+        "src/features/jobs/api/list.ts",
+        "src/features/jobs/types/index.ts",
+        "src/features/learning-paths/api/useListQuery.ts",
+        "src/features/learning-paths/api/list.ts",
+        "src/features/learning-paths/types/index.ts",
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts",
+        "src/features/qualifications/api/useListQuery.ts",
+        "src/features/qualifications/api/list.ts",
+        "src/features/qualifications/types/index.ts",
+        "src/features/work-sites/api/useListQuery.ts",
+        "src/features/work-sites/api/list.ts",
+        "src/features/work-sites/types/index.ts"
+      ],
+      "headings": [
+        "{id ? 'تعديل بيانات الموظف' : 'إضافة موظف / متدرب جديد'}",
+        "البيانات الأساسية ومعلومات الدخول",
+        "كود الموظف",
+        "الاسم الرباعي *",
+        "رقم الهاتف / واتساب",
+        "العنوان السكني",
+        "المحافظة *",
+        "المؤهل العلمي *",
+        "بيانات العمل والإدارة",
+        "جهة العمل (Organization) *",
+        "الإدارة (Department)",
+        "الوظيفة (Job)",
+        "المجموعة الوظيفية",
+        "موقع العمل (اختياري)",
+        "تاريخ التعاقد",
+        "المسار التدريبي والدرجة",
+        "المسار التدريبي الحالي",
+        "الدرجة الحالية",
+        "تاريخ الدرجة الحالية",
+        "الصلاحيات والخيارات",
+        "جهة الاعتماد للمدرب"
+      ],
+      "overlays": [],
+      "findings": [
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/qualification-types",
+      "component": "QualificationTypeList",
+      "source": "src/features/qualification-types/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /qualification-types"
+      ],
+      "dependencies": [
+        "src/features/qualification-types/api/useListQuery.ts",
+        "src/features/qualification-types/api/list.ts",
+        "src/features/qualification-types/types/index.ts"
+      ],
+      "headings": [
+        "أنواع المؤهلات",
+        "التصنيفات المرجعية لأنواع المؤهلات العلمية."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/qualification-types/:id",
+      "component": "QualificationTypeDetail",
+      "source": "src/features/qualification-types/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /qualification-type/"
+      ],
+      "dependencies": [
+        "src/features/qualification-types/api/useGetQuery.ts",
+        "src/features/qualification-types/api/get.ts",
+        "src/features/qualification-types/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/qualification-types/:id/edit",
+      "component": "QualificationTypeCreate",
+      "source": "src/features/qualification-types/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات نوع المؤهل",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/qualification-types/new",
+      "component": "QualificationTypeCreate",
+      "source": "src/features/qualification-types/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input"
+      ],
+      "apis": [],
+      "dependencies": [],
+      "headings": [
+        "بيانات نوع المؤهل",
+        "الاسم / الوصف *"
+      ],
+      "overlays": [],
+      "findings": [
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/qualifications",
+      "component": "QualificationList",
+      "source": "src/features/qualifications/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "RecordKpis",
+        "Card",
+        "Search",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /qualifications"
+      ],
+      "dependencies": [
+        "src/features/qualifications/api/useListQuery.ts",
+        "src/features/qualifications/api/list.ts",
+        "src/features/qualifications/types/index.ts"
+      ],
+      "headings": [
+        "المؤهلات العلمية",
+        "المؤهلات الدراسية والشهادات المعتمدة."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/qualifications/:id",
+      "component": "QualificationDetail",
+      "source": "src/features/qualifications/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /qualification/"
+      ],
+      "dependencies": [
+        "src/features/qualifications/api/useGetQuery.ts",
+        "src/features/qualifications/api/get.ts",
+        "src/features/qualifications/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "الكود",
+        "اسم المؤهل",
+        "معرف نوع المؤهل"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/qualifications/:id/edit",
+      "component": "QualificationCreate",
+      "source": "src/features/qualifications/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /qualification-types"
+      ],
+      "dependencies": [
+        "src/features/qualification-types/api/useListQuery.ts",
+        "src/features/qualification-types/api/list.ts",
+        "src/features/qualification-types/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المؤهل",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "نوع المؤهل *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/qualifications/new",
+      "component": "QualificationCreate",
+      "source": "src/features/qualifications/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /qualification-types"
+      ],
+      "dependencies": [
+        "src/features/qualification-types/api/useListQuery.ts",
+        "src/features/qualification-types/api/list.ts",
+        "src/features/qualification-types/types/index.ts"
+      ],
+      "headings": [
+        "بيانات المؤهل",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "نوع المؤهل *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/rooms",
+      "component": "TrainingRoomList",
+      "source": "src/features/rooms/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /rooms"
+      ],
+      "dependencies": [
+        "src/features/rooms/api/useListQuery.ts",
+        "src/features/rooms/api/list.ts",
+        "src/features/rooms/types/index.ts"
+      ],
+      "headings": [
+        "قاعات التدريب",
+        "القاعات ومراكز التدريب والمختبرات المتاحة."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/rooms/:id",
+      "component": "TrainingRoomDetail",
+      "source": "src/features/rooms/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /room/"
+      ],
+      "dependencies": [
+        "src/features/rooms/api/useGetQuery.ts",
+        "src/features/rooms/api/get.ts",
+        "src/features/rooms/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "اسم قاعة التدريب",
+        "معرف موقع العمل"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/rooms/:id/edit",
+      "component": "TrainingRoomCreate",
+      "source": "src/features/rooms/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /work-sites"
+      ],
+      "dependencies": [
+        "src/features/work-sites/api/useListQuery.ts",
+        "src/features/work-sites/api/list.ts",
+        "src/features/work-sites/types/index.ts"
+      ],
+      "headings": [
+        "بيانات قاعة التدريب",
+        "الاسم / الوصف *",
+        "موقع العمل *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/rooms/new",
+      "component": "TrainingRoomCreate",
+      "source": "src/features/rooms/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /work-sites"
+      ],
+      "dependencies": [
+        "src/features/work-sites/api/useListQuery.ts",
+        "src/features/work-sites/api/list.ts",
+        "src/features/work-sites/types/index.ts"
+      ],
+      "headings": [
+        "بيانات قاعة التدريب",
+        "الاسم / الوصف *",
+        "موقع العمل *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/trainer-subjects",
+      "component": "TrainerSubjectList",
+      "source": "src/features/trainer-subjects/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /trainer-subjects"
+      ],
+      "dependencies": [
+        "src/features/trainer-subjects/api/useListQuery.ts",
+        "src/features/trainer-subjects/api/list.ts",
+        "src/features/trainer-subjects/types/index.ts"
+      ],
+      "headings": [
+        "المواد التدريبية للمدربين",
+        "تخصصات ومواد المدربين المعتمدين."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/trainer-subjects/:id",
+      "component": "TrainerSubjectDetail",
+      "source": "src/features/trainer-subjects/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /trainer-subject/"
+      ],
+      "dependencies": [
+        "src/features/trainer-subjects/api/useGetQuery.ts",
+        "src/features/trainer-subjects/api/get.ts",
+        "src/features/trainer-subjects/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "المدرب",
+        "الموضوع التدريبي"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/trainer-subjects/:id/edit",
+      "component": "TrainerSubjectCreate",
+      "source": "src/features/trainer-subjects/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "Values",
+        "Select",
+        "Button"
+      ],
+      "apis": [
+        "GET /persons",
+        "GET /learning-subjects"
+      ],
+      "dependencies": [
+        "src/features/persons/api/useListQuery.ts",
+        "src/features/persons/api/list.ts",
+        "src/features/persons/types/index.ts",
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts"
+      ],
+      "headings": [
+        "تخصص المدرب",
+        "المدرب *",
+        "الموضوع التدريبي *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/trainer-subjects/new",
+      "component": "TrainerSubjectCreate",
+      "source": "src/features/trainer-subjects/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "Values",
+        "Select",
+        "Button"
+      ],
+      "apis": [
+        "GET /persons",
+        "GET /learning-subjects"
+      ],
+      "dependencies": [
+        "src/features/persons/api/useListQuery.ts",
+        "src/features/persons/api/list.ts",
+        "src/features/persons/types/index.ts",
+        "src/features/learning-subjects/api/useListQuery.ts",
+        "src/features/learning-subjects/api/list.ts",
+        "src/features/learning-subjects/types/index.ts"
+      ],
+      "headings": [
+        "تخصص المدرب",
+        "المدرب *",
+        "الموضوع التدريبي *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/user-management",
+      "component": "UserManagement",
+      "source": "src/features/user-management/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "RegisterValues",
+        "PasswordValues",
+        "CalendarDays",
+        "Button",
+        "LogOut",
+        "UserPlus",
+        "Select",
+        "Input",
+        "LockKeyhole",
+        "KeyRound",
+        "UsersRound",
+        "Search",
+        "ShieldCheck",
+        "RotateCcw"
+      ],
+      "apis": [
+        "GET /persons",
+        "GET /users",
+        "GET /allowed-groups",
+        "POST /register-user",
+        "POST /change-password",
+        "POST /person/${personId}/reset-password",
+        "POST /logout"
+      ],
+      "dependencies": [
+        "src/features/persons/api/useListQuery.ts",
+        "src/features/persons/api/list.ts",
+        "src/features/persons/types/index.ts",
+        "src/features/user-management/api.ts"
+      ],
+      "headings": [
+        "إدارة حسابات المستخدمين",
+        "تسجيل مستخدم جديد",
+        "الموظف *",
+        "اسم المستخدم *",
+        "كلمة المرور المؤقتة *",
+        "مجموعة الصلاحيات *",
+        "تغيير كلمة مروري",
+        "كلمة المرور الحالية *",
+        "كلمة المرور الجديدة *",
+        "المستخدمون المسجلون"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-centers",
+      "component": "WorkCenterList",
+      "source": "src/features/work-centers/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /work-centers"
+      ],
+      "dependencies": [
+        "src/features/work-centers/api/useListQuery.ts",
+        "src/features/work-centers/api/list.ts",
+        "src/features/work-centers/types/index.ts"
+      ],
+      "headings": [
+        "مراكز العمل",
+        "المراكز الرئيسية لتوزيع ومواقع العمل."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-centers/:id",
+      "component": "WorkCenterDetail",
+      "source": "src/features/work-centers/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /work-center/"
+      ],
+      "dependencies": [
+        "src/features/work-centers/api/useGetQuery.ts",
+        "src/features/work-centers/api/get.ts",
+        "src/features/work-centers/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "اسم مركز العمل",
+        "معرف المحافظة",
+        "معرف الجهة"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-centers/:id/edit",
+      "component": "WorkCenterCreate",
+      "source": "src/features/work-centers/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /governorates",
+        "GET /organizations"
+      ],
+      "dependencies": [
+        "src/features/governorates/api/useListQuery.ts",
+        "src/features/governorates/api/list.ts",
+        "src/features/governorates/types/index.ts",
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts"
+      ],
+      "headings": [
+        "بيانات مركز العمل",
+        "الاسم / الوصف *",
+        "المحافظة *",
+        "الجهة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-centers/new",
+      "component": "WorkCenterCreate",
+      "source": "src/features/work-centers/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /governorates",
+        "GET /organizations"
+      ],
+      "dependencies": [
+        "src/features/governorates/api/useListQuery.ts",
+        "src/features/governorates/api/list.ts",
+        "src/features/governorates/types/index.ts",
+        "src/features/organizations/api/useListQuery.ts",
+        "src/features/organizations/api/list.ts",
+        "src/features/organizations/types/index.ts"
+      ],
+      "headings": [
+        "بيانات مركز العمل",
+        "الاسم / الوصف *",
+        "المحافظة *",
+        "الجهة *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-groups",
+      "component": "WorkGroupList",
+      "source": "src/features/work-groups/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Database"
+      ],
+      "apis": [
+        "GET /work-groups"
+      ],
+      "dependencies": [
+        "src/features/work-groups/api/useListQuery.ts",
+        "src/features/work-groups/api/list.ts",
+        "src/features/work-groups/types/index.ts"
+      ],
+      "headings": [
+        "مجموعات العمل",
+        "مجموعات العمل التنظيمية."
+      ],
+      "overlays": [],
+      "findings": [
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-groups/:id",
+      "component": "WorkGroupDetail",
+      "source": "src/features/work-groups/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /work-group/"
+      ],
+      "dependencies": [
+        "src/features/work-groups/api/useGetQuery.ts",
+        "src/features/work-groups/api/get.ts",
+        "src/features/work-groups/types/index.ts"
+      ],
+      "headings": [
+        "البيانات الأساسية",
+        "المعرّف (ID)",
+        "الكود",
+        "الاسم"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-sites",
+      "component": "WorkSiteList",
+      "source": "src/features/work-sites/components/List.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "NonNullable",
+        "Badge",
+        "ErrorState",
+        "PageHeader",
+        "Card",
+        "Search",
+        "ReferenceActions",
+        "Table",
+        "Building"
+      ],
+      "apis": [
+        "GET /work-sites"
+      ],
+      "dependencies": [
+        "src/features/work-sites/api/useListQuery.ts",
+        "src/features/work-sites/api/list.ts",
+        "src/features/work-sites/types/index.ts"
+      ],
+      "headings": [
+        "مواقع العمل",
+        "المحطات والمواقع التشغيلية والمكاتب الفرعية."
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Render-time transforms: measure before memoizing",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-sites/:id",
+      "component": "WorkSiteDetail",
+      "source": "src/features/work-sites/components/Detail.tsx",
+      "kind": "page",
+      "wrapper": false,
+      "components": [
+        "LoadingSkeleton",
+        "ErrorState",
+        "PageHeader",
+        "Link",
+        "Button",
+        "ArrowRight",
+        "Card",
+        "InfoField"
+      ],
+      "apis": [
+        "GET /work-site/"
+      ],
+      "dependencies": [
+        "src/features/work-sites/api/useGetQuery.ts",
+        "src/features/work-sites/api/get.ts",
+        "src/features/work-sites/types/index.ts"
+      ],
+      "headings": [
+        "البيانات التنظيمية",
+        "المعرّف (ID)",
+        "الكود",
+        "اسم موقع العمل",
+        "معرف مركز العمل"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-sites/:id/edit",
+      "component": "WorkSiteCreate",
+      "source": "src/features/work-sites/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /work-centers"
+      ],
+      "dependencies": [
+        "src/features/work-centers/api/useListQuery.ts",
+        "src/features/work-centers/api/list.ts",
+        "src/features/work-centers/types/index.ts"
+      ],
+      "headings": [
+        "بيانات موقع العمل",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "مركز العمل *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    },
+    {
+      "route": "/work-sites/new",
+      "component": "WorkSiteCreate",
+      "source": "src/features/work-sites/components/Create.tsx",
+      "kind": "page",
+      "wrapper": true,
+      "components": [
+        "FormInputs",
+        "Link",
+        "Button",
+        "Input",
+        "Select"
+      ],
+      "apis": [
+        "GET /work-centers"
+      ],
+      "dependencies": [
+        "src/features/work-centers/api/useListQuery.ts",
+        "src/features/work-centers/api/list.ts",
+        "src/features/work-centers/types/index.ts"
+      ],
+      "headings": [
+        "بيانات موقع العمل",
+        "الكود (Code) *",
+        "الاسم / الوصف *",
+        "مركز العمل *"
+      ],
+      "overlays": [],
+      "findings": [
+        "Untyped data: inspect malformed/null API values",
+        "No local layout-matched skeleton found",
+        "Inline layouts: check narrow viewport and RTL"
+      ],
+      "status": "Pending individual audit, implementation and functional verification"
+    }
+  ],
+  "sourceOnly": [
+    "src/features/clients/components/Create.tsx",
+    "src/features/course-participant-final-exams/components/Create.tsx",
+    "src/features/course-participants/components/Create.tsx",
+    "src/features/job-type-groups/components/Create.tsx",
+    "src/features/organization-types/components/OrganizationTypesList.tsx",
+    "src/features/participant-types/components/Create.tsx",
+    "src/features/work-groups/components/Create.tsx"
+  ],
+  "overlays": [
+    {
+      "source": "src/app/components/Sidebar.tsx",
+      "controls": [
+        "إغلاق القائمة",
+        "التنقل الرئيسي",
+        "إغلاق القائمة"
+      ]
+    },
+    {
+      "source": "src/features/course-session-participants/components/Detail.tsx",
+      "controls": [
+        "سجل تفاصيل ومتابعة حضور جلسة",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "معرف الجلسة التدريبية",
+        "معرف تسجيل المتدرب في الدورة"
+      ]
+    },
+    {
+      "source": "src/features/course-sessions/components/Detail.tsx",
+      "controls": [
+        "سجل تفاصيل ومتابعة جلسة تدريبية",
+        "بيانات السجل",
+        "المعرّف (ID)",
+        "تاريخ انعقاد الجلسة",
+        "وقت البدء",
+        "وقت الانتهاء",
+        "معرف الدورة التدريبية"
+      ]
+    },
+    {
+      "source": "src/features/path-grade-candidates/components/List.tsx",
+      "controls": [
+        "الموظف *",
+        "المسار والدرجة *",
+        "الفصل التدريبي *",
+        "التقييم النهائي *",
+        "تعديل الترشيح",
+        "حذف الترشيح"
+      ]
+    },
+    {
+      "source": "src/features/performance-evaluations/components/List.tsx",
+      "controls": [
+        "الدورة التدريبية المنفذة *",
+        "فئة التقييم *",
+        "المتدرب محل التقييم *",
+        "بند التقييم المتاح *",
+        "الدرجة *",
+        "ملاحظات",
+        "تعديل التقييم",
+        "حذف التقييم"
+      ]
+    },
+    {
+      "source": "src/shared/components/Dialog.tsx",
+      "controls": [
+        "إغلاق النافذة"
+      ]
+    },
+    {
+      "source": "src/shared/components/ReferenceActions.tsx",
+      "controls": []
+    }
+  ]
+}

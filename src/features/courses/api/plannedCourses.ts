@@ -8,14 +8,15 @@ export interface CourseFilters {
   learning_subject_id?: number;
 }
 
-export const getPlannedCourses = async (filters: CourseFilters = {}): Promise<Course[]> => {
-  const response = await apiClient.get<Course[]>('/get-planned-courses', { params: filters });
+export const getPlannedCourses = async (filters: CourseFilters = {}, signal?: AbortSignal): Promise<Course[]> => {
+  const response = await apiClient.get<Course[]>('/get-planned-courses', { params: filters, signal });
   return response.data;
 };
 
-export const usePlannedCourses = (filters: CourseFilters = {}) => {
+export const usePlannedCourses = (filters: CourseFilters = {}, enabled = true) => {
   return useQuery({
+    enabled,
     queryKey: ['planned-courses', filters],
-    queryFn: () => getPlannedCourses(filters),
+    queryFn: ({ signal }) => getPlannedCourses(filters, signal),
   });
 };

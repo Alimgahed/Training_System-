@@ -1,0 +1,7 @@
+.document-editor,.document-editor fieldset { display:grid; gap:24px; min-width:0; }
+.document-editor fieldset { border:0; margin:0; padding:0; }
+.document-editor-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; padding:20px; }
+.document-editor-intro { grid-column:1/-1; margin:0; color:var(--color-text-secondary); }
+.document-lookup-note { color:var(--color-text-secondary); font-size:14px; line-height:1.7; }
+.document-editor .enterprise-skeleton { padding:0; }
+@media(max-width:700px) { .document-editor-grid { grid-template-columns:minmax(0,1fr); padding:16px; } }

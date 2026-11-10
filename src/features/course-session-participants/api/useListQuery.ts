@@ -4,6 +4,6 @@ import { getCourseSessionParticipants } from './list';
 export const useCourseSessionParticipants = () => {
   return useQuery({
     queryKey: ['course-session-participants'],
-    queryFn: getCourseSessionParticipants,
+    queryFn: ({ signal }) => getCourseSessionParticipants(signal),
   });
 };

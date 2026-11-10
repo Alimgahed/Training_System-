@@ -25,7 +25,7 @@ export function Layout() {
       <div className="app-main">
         <Header menuOpen={isMobile ? mobileNavOpen : desktopNavOpen} onMenuToggle={() => isMobile ? setMobileNavOpen((open) => !open) : setDesktopNavOpen((open) => !open)} />
         <main className="app-content" id="main-content" tabIndex={-1}>
-          <ReferenceActions />
+          {!/^\/(countries|courses|departments|documentation-types|documentations|evaluation-types|governorates|grades)\/[^/]+$/.test(pathname) && <ReferenceActions />}
           <div className="app-content__inner"><Suspense fallback={<div className="route-loading" aria-live="polite" aria-busy="true"><LoadingSkeleton variant="detail" /></div>}><Outlet /></Suspense></div>
         </main>
       </div>

@@ -1,71 +1,42 @@
-import { ReferenceActions } from '../../../shared/components/ReferenceActions';
-import { Database,Search } from 'lucide-react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Globe2, Plus, X } from 'lucide-react';
+import { useDeferredValue, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { Button } from '../../../shared/components/Button';
 import { Card } from '../../../shared/components/Card';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { PageHeader } from '../../../shared/components/PageHeader';
 import { Table } from '../../../shared/components/Table';
+import { EnterpriseSkeleton } from '../../../shared/enterprise/Skeleton';
 import { useCountrys } from '../api/useListQuery';
+import type { Country } from '../types';
 
 export function CountryList() {
-  const { data, isLoading, isError, refetch } = useCountrys();
-  const navigate = useNavigate();
-  const [search, setSearch] = useState('');
-
-  const columns: import("../../../shared/components/Table").Column<NonNullable<typeof data>[number]>[] = [
-    { header: 'الاسم', accessor: (row) => <span style={{ fontWeight: 600 }}>{row.name || '—'}</span> },
+  const { data, isLoading, isError, isFetching, refetch } = useCountrys();
+  const [params, setParams] = useSearchParams();
+  const search = params.get('q') || '';
+  const order = params.get('order') || 'name';
+  const query = useDeferredValue(search.trim().toLocaleLowerCase('ar'));
+  const change = (key: string, value: string) => setParams(current => {
+    const next = new URLSearchParams(current);
+    if (value) next.set(key, value); else next.delete(key);
+    return next;
+  }, { replace: true });
+  const filtered = useMemo(() => (data || []).filter(item => !query || Object.values(item).some(value => String(value ?? '').toLocaleLowerCase('ar').includes(query)))
+    .sort((a, b) => order === 'recent' ? Number(b.id || 0) - Number(a.id || 0) : String(a.name || '').localeCompare(String(b.name || ''), 'ar', { numeric: true })), [data, query, order]);
+  const columns = [
+    { header: 'الدولة', accessor: (row: Country) => row.id != null ? <Link className="enterprise-record-link" to={`/countries/${row.id}`}>{row.name || 'دولة بدون اسم'}</Link> : row.name || '—' },
+    { header: 'رقم السجل', accessor: (row: Country) => <bdi>{row.id?.toLocaleString('ar-EG') ?? '—'}</bdi> },
   ];
-
-  const filtered = data?.filter(item => {
-    if (!search) return true;
-    const s = search.toLowerCase();
-    return Object.values(item).some(v => String(v || '').toLowerCase().includes(s));
-  }) || [];
-
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title="الدول"
-        subtitle="إدارة بيانات الدول المرجعية في النظام."
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'الدول' },
-        ]}
-      />
-
-      <Card>
-        <div className="record-search-toolbar" style={{ padding: 'var(--space-3) var(--space-4)', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-          <div style={{ position: 'relative', flex: 1, maxWidth: '320px' }}>
-            <Search size={16} style={{ position: 'absolute', right: 'var(--space-3)', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-tertiary)' }} />
-            <input
-              type="text"
-              placeholder="بحث..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              style={{
-                width: '100%', padding: '8px 36px 8px 12px',
-                border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)',
-                fontSize: 'var(--font-size-sm)', fontFamily: 'var(--font-family)',
-                outline: 'none', backgroundColor: 'var(--color-surface)',
-              }}
-            />
-          </div>
-          {!isLoading && <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)' }}>{filtered.length} سجل</span>}
-          <ReferenceActions placement="toolbar" />
-        </div>
-        <Table
-          data={filtered}
-          columns={columns}
-          isLoading={isLoading}
-          onRowClick={(row) => navigate('/countries/' + row.id)}
-          compact
-          emptyTitle="لا توجد الدول"
-          emptyIcon={<Database size={28} />}
-        />
-      </Card>
-    </div>
-  );
+  return <div className="enterprise-page">
+    <header className="enterprise-heading"><div><span className="enterprise-kicker">الإعدادات العامة / البيانات الجغرافية</span><h1>الدول</h1><p>أدر الدول المرجعية المستخدمة في المحافظات وبيانات المواقع.</p></div><Link className="enterprise-link-button enterprise-link-button--primary" to="/countries/new"><Plus size={18} aria-hidden="true" />إضافة دولة</Link></header>
+    <Card>
+      <div className="enterprise-toolbar">
+        <label className="enterprise-field enterprise-field--search">البحث في الدول<input type="search" placeholder="اسم الدولة أو رقم السجل" value={search} onChange={event => change('q', event.target.value)} /></label>
+        <label className="enterprise-field">ترتيب الدول<select value={order} onChange={event => change('order', event.target.value)}><option value="name">الاسم: أ–ي</option><option value="recent">الأحدث أولاً</option></select></label>
+        {search && <Button variant="outline" onClick={() => change('q', '')}><X size={16} aria-hidden="true" />مسح البحث</Button>}
+      </div>
+      <div className="enterprise-results" role="status"><span>{isLoading ? 'جارٍ تحميل الدول' : isError && !data ? 'بيانات الدول غير متاحة' : `${filtered.length.toLocaleString('ar-EG')} نتيجة من ${(data?.length || 0).toLocaleString('ar-EG')} دولة`}</span>{isFetching && !isLoading && <span>جارٍ التحديث…</span>}</div>
+      {isError && <ErrorState title="تعذر تحميل الدول" message="تحقق من الاتصال ثم أعد المحاولة. معايير البحث محفوظة." onRetry={() => refetch()} />}
+      {isLoading ? <EnterpriseSkeleton columns={2} /> : (!isError || data) && <Table key={`${query}:${order}`} data={filtered} columns={columns} compact showOverview={false} emptyTitle={search ? 'لا توجد دول مطابقة' : 'لم تُضف دول بعد'} emptyDescription={search ? 'جرّب اسماً آخر أو امسح البحث لعرض جميع الدول.' : 'استخدم «إضافة دولة» لإعداد الدليل الجغرافي.'} emptyIcon={<Globe2 size={28} aria-hidden="true" />} />}
+    </Card>
+  </div>;
 }

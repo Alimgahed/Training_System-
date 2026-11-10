@@ -1,51 +1,17 @@
-import { ArrowRight } from 'lucide-react';
-import React from 'react';
-import { Link,useParams } from 'react-router-dom';
-import { Button } from '../../../shared/components/Button';
+import { ArrowRight, Building2 } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 import { Card } from '../../../shared/components/Card';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
-import { PageHeader } from '../../../shared/components/PageHeader';
+import { EmptyState } from '../../../shared/components/EmptyState';
 import { useClient } from '../api/useGetQuery';
-
-const InfoField: React.FC<{ label: string; value: any }> = ({ label, value }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-    <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', fontWeight: 500 }}>{label}</span>
-    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value ?? '—'}</span>
-  </div>
-);
+import './clients.css';
 
 export function ClientDetail() {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading, isError, refetch } = useClient(id || '');
-
-  if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title={data?.name || 'عميل'}
-        subtitle={'تفاصيل عميل — معرّف #' + id}
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'العملاء', href: '/clients' },
-          { label: data?.name || '#' + id },
-        ]}
-        actions={
-          <Link to="/clients">
-            <Button variant="outline" size="sm"><ArrowRight size={16} /> العودة للقائمة</Button>
-          </Link>
-        }
-      />
-
-      <Card title="البيانات الأساسية">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
-          <InfoField label="المعرّف (ID)" value={data?.id} />
-            <InfoField label="الاسم" value={data?.name} />
-        </div>
-      </Card>
-
-    </div>
-  );
+  return <div className="clients-page">
+    <nav className="client-breadcrumbs" aria-label="مسار التنقل"><Link to="/">لوحة التحكم</Link><span aria-hidden="true">/</span><Link to="/clients">العملاء</Link><span aria-hidden="true">/</span><span aria-current="page">تفاصيل العميل</span></nav>
+    <header className="clients-heading"><div><h1>{data?.name || 'تفاصيل العميل'}</h1><p>بيانات الجهة المسجلة في دليل العملاء.</p></div><Link className="client-back-link" to="/clients"><ArrowRight size={18} aria-hidden="true" />العودة للقائمة</Link></header>
+    {isLoading ? <section className="client-detail-skeleton" role="status" aria-label="جارٍ تحميل بيانات العميل"><div aria-hidden="true" /><div aria-hidden="true" /></section> : isError ? <ErrorState title="تعذر تحميل بيانات العميل" message="قد يكون السجل غير متاح أو تعذر الاتصال. أعد المحاولة أو ارجع إلى دليل العملاء." onRetry={() => refetch()} /> : !data ? <EmptyState title="العميل غير متاح" description="ارجع إلى دليل العملاء لاختيار سجل متاح." icon={<Building2 size={28} aria-hidden="true" />} /> : <Card title="البيانات الأساسية"><dl className="client-details"><div><dt>اسم العميل</dt><dd>{data.name || 'لم يُسجل اسم'}</dd></div><div><dt>رقم السجل</dt><dd><bdi>{data.id?.toLocaleString('ar-EG') ?? '—'}</bdi></dd></div></dl></Card>}
+  </div>;
 }

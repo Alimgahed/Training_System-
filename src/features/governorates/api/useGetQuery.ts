@@ -4,7 +4,7 @@ import { getGovernorate } from './get';
 export const useGovernorate = (id: string | number) => {
   return useQuery({
     queryKey: ['governorate', id],
-    queryFn: () => getGovernorate(id),
+    queryFn: ({ signal }) => getGovernorate(id, signal),
     enabled: !!id,
   });
 };

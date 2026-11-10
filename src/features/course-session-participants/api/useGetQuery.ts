@@ -4,7 +4,7 @@ import { getCourseSessionParticipant } from './get';
 export const useCourseSessionParticipant = (id: string | number) => {
   return useQuery({
     queryKey: ['course-session-participant', id],
-    queryFn: () => getCourseSessionParticipant(id),
+    queryFn: ({ signal }) => getCourseSessionParticipant(id, signal),
     enabled: !!id,
   });
 };

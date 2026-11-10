@@ -1,71 +1,43 @@
-import { ReferenceActions } from '../../../shared/components/ReferenceActions';
-import { Database,Search } from 'lucide-react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Building2, Search, X } from 'lucide-react';
+import { useDeferredValue, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { Button } from '../../../shared/components/Button';
 import { Card } from '../../../shared/components/Card';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { PageHeader } from '../../../shared/components/PageHeader';
 import { Table } from '../../../shared/components/Table';
 import { useClients } from '../api/useListQuery';
+import type { Client } from '../types';
+import './clients.css';
 
 export function ClientList() {
-  const { data, isLoading, isError, refetch } = useClients();
-  const navigate = useNavigate();
-  const [search, setSearch] = useState('');
-
-  const columns: import("../../../shared/components/Table").Column<NonNullable<typeof data>[number]>[] = [
-    { header: 'الاسم', accessor: (row) => <span style={{ fontWeight: 600 }}>{row.name || '—'}</span> },
+  const { data, isLoading, isError, isFetching, refetch } = useClients();
+  const [params, setParams] = useSearchParams();
+  const search = params.get('q') || '';
+  const deferredSearch = useDeferredValue(search.trim().toLocaleLowerCase('ar'));
+  const sort = params.get('sort') || 'name';
+  const updateFilter = (key: string, value: string) => setParams(current => {
+    const next = new URLSearchParams(current);
+    if (value) next.set(key, value); else next.delete(key);
+    return next;
+  }, { replace: true });
+  const filtered = useMemo(() => (data || [])
+    .filter(item => !deferredSearch || Object.values(item).some(value => String(value ?? '').toLocaleLowerCase('ar').includes(deferredSearch)))
+    .sort((a, b) => sort === 'id' ? Number(b.id || 0) - Number(a.id || 0) : String(a.name || '').localeCompare(String(b.name || ''), 'ar', { numeric: true })), [data, deferredSearch, sort]);
+  const columns = [
+    { header: 'اسم العميل', accessor: (row: Client) => row.id != null ? <Link className="client-record-link" to={`/clients/${row.id}`}>{row.name || 'عميل بدون اسم'}</Link> : <span>{row.name || 'عميل بدون اسم'}</span> },
+    { header: 'رقم السجل', accessor: (row: Client) => <bdi>{row.id?.toLocaleString('ar-EG') ?? '—'}</bdi> },
   ];
-
-  const filtered = data?.filter(item => {
-    if (!search) return true;
-    const s = search.toLowerCase();
-    return Object.values(item).some(v => String(v || '').toLowerCase().includes(s));
-  }) || [];
-
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title="العملاء"
-        subtitle="بيانات العملاء المسجلة في النظام."
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'العملاء' },
-        ]}
-      />
-
-      <Card>
-        <div className="record-search-toolbar" style={{ padding: 'var(--space-3) var(--space-4)', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-          <div style={{ position: 'relative', flex: 1, maxWidth: '320px' }}>
-            <Search size={16} style={{ position: 'absolute', right: 'var(--space-3)', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-tertiary)' }} />
-            <input
-              type="text"
-              placeholder="بحث..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              style={{
-                width: '100%', padding: '8px 36px 8px 12px',
-                border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)',
-                fontSize: 'var(--font-size-sm)', fontFamily: 'var(--font-family)',
-                outline: 'none', backgroundColor: 'var(--color-surface)',
-              }}
-            />
-          </div>
-          {!isLoading && <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)' }}>{filtered.length} سجل</span>}
-          <ReferenceActions placement="toolbar" />
-        </div>
-        <Table
-          data={filtered}
-          columns={columns}
-          isLoading={isLoading}
-          onRowClick={(row) => navigate('/clients/' + row.id)}
-          compact
-          emptyTitle="لا توجد العملاء"
-          emptyIcon={<Database size={28} />}
-        />
-      </Card>
-    </div>
-  );
+  return <div className="clients-page">
+    <header className="clients-heading"><div><h1>العملاء</h1><p>دليل الجهات المسجلة. افتح اسم العميل للاطلاع على بياناته الأساسية.</p></div><Building2 size={28} aria-hidden="true" /></header>
+    <Card>
+      <div className="clients-toolbar">
+        <label className="clients-search">البحث في العملاء<div><Search size={18} aria-hidden="true" /><input type="search" value={search} onChange={event => updateFilter('q', event.target.value)} placeholder="اسم العميل أو رقم السجل" /></div></label>
+        <label className="clients-order">ترتيب النتائج<select value={sort} onChange={event => updateFilter('sort', event.target.value)}><option value="name">الاسم: أ–ي</option><option value="id">رقم السجل: الأحدث أولاً</option></select></label>
+        {search && <Button variant="outline" onClick={() => updateFilter('q', '')}><X size={16} aria-hidden="true" />مسح البحث</Button>}
+      </div>
+      <p className="clients-result-count" role="status">{isLoading ? 'جارٍ تحميل دليل العملاء' : isError && !data ? 'تعذر تحميل دليل العملاء' : `${filtered.length.toLocaleString('ar-EG')} نتيجة من ${(data?.length || 0).toLocaleString('ar-EG')} عميل`}{isFetching && !isLoading ? ' · جارٍ التحديث' : ''}</p>
+      {isError && <ErrorState title="تعذر تحديث بيانات العملاء" message="تحقق من الاتصال ثم أعد المحاولة. احتفظنا بمعايير البحث الحالية." onRetry={() => refetch()} />}
+      {isLoading ? <div className="clients-list-skeleton" aria-label="جارٍ تحميل العملاء" role="status">{Array.from({length:6},(_,i)=><div key={i} aria-hidden="true"><span /><span /></div>)}</div> : (!isError || data) && <Table key={`${deferredSearch}:${sort}`} data={filtered} columns={columns} compact showOverview={false} emptyTitle={search ? 'لا توجد نتائج مطابقة' : 'لا يوجد عملاء مسجلون'} emptyDescription={search ? 'جرّب اسمًا آخر أو امسح البحث لعرض جميع العملاء.' : 'ستظهر الجهات هنا عند توفر بيانات العملاء في النظام.'} emptyIcon={<Building2 size={28} aria-hidden="true" />} />}
+    </Card>
+  </div>;
 }

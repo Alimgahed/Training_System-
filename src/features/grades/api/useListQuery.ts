@@ -4,6 +4,6 @@ import { getGrades } from './list';
 export const useGrades = () => {
   return useQuery({
     queryKey: ['grades'],
-    queryFn: getGrades,
+    queryFn: ({ signal }) => getGrades(signal),
   });
 };

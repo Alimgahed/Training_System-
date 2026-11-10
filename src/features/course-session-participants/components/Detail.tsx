@@ -1,60 +1,19 @@
-import { useMutation,useQueryClient } from '@tanstack/react-query';
-import { ArrowRight,Pencil,Trash2 } from 'lucide-react';
-import React from 'react';
-import { Link,useNavigate,useParams } from 'react-router-dom';
-import { Button } from '../../../shared/components/Button';
+import { ArrowRight } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 import { Card } from '../../../shared/components/Card';
+import { EmptyState } from '../../../shared/components/EmptyState';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
-import { PageHeader } from '../../../shared/components/PageHeader';
-import { deleteCourseSessionParticipant } from '../api/delete';
+import { EnterpriseSkeleton } from '../../../shared/enterprise/Skeleton';
+import { RecordActions } from '../../../shared/enterprise/RecordActions';
 import { useCourseSessionParticipant } from '../api/useGetQuery';
-
-const InfoField: React.FC<{ label: string; value: any }> = ({ label, value }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-    <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', fontWeight: 500 }}>{label}</span>
-    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value ?? '—'}</span>
-  </div>
-);
-
 export function CourseSessionParticipantDetail() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const { data, isLoading, isError, refetch } = useCourseSessionParticipant(id || '');
-  const deleteMutation = useMutation({ mutationFn: () => deleteCourseSessionParticipant(Number(id)), onSuccess: async () => { await queryClient.invalidateQueries({ queryKey: ['course-session-participants'] }); navigate('/course-session-participants'); } });
-
-  if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title={'تفاصيل حضور جلسة #' + id}
-        subtitle="سجل تفاصيل ومتابعة حضور جلسة"
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'شئون التدريب والعمليات' },
-          { label: 'حضور جلسات التدريب', href: '/course-session-participants' },
-          { label: '#' + id },
-        ]}
-        actions={
-          <div style={{ display: 'flex', gap: 8 }}>
-            <Link to={`/course-session-participants/${id}/edit`}><Button variant="outline" size="sm"><Pencil size={16} /> تعديل</Button></Link>
-            <Button variant="danger" size="sm" isLoading={deleteMutation.isPending} onClick={() => { if (window.confirm('هل تريد حذف تسجيل الحضور؟')) deleteMutation.mutate(); }}><Trash2 size={16} /> حذف</Button>
-            <Link to="/course-session-participants"><Button variant="outline" size="sm"><ArrowRight size={16} /> العودة للقائمة</Button></Link>
-          </div>
-        }
-      />
-
-      <Card title="بيانات السجل">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
-          <InfoField label="المعرّف (ID)" value={data?.id} />
-            <InfoField label="معرف الجلسة التدريبية" value={data?.course_session_id} />
-            <InfoField label="معرف تسجيل المتدرب في الدورة" value={data?.course_participant_id} />
-        </div>
-      </Card>
-
-    </div>
-  );
+  const { id = '' } = useParams();
+  const { data, isLoading, isError, refetch } = useCourseSessionParticipant(id);
+  return <div className="enterprise-page">
+    <nav className="enterprise-breadcrumbs" aria-label="مسار التنقل"><Link to="/">لوحة التحكم</Link><span aria-hidden="true">/</span><Link to="/course-session-participants">حضور جلسات التدريب</Link><span aria-hidden="true">/</span><span aria-current="page">سجل <bdi>#{id}</bdi></span></nav>
+    <header className="enterprise-heading"><div><span className="enterprise-kicker">شئون التدريب والعمليات / سجل الحضور</span><h1>تفاصيل حضور المتدرب</h1><p>راجع ارتباط المتدرب بالجلسة قبل تعديل الحضور أو حذفه.</p></div><Link className="enterprise-link-button" to="/course-session-participants"><ArrowRight size={18} aria-hidden="true"/>العودة للسجلات</Link></header>
+    {isLoading?<Card title="بيانات الحضور"><EnterpriseSkeleton variant="fields" columns={3}/></Card>:isError?<ErrorState title="تعذر تحميل سجل الحضور" onRetry={()=>refetch()}/>:!data?<EmptyState title="سجل الحضور غير متاح" description="ارجع إلى السجلات لاختيار تسجيل متاح."/>:<Card title="بيانات الحضور" action={<RecordActions resource="course-session-participants" singular="course-session-participant" id={id} name={`حضور ${data.course_participant?.person?.name || `المشارك #${data.course_participant_id}`} في الجلسة #${data.course_session_id}`}/>}>
+      <dl className="enterprise-data"><div><dt>رقم سجل الحضور</dt><dd><bdi>#{data.id ?? id}</bdi></dd></div><div><dt>المتدرب المسجل بالدورة</dt><dd>{data.course_participant_id!=null?<Link className="enterprise-record-link" to={`/course-participants/${data.course_participant_id}`}>{data.course_participant?.person?.name || 'ملف المشاركة'} <bdi>#{data.course_participant_id}</bdi></Link>:'غير محدد'}</dd></div><div><dt>الجلسة التدريبية</dt><dd>{data.course_session_id!=null?<Link className="enterprise-record-link" to={`/course-sessions/${data.course_session_id}`}>تفاصيل الجلسة <bdi>#{data.course_session_id}</bdi></Link>:'غير محددة'}</dd></div></dl>
+    </Card>}
+  </div>;
 }

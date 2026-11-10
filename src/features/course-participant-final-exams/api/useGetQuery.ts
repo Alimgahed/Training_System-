@@ -4,7 +4,7 @@ import { getCourseParticipantFinalExam } from './get';
 export const useCourseParticipantFinalExam = (id: string | number) => {
   return useQuery({
     queryKey: ['course-participant-final-exam', id],
-    queryFn: () => getCourseParticipantFinalExam(id),
+    queryFn: ({ signal }) => getCourseParticipantFinalExam(id, signal),
     enabled: !!id,
   });
 };

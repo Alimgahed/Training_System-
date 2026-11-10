@@ -1,56 +1,25 @@
-import { ArrowRight } from 'lucide-react';
-import React from 'react';
-import { Link,useParams } from 'react-router-dom';
-import { Button } from '../../../shared/components/Button';
+import { ArrowRight, FileText, UserRound } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { Badge } from '../../../shared/components/Badge';
 import { Card } from '../../../shared/components/Card';
+import { EmptyState } from '../../../shared/components/EmptyState';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
-import { PageHeader } from '../../../shared/components/PageHeader';
+import { EnterpriseSkeleton } from '../../../shared/enterprise/Skeleton';
 import { useCourseParticipantFinalExam } from '../api/useGetQuery';
-
-const InfoField: React.FC<{ label: string; value: any }> = ({ label, value }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-    <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', fontWeight: 500 }}>{label}</span>
-    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value ?? '—'}</span>
-  </div>
-);
+import { examDate, examScore, examStatus } from '../utils/results';
+import './results.css';
 
 export function CourseParticipantFinalExamDetail() {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading, isError, refetch } = useCourseParticipantFinalExam(id || '');
-
-  if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title={'تفاصيل اختبار نهائي #' + id}
-        subtitle="سجل تفاصيل ومتابعة اختبار نهائي"
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'شئون التدريب والعمليات' },
-          { label: 'نتائج الاختبارات النهائية', href: '/course-participant-final-exams' },
-          { label: '#' + id },
-        ]}
-        actions={
-          <Link to="/course-participant-final-exams">
-            <Button variant="outline" size="sm"><ArrowRight size={16} /> العودة للقائمة</Button>
-          </Link>
-        }
-      />
-
-      <Card title="بيانات السجل">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
-          <InfoField label="المعرّف (ID)" value={data?.id} />
-            <InfoField label="تاريخ الاختبار" value={data?.exam_date} />
-            <InfoField label="الجهة المنظمة" value={data?.organized_by} />
-            <InfoField label="الدرجة المحققة" value={data?.exam_score} />
-            <InfoField label="معرف ملف الوثيقة المرفقة" value={data?.documentation_id} />
-            <InfoField label="معرف مشارك الدورة" value={data?.course_participant_id} />
-        </div>
-      </Card>
-
-    </div>
-  );
+  const status = examStatus(data?.exam_score);
+  return <div className="enterprise-page">
+    <nav className="enterprise-breadcrumbs" aria-label="مسار التنقل"><Link to="/">لوحة التحكم</Link><span aria-hidden="true">/</span><Link to="/course-participant-final-exams">نتائج الاختبارات النهائية</Link><span aria-hidden="true">/</span><span aria-current="page">اختبار <bdi>#{id}</bdi></span></nav>
+    <header className="enterprise-heading"><div><span className="enterprise-kicker">شئون المتدربين / سجل اختبار</span><h1>تفاصيل الاختبار النهائي</h1><p>راجع النتيجة وتفاصيل الجهة المنظمة والسجلات المرتبطة.</p></div><Link className="enterprise-link-button" to="/course-participant-final-exams"><ArrowRight size={18} aria-hidden="true" />العودة للنتائج</Link></header>
+    {isLoading ? <div className="exam-detail-grid"><Card title="النتيجة"><EnterpriseSkeleton variant="fields" columns={1}/></Card><Card title="بيانات الاختبار"><EnterpriseSkeleton variant="fields" columns={4}/></Card></div> : isError ? <ErrorState title="تعذر تحميل تفاصيل الاختبار" onRetry={()=>refetch()}/> : !data ? <EmptyState title="الاختبار غير متاح" description="ارجع إلى النتائج لاختيار سجل متاح."/> : <>
+      <div className="exam-detail-grid"><Card title="النتيجة"><div className="exam-result-focus"><strong>{examScore(data.exam_score)?.toLocaleString('ar-EG') ?? '—'}</strong><span>الدرجة المحققة</span><Badge variant={status==='pending'?'neutral':status==='passed'?'success':'danger'}>{status==='pending'?'لم تُرصد الدرجة':status==='passed'?'مجتاز':'لم يجتز'}</Badge></div></Card>
+      <Card title="بيانات الاختبار"><dl className="enterprise-data"><div><dt>رقم الاختبار</dt><dd><bdi>{data.id?.toLocaleString('ar-EG') ?? id}</bdi></dd></div><div><dt>تاريخ الاختبار</dt><dd>{examDate(data.exam_date)}</dd></div><div><dt>الجهة المنظمة</dt><dd>{data.organized_by || 'غير محددة'}</dd></div><div><dt>رقم مشارك الدورة</dt><dd><bdi>{data.course_participant_id?.toLocaleString('ar-EG') ?? '—'}</bdi></dd></div></dl></Card></div>
+      <Card title="السجلات المرتبطة"><div className="exam-related-records">{data.course_participant_id != null ? <Link className="enterprise-link-button" to={`/course-participants/${data.course_participant_id}`}><UserRound size={18} aria-hidden="true"/>عرض سجل المشارك <bdi>#{data.course_participant_id}</bdi></Link> : <p>لم يُربط الاختبار بسجل مشارك.</p>}{data.documentation_id != null ? <Link className="enterprise-link-button" to={`/documentations/${data.documentation_id}`}><FileText size={18} aria-hidden="true"/>عرض الوثيقة <bdi>#{data.documentation_id}</bdi></Link> : <p>لا توجد وثيقة مرتبطة بهذا الاختبار.</p>}</div></Card>
+    </>}
+  </div>;
 }

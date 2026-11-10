@@ -4,7 +4,7 @@ import { getDepartment } from './get';
 export const useDepartment = (id: string | number) => {
   return useQuery({
     queryKey: ['department', id],
-    queryFn: () => getDepartment(id),
+    queryFn: ({ signal }) => getDepartment(id, signal),
     enabled: !!id,
   });
 };

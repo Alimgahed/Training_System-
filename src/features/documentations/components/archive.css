@@ -1,0 +1,23 @@
+.archive-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.archive-card { padding:20px; border:1px solid var(--color-border); border-radius:12px; background:var(--color-surface); min-width:0; }
+.archive-card-heading { display:flex; gap:16px; align-items:center; }
+.archive-card-heading > div { min-width:0; }
+.archive-file-icon { display:grid; justify-items:center; gap:5px; padding:12px; border-radius:10px; background:var(--color-primary-50); color:var(--color-primary); font-size:12px; flex:none; }
+.archive-card h2 { margin:0; font-size:18px; line-height:1.6; }
+.archive-card h2 a { display:inline-flex; align-items:center; min-height:44px; text-decoration:underline; text-underline-offset:4px; overflow-wrap:anywhere; }
+.archive-file-path { color:var(--color-text-secondary); font-size:13px; overflow-wrap:anywhere; margin:16px 0; }
+.archive-meta { display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:var(--color-text-secondary); }
+.archive-meta span { padding:5px 10px; border-radius:6px; background:var(--color-bg); }
+.archive-pagination { display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; }
+.archive-lookup-error { padding:0 16px 12px; font-size:14px; color:var(--color-text-secondary); }
+@media(max-width:700px) { .archive-grid { grid-template-columns:minmax(0,1fr); } .archive-card { padding:16px; } }
+.archive-detail .enterprise-data { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.archive-detail .enterprise-record-link { display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap; min-height:44px; }
+.archive-path-panel { display:flex; gap:14px; margin:0 16px 16px; padding:16px; background:var(--color-bg); border-radius:8px; }
+.archive-path-panel > div { min-width:0; flex:1; }
+.archive-path-panel > svg { flex:none; color:var(--color-primary); }
+.archive-path-panel h2 { font-size:14px; margin:0 0 10px; color:var(--color-text-secondary); }
+.archive-path-panel p { margin:0; overflow-wrap:anywhere; }
+@media(max-width:700px) { .archive-detail .enterprise-data { grid-template-columns:minmax(0,1fr); } }
+
+.archive-detail .archive-basic { grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); }

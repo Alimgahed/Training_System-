@@ -4,7 +4,7 @@ import { getDocumentationType } from './get';
 export const useDocumentationType = (id: string | number) => {
   return useQuery({
     queryKey: ['documentation-type', id],
-    queryFn: () => getDocumentationType(id),
+    queryFn: ({ signal }) => getDocumentationType(id, signal),
     enabled: !!id,
   });
 };

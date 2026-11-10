@@ -20,6 +20,7 @@ registerHooks({
     return next(specifier, context);
   },
   load(url, context, next) {
+    if (url.endsWith('.css')) return { format: 'module', shortCircuit: true, source: '' };
     if (/\.(tsx|ts)$/.test(url) && !url.includes('/node_modules/')) return { format: 'module', shortCircuit: true, source: ts.transpileModule(readFileSync(fileURLToPath(url),'utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022, jsx: ts.JsxEmit.ReactJSX } }).outputText };
     return next(url, context);
   },

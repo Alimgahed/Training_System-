@@ -4,6 +4,6 @@ import { getCountrys } from './list';
 export const useCountrys = () => {
   return useQuery({
     queryKey: ['countries'],
-    queryFn: getCountrys,
+    queryFn: ({ signal }) => getCountrys(signal),
   });
 };

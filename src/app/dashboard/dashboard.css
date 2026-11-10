@@ -1,0 +1,17 @@
+.dashboard-heading { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; padding-block:8px 20px; border-block-end:1px solid var(--color-border); }
+.dashboard-heading p { color:var(--color-primary); margin:0 0 4px; font-weight:700; font-size:14px; }
+.dashboard-heading h1 { margin:0; font-size:28px; color:var(--color-text-primary); }
+.dashboard-heading span { color:var(--color-text-secondary); line-height:1.7; }
+.dashboard-heading time { padding:8px 12px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-sm); white-space:nowrap; }
+.dashboard-stat-content h2 { margin:0; font-size:14px; font-weight:600; line-height:1.6; color:var(--color-text-secondary); }
+.dashboard-retry { border:0; background:transparent; color:var(--color-primary); font:inherit; font-size:13px; text-align:start; padding:4px 0; min-height:32px; cursor:pointer; text-decoration:underline; }
+.dashboard-value-skeleton { display:block; width:64px; height:34px; margin-block:4px; border-radius:4px; }
+.dashboard-row-skeletons { padding:16px; }
+.dashboard-row-skeleton { display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr); gap:16px; align-items:center; min-height:52px; border-block-end:1px solid var(--color-border-light); }
+.dashboard-row-skeleton span { height:14px; border-radius:4px; }
+.dashboard-value-skeleton, .dashboard-row-skeleton span { background:linear-gradient(90deg,var(--color-border-light) 25%,var(--color-border) 50%,var(--color-border-light) 75%); background-size:200% 100%; animation:shimmer 1.5s ease-in-out infinite; }
+.dashboard-session > div { min-width:0; }
+.dashboard-session strong { overflow-wrap:anywhere; }
+.dashboard-session time { flex-shrink:0; font-variant-numeric:tabular-nums; }
+@media(max-width:620px) { .dashboard-heading h1 { font-size:24px; } .dashboard-session { flex-wrap:wrap; } .dashboard-stat-content h2 { font-size:12px; } }
+@media(prefers-reduced-motion:reduce) { .dashboard-value-skeleton, .dashboard-row-skeleton span { animation:none; } }

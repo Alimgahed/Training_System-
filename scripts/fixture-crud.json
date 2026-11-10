@@ -1,0 +1,8 @@
+{
+  "departments": "department",
+  "documentation-types": "documentation-type",
+  "documentations": "documentation",
+  "evaluation-types": "evaluation-type",
+  "governorates": "governorate",
+  "grades": "grade"
+}

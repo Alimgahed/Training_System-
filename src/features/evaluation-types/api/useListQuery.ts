@@ -4,6 +4,6 @@ import { getEvaluationTypes } from './list';
 export const useEvaluationTypes = () => {
   return useQuery({
     queryKey: ['evaluation-types'],
-    queryFn: getEvaluationTypes,
+    queryFn: ({ signal }) => getEvaluationTypes(signal),
   });
 };

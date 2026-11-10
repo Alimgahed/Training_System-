@@ -4,7 +4,7 @@ import { getGrade } from './get';
 export const useGrade = (id: string | number) => {
   return useQuery({
     queryKey: ['grade', id],
-    queryFn: () => getGrade(id),
+    queryFn: ({ signal }) => getGrade(id, signal),
     enabled: !!id,
   });
 };

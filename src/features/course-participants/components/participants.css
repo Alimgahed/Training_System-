@@ -1,0 +1,21 @@
+.participation-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.participation-metrics article { display:flex; gap:16px; align-items:center; padding:20px; border:1px solid var(--color-border); background:var(--color-surface); border-radius:12px; }
+.participation-metrics svg { color:var(--color-primary); flex-shrink:0; }
+.participation-metrics h2 { font-size:14px; font-weight:500; color:var(--color-text-secondary); margin:0 0 8px; }
+.participation-metrics strong { display:block; font-size:28px; line-height:36px; }
+.participation-value-skeleton { display:block; width:64px; height:36px; border-radius:4px; background:linear-gradient(90deg,var(--color-border-light),var(--color-border),var(--color-border-light)); background-size:200% 100%; animation:shimmer 1.5s ease-in-out infinite; }
+.participation-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.participation-card,.participation-skeleton-card { padding:20px; min-width:0; border:1px solid var(--color-border); border-radius:12px; background:var(--color-surface); min-height:200px; }
+.participation-card { display:block; text-decoration:none; color:var(--color-text-primary); }
+.participation-card:hover { border-color:var(--color-primary); }
+.participation-record-id { font-size:12px; color:var(--color-text-secondary); }
+.participation-card h2 { margin:12px 0 8px; font-size:18px; }
+.participation-card p { margin:0 0 16px; color:var(--color-text-secondary); }
+.participation-evidence { display:flex; flex-wrap:wrap; gap:12px; font-size:14px; }
+.participation-evidence span,.participation-open { display:inline-flex; gap:6px; align-items:center; }
+.participation-open { margin-top:16px; color:var(--color-primary); font-size:14px; font-weight:700; }
+.participation-pagination { display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:center; }
+@media(max-width:1000px) { .participation-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:620px) { .participation-cards,.participation-metrics { grid-template-columns:1fr; } .participation-metrics article { padding:16px; } }
+@media(prefers-reduced-motion:reduce) { .participation-value-skeleton { animation:none; } }
+@media(max-width:620px) { .participation-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; } .participation-metrics article { display:block; padding:12px; } .participation-metrics article > svg { display:none; } .participation-metrics h2 { font-size:12px; line-height:1.6; min-height:58px; } }

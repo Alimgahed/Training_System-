@@ -1,51 +1,21 @@
 import { ArrowRight } from 'lucide-react';
-import React from 'react';
-import { Link,useParams } from 'react-router-dom';
-import { Button } from '../../../shared/components/Button';
+import { Link, useParams } from 'react-router-dom';
 import { Card } from '../../../shared/components/Card';
+import { EmptyState } from '../../../shared/components/EmptyState';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
-import { PageHeader } from '../../../shared/components/PageHeader';
+import { RecordActions } from '../../../shared/enterprise/RecordActions';
+import { EnterpriseSkeleton } from '../../../shared/enterprise/Skeleton';
 import { useDocumentationType } from '../api/useGetQuery';
-
-const InfoField: React.FC<{ label: string; value: any }> = ({ label, value }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-    <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', fontWeight: 500 }}>{label}</span>
-    <span style={{ fontSize: 'var(--font-size-base)', color: 'var(--color-text-primary)' }}>{value ?? '—'}</span>
-  </div>
-);
 
 export function DocumentationTypeDetail() {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading, isError, refetch } = useDocumentationType(id || '');
+  return <div className="enterprise-page">
+    <nav className="enterprise-breadcrumbs" aria-label="مسار التنقل"><Link to="/">لوحة التحكم</Link><span aria-hidden="true">/</span><Link to="/documentation-types">أنواع الوثائق</Link><span aria-hidden="true">/</span><span aria-current="page">تفاصيل نوع الوثيقة</span></nav>
+    <header className="enterprise-heading"><div><span className="enterprise-kicker">دليل أنواع الوثائق / رقم السجل <bdi>{id}</bdi></span><h1>{data?.name || 'تفاصيل نوع الوثيقة'}</h1><p>التصنيف المرجعي المستخدم في تنظيم الوثائق والمستندات.</p></div><Link className="enterprise-link-button" to="/documentation-types"><ArrowRight size={18} aria-hidden="true" />العودة للقائمة</Link></header>
+    {isLoading ? <><Card title="البيانات الأساسية"><EnterpriseSkeleton variant="fields" columns={2} /></Card></> : isError ? <ErrorState title="تعذر تحميل نوع الوثيقة" message="قد يكون السجل غير متاح أو تعذر الاتصال بالخادم. أعد المحاولة أو ارجع إلى قائمة أنواع الوثائق." onRetry={() => refetch()} /> : !data ? <EmptyState title="نوع الوثيقة غير متاحة" description="ارجع إلى قائمة أنواع الوثائق واختر سجلاً متاحاً." /> : <>
+      <Card title="البيانات الأساسية" action={<RecordActions resource="documentation-types" singular="documentation-type" id={id || ''} name={data.name || 'نوع الوثيقة'} />}><dl className="enterprise-data"><div><dt>اسم نوع الوثيقة</dt><dd>{data.name || 'لم يُحدد الاسم'}</dd></div><div><dt>رقم السجل</dt><dd><bdi>{data.id?.toLocaleString('ar-EG') ?? '—'}</bdi></dd></div></dl></Card>
 
-  if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      <PageHeader
-        title={data?.name || 'نوع وثيقة'}
-        subtitle={'تفاصيل نوع وثيقة — معرّف #' + id}
-        breadcrumbs={[
-          { label: 'لوحة التحكم', href: '/' },
-          { label: 'أنواع الوثائق', href: '/documentation-types' },
-          { label: data?.name || '#' + id },
-        ]}
-        actions={
-          <Link to="/documentation-types">
-            <Button variant="outline" size="sm"><ArrowRight size={16} /> العودة للقائمة</Button>
-          </Link>
-        }
-      />
-
-      <Card title="البيانات الأساسية">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))', gap: 'var(--space-5)' }}>
-          <InfoField label="المعرّف (ID)" value={data?.id} />
-            <InfoField label="الاسم" value={data?.name} />
-        </div>
-      </Card>
-
-    </div>
-  );
+    </>}
+  </div>;
 }

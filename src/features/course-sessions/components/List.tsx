@@ -1,33 +1,32 @@
-import { CalendarDays,Clock3,MapPin,Plus,Search,TimerReset } from 'lucide-react';
-import { useDeferredValue,useMemo,useState } from 'react';
-import { Link } from 'react-router-dom';
+import { CalendarDays, ChevronLeft, ChevronRight, Clock3, Plus, X } from 'lucide-react';
+import { useDeferredValue, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from '../../../shared/components/Button';
+import { Card } from '../../../shared/components/Card';
+import { EmptyState } from '../../../shared/components/EmptyState';
 import { ErrorState } from '../../../shared/components/ErrorState';
-import { LoadingSkeleton } from '../../../shared/components/LoadingSkeleton';
+import { EnterpriseSkeleton } from '../../../shared/enterprise/Skeleton';
 import { useCourseSessions } from '../api/useListQuery';
-
-const dateLabel = (value?: string) => value ? new Intl.DateTimeFormat('ar-EG', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(value)) : 'تاريخ غير محدد';
-
+import type { CourseSession } from '../types';
+import { localToday, sessionDate, sessionDay, sessionSummary, sessionTime } from '../utils/schedule';
+import './schedule.css';
+const empty:CourseSession[]=[];
 export function CourseSessionList() {
-  const { data, isLoading, isError, refetch } = useCourseSessions();
-  const [date, setDate] = useState('');
-  const [query, setQuery] = useState('');
-  const deferredQuery = useDeferredValue(query);
-  const sessions = data || [];
-  const visible = useMemo(() => sessions.filter((item: any) => (!date || item.session_date?.slice(0, 10) === date) && (!deferredQuery || `${item.course_id || ''} ${item.session_date || ''} ${item.start_time || ''}`.toLowerCase().includes(deferredQuery.toLowerCase()))), [sessions, deferredQuery, date]);
-  if (isLoading) return <LoadingSkeleton variant="detail" />;
-  if (isError) return <ErrorState onRetry={() => refetch()} />;
-  const todayKey = new Date().toISOString().slice(0, 10);
-  const todayCount = sessions.filter((item: any) => item.session_date?.slice(0, 10) === todayKey).length;
-  const upcomingCount = sessions.filter((item: any) => item.session_date && new Date(item.session_date) > new Date()).length;
-  return <div className="sessions-page">
-    <nav className="people-breadcrumb"><Link to="/">الرئيسية</Link><span>‹</span><span>إدارة التدريب</span><span>‹</span><strong>الجلسات التدريبية</strong></nav>
-    <header className="people-header"><div><h1>الجلسات التدريبية</h1><p>تنظيم مواعيد الجلسات التدريبية ومتابعة جدول التنفيذ</p></div></header>
-    <section className="sessions-summary"><article><CalendarDays /><div><strong>{sessions.length}</strong><span>إجمالي الجلسات</span></div></article><article><Clock3 /><div><strong>{todayCount}</strong><span>جلسات اليوم</span></div></article><article><TimerReset /><div><strong>{upcomingCount}</strong><span>جلسات قادمة</span></div></article></section>
-    <section className="sessions-toolbar"><label className="people-search"><Search size={20} /><input aria-label="البحث في الجلسات" value={query} onChange={event => setQuery(event.target.value)} placeholder="البحث برقم الدورة أو تاريخ الجلسة..." /></label><label className="session-date-filter">تاريخ الجلسة<input type="date" value={date} onChange={event => setDate(event.target.value)} /></label>{date && <button type="button" onClick={() => setDate('')}>مسح التاريخ</button>}<span aria-live="polite">{visible.length} جلسة</span><div className="toolbar-create"><Link to="/course-sessions/new"><Button size="lg"><Plus size={20} />جدولة جلسة جديدة</Button></Link></div></section>
-    <section className="sessions-timeline" aria-label="جدول الجلسات التدريبية">
-      {visible.map((session: any) => <article className="session-item" key={session.id}><time dateTime={session.session_date}><strong>{session.session_date ? new Date(session.session_date).getDate() : '—'}</strong><span>{session.session_date ? new Intl.DateTimeFormat('ar-EG', { month: 'short' }).format(new Date(session.session_date)) : '—'}</span></time><span className="session-rail" aria-hidden="true" /><div className="session-content"><div><h2><Link to={`/course-sessions/${session.id}`}>{dateLabel(session.session_date)}</Link></h2><p>الدورة التدريبية رقم #{session.course_id || '—'}</p></div><div className="session-info"><span><Clock3 size={16} />{session.start_time || '—'} — {session.end_time || '—'}</span><span><MapPin size={16} />قاعة التدريب</span></div></div></article>)}
-      {!visible.length && <div className="sessions-empty"><CalendarDays size={42} /><strong>لا توجد جلسات مطابقة</strong><span>ابدأ بجدولة جلسة تدريبية جديدة.</span><Link to="/course-sessions/new"><Button><Plus size={17} />جدولة جلسة</Button></Link></div>}
-    </section>
+  const {data,isLoading,isError,refetch}=useCourseSessions();
+  const sessions=data||empty;
+  const [params,setParams]=useSearchParams();
+  const search=params.get('q')||'';const date=params.get('date')||'';const order=params.get('order')==='desc'?'desc':'asc';
+  const query=useDeferredValue(search.trim());
+  const today=localToday();
+  const summary=useMemo(()=>sessionSummary(sessions,today),[sessions,today]);
+  const visible=useMemo(()=>sessions.filter(s=>(!date||sessionDay(s.session_date)===date)&&(!query||`${s.id??''} ${s.course_id??''} ${s.session_date??''} ${s.start_time??''}`.includes(query))).sort((a,b)=>{const dayA=sessionDay(a.session_date),dayB=sessionDay(b.session_date);if(!dayA)return dayB?1:0;if(!dayB)return -1;return (`${dayA} ${a.start_time||''}`.localeCompare(`${dayB} ${b.start_time||''}`))*(order==='asc'?1:-1);}),[sessions,date,query,order]);
+  const pages=Math.max(1,Math.ceil(visible.length/12));const requested=Number(params.get('page'))||1;const page=Math.max(1,Math.min(pages,Number.isFinite(requested)?Math.floor(requested):1));
+  const change=(key:string,value:string)=>setParams(current=>{const next=new URLSearchParams(current);if(value)next.set(key,value);else next.delete(key);if(key!=='page')next.delete('page');return next;},{replace:true});
+  return <div className="enterprise-page schedule-directory">
+    <header className="enterprise-heading"><div><span className="enterprise-kicker">إدارة التدريب / جدول التنفيذ</span><h1>الجلسات التدريبية</h1><p>نظّم مواعيد التدريب، وراجع توقيت كل جلسة ودورتها المرتبطة.</p></div><Link className="enterprise-link-button enterprise-link-button--primary" to="/course-sessions/new"><Plus size={18} aria-hidden="true"/>جدولة جلسة جديدة</Link></header>
+    <section className="schedule-metrics" aria-label="ملخص جميع الجلسات">{[{label:'إجمالي الجلسات',value:summary.total},{label:'جلسات اليوم',value:summary.today},{label:'جلسات بعد اليوم',value:summary.upcoming}].map(m=><article key={m.label}><h2>{m.label}</h2>{isLoading?<span className="schedule-metric-shimmer" role="status" aria-label="جارٍ التحميل"/>:<strong>{isError&&!data?'—':m.value.toLocaleString('ar-EG')}</strong>}</article>)}</section>
+    <Card><div className="enterprise-toolbar"><label className="enterprise-field enterprise-field--search">البحث في الجلسات<input type="search" value={search} onChange={e=>change('q',e.target.value)} placeholder="رقم الجلسة، الدورة، التاريخ أو وقت البدء"/></label><label className="enterprise-field">تاريخ الجلسة<input type="date" value={date} onInput={e=>change('date',e.currentTarget.value)} onChange={e=>change('date',e.target.value)}/></label><label className="enterprise-field">ترتيب المواعيد<select value={order} onChange={e=>change('order',e.target.value)}><option value="asc">الأقدم أولاً</option><option value="desc">الأحدث أولاً</option></select></label>{(search||date)&&<Button variant="outline" onClick={()=>setParams(current=>{const next=new URLSearchParams(current);for(const key of ['q','date','page'])next.delete(key);return next;},{replace:true})}><X size={16} aria-hidden="true"/>مسح التصفية</Button>}</div><div className="enterprise-results" role="status">{isLoading?'جارٍ تحميل الجدول':isError&&!data?'جدول الجلسات غير متاح':`${visible.length.toLocaleString('ar-EG')} جلسة من ${sessions.length.toLocaleString('ar-EG')}`}</div></Card>
+    {isError&&<ErrorState title="تعذر تحميل جدول الجلسات" onRetry={()=>refetch()}/>}
+    {isLoading?<Card><EnterpriseSkeleton columns={3} rows={6}/></Card>:(!isError||data)&&(visible.length?<><ol className="schedule-agenda" aria-label="جدول الجلسات">{visible.slice((page-1)*12,page*12).map((s,index)=><li key={s.id??index}><div className="schedule-date-mark" aria-hidden="true"><CalendarDays size={23}/><bdi>#{s.id??'—'}</bdi></div><div className="schedule-session"><h2>{s.id!=null?<Link className="enterprise-record-link" to={`/course-sessions/${s.id}`}>{sessionDate(s.session_date)}</Link>:sessionDate(s.session_date)}</h2><p>{s.course_id!=null?<Link to={`/courses/${s.course_id}`}>الدورة التدريبية <bdi>#{s.course_id}</bdi></Link>:'الدورة غير محددة'}</p></div><span className="schedule-time"><Clock3 size={17} aria-hidden="true"/><bdi>{sessionTime(s.start_time)} – {sessionTime(s.end_time)}</bdi></span></li>)}</ol><nav className="schedule-pagination" aria-label="صفحات الجلسات"><Button variant="outline" disabled={page===1} onClick={()=>change('page',String(page-1))}><ChevronRight size={16} aria-hidden="true"/>السابق</Button><span>صفحة {page.toLocaleString('ar-EG')} من {pages.toLocaleString('ar-EG')}</span><Button variant="outline" disabled={page===pages} onClick={()=>change('page',String(page+1))}>التالي<ChevronLeft size={16} aria-hidden="true"/></Button></nav></>:<EmptyState title={search||date?'لا توجد جلسات مطابقة':'لم تُجدول جلسات بعد'} description={search||date?'عدّل التاريخ أو امسح التصفية لعرض الجلسات.':'استخدم جدولة جلسة جديدة لتحديد موعد تدريب.'} icon={<CalendarDays size={30} aria-hidden="true"/>}/>)}
   </div>;
 }

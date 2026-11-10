@@ -4,6 +4,6 @@ import { getGovernorates } from './list';
 export const useGovernorates = () => {
   return useQuery({
     queryKey: ['governorates'],
-    queryFn: getGovernorates,
+    queryFn: ({ signal }) => getGovernorates(signal),
   });
 };

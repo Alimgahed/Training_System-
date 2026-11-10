@@ -1,0 +1,17 @@
+.exam-result-metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.exam-result-metrics article { padding:20px; border:1px solid var(--color-border); border-radius:12px; background:var(--color-surface); }
+.exam-result-metrics h2 { font-size:14px; font-weight:500; color:var(--color-text-secondary); margin:0 0 12px; line-height:1.6; }
+.exam-result-metrics strong { font-size:28px; font-variant-numeric:tabular-nums; color:var(--color-text-primary); }
+.exam-metric-skeleton { display:block; height:36px; width:64px; border-radius:4px; background:linear-gradient(90deg,var(--color-border-light),var(--color-border),var(--color-border-light)); background-size:200% 100%; animation:shimmer 1.5s ease-in-out infinite; }
+.exam-results-page .ui-table td { vertical-align:middle; }
+@media(max-width:820px) { .exam-result-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .exam-result-metrics article { padding:16px; } }
+@media(prefers-reduced-motion:reduce) { .exam-metric-skeleton { animation:none; } }
+.exam-result-metrics strong { display:block; min-height:36px; line-height:36px; }
+.exam-detail-grid { display:grid; grid-template-columns:minmax(220px,1fr) minmax(0,3fr); gap:24px; }
+.exam-result-focus { display:grid; justify-items:center; gap:12px; padding:24px; color:var(--color-text-secondary); }
+.exam-result-focus > strong { font-size:48px; line-height:1.2; font-variant-numeric:tabular-nums; color:var(--color-text-primary); }
+.exam-related-records { display:flex; gap:16px; flex-wrap:wrap; padding:16px; }
+@media(max-width:820px) { .exam-detail-grid { grid-template-columns:1fr; } .exam-related-records > a { width:100%; } }
+.exam-detail-grid .enterprise-data { grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media(max-width:620px) { .exam-detail-grid .enterprise-data { grid-template-columns:1fr; } }
+.exam-detail-grid > .ui-card:first-child .enterprise-skeleton { min-height:210px; }

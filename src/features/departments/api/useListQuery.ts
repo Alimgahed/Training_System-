@@ -4,6 +4,6 @@ import { getDepartments } from './list';
 export const useDepartments = () => {
   return useQuery({
     queryKey: ['departments'],
-    queryFn: getDepartments,
+    queryFn: ({ signal }) => getDepartments(signal),
   });
 };

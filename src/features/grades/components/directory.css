@@ -1,0 +1,15 @@
+.grade-directory .enterprise-record-link { display:inline-flex; align-items:center; min-height:44px; }
+.grade-identity { display:grid; gap:4px; }
+.grade-identity small { color:var(--color-text-secondary); }
+.grade-directory td:last-child { width:30%; }
+.grade-editor { display:grid; gap:24px; max-width:960px; }
+.grade-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; padding:20px; }
+@media(max-width:700px) { .grade-fields { grid-template-columns:minmax(0,1fr); padding:16px; } }
+@media(max-width:700px) {
+  .grade-directory .record-kpis { gap:8px; }
+  .grade-directory .record-kpi { padding:12px 16px; min-height:0; }
+  .grade-directory .record-kpi__copy { display:flex; align-items:center; justify-content:space-between; gap:16px; flex:1; }
+  .grade-directory .record-kpi__copy p { display:none; }
+  .grade-directory .record-kpi__copy strong { font-size:22px; }
+  .grade-directory .record-kpi__icon { display:none; }
+}

@@ -4,6 +4,6 @@ import { getDocumentations } from './list';
 export const useDocumentations = () => {
   return useQuery({
     queryKey: ['documentations'],
-    queryFn: getDocumentations,
+    queryFn: ({ signal }) => getDocumentations(signal),
   });
 };

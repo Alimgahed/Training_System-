@@ -1,11 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
 import { ArrowLeft,BarChart3,BookOpen,Eye,EyeOff,Globe2,LockKeyhole,ShieldCheck,UserRound,UsersRound } from 'lucide-react';
-import { lazy,Suspense,useState } from 'react';
+import { lazy,Suspense,useEffect,useRef,useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { apiClient } from '../core/api/apiClient';
 import { useAuthStore } from '../core/store/useAuthStore';
+import { loginErrorMessage } from '../features/auth/loginFeedback';
 import { LoadingSkeleton } from '../shared/components/LoadingSkeleton';
 const AuthenticatedRoutes = lazy(() => import('./AuthenticatedRoutes'));
 
@@ -35,17 +36,27 @@ const platformFeatures = [
 export function App() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const login = useAuthStore((state) => state.login);
+  const errorSummaryRef = useRef<HTMLDivElement>(null);
   const [showPassword, setShowPassword] = useState(false);
-  const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<LoginFormInputs>({
+  const { register, handleSubmit, setError, clearErrors, formState: { errors, isSubmitting } } = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema),
   });
 
+  useEffect(() => {
+    if (errors.root) errorSummaryRef.current?.focus();
+  }, [errors.root]);
+
   const onSubmit = async (data: LoginFormInputs) => {
+    clearErrors('root');
     try {
       const response = await apiClient.post('/login', { username: data.username, password: data.password });
+      if (typeof response.data?.token !== 'string' || !response.data.token.trim()) {
+        setError('root', { message: 'استجابة تسجيل الدخول غير مكتملة. أعد المحاولة أو تواصل مع مسؤول النظام.' });
+        return;
+      }
       login(response.data.token, data.username);
-    } catch {
-      setError('root', { message: 'فشل تسجيل الدخول. تأكد من صحة البيانات.' });
+    } catch (error) {
+      setError('root', { message: loginErrorMessage(error) });
     }
   };
 
@@ -61,14 +72,15 @@ export function App() {
           <img src="/training/organization-logo.png" alt="شعار شركة مياه الشرب والصرف الصحي بالمنيا" className="login-form-logo" width="172" height="172" />
           <header className="login-form-heading">
             <h1 id="login-title">تسجيل الدخول إلى النظام</h1>
-            <p>منصة إدارة التدريب والبرامج التدريبية</p>
+            <p>ادخل بحساب العمل لمتابعة الموظفين والبرامج التدريبية.</p>
           </header>
-          <form className="login-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form className="login-form" onSubmit={handleSubmit(onSubmit)} aria-busy={isSubmitting} noValidate>
+            {errors.root && <div ref={errorSummaryRef} tabIndex={-1} className="login-error login-root-error" role="alert"><strong>لم يتم تسجيل الدخول</strong><p>{errors.root.message}</p></div>}
             <div className="login-field">
               <label htmlFor="login-username">اسم المستخدم</label>
               <div className={`login-input-shell ${errors.username ? 'has-error' : ''}`}>
                 <UserRound aria-hidden="true" size={20} />
-                <input id="login-username" type="text" autoComplete="username" placeholder="أدخل اسم المستخدم" aria-invalid={Boolean(errors.username)} aria-describedby={errors.username ? 'username-error' : undefined} {...register('username')} />
+                <input id="login-username" type="text" autoComplete="username" autoCapitalize="none" spellCheck={false} readOnly={isSubmitting} placeholder="أدخل اسم المستخدم" aria-invalid={Boolean(errors.username)} aria-describedby={errors.username ? 'username-error' : undefined} {...register('username')} />
               </div>
               {errors.username && <p id="username-error" className="login-error" role="alert">{errors.username.message}</p>}
             </div>
@@ -76,22 +88,22 @@ export function App() {
               <label htmlFor="login-password">كلمة المرور</label>
               <div className={`login-input-shell ${errors.password ? 'has-error' : ''}`}>
                 <LockKeyhole aria-hidden="true" size={20} />
-                <input id="login-password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" placeholder="أدخل كلمة المرور" aria-invalid={Boolean(errors.password)} aria-describedby={errors.password ? 'password-error' : undefined} {...register('password')} />
+                <input id="login-password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" readOnly={isSubmitting} placeholder="أدخل كلمة المرور" aria-invalid={Boolean(errors.password)} aria-describedby={errors.password ? 'password-error' : undefined} {...register('password')} />
                 <button type="button" className="password-toggle" onClick={() => setShowPassword((current) => !current)} aria-label={showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'} aria-pressed={showPassword}>
                   {showPassword ? <EyeOff aria-hidden="true" size={20} /> : <Eye aria-hidden="true" size={20} />}
                 </button>
               </div>
               {errors.password && <p id="password-error" className="login-error" role="alert">{errors.password.message}</p>}
             </div>
-            <p className="login-session-note">لأمان حسابك، سجّل الدخول مجدداً بعد إغلاق الصفحة.</p>
-            {errors.root && <p className="login-error login-root-error" role="alert">{errors.root.message}</p>}
             <button className="login-submit" disabled={isSubmitting} type="submit">
               <span>{isSubmitting ? 'جارٍ تسجيل الدخول...' : 'دخول'}</span>{!isSubmitting && <ArrowLeft aria-hidden="true" size={21} />}
             </button>
+            <span className="visually-hidden" role="status">{isSubmitting ? 'جارٍ تسجيل الدخول' : ''}</span>
+            <p className="login-session-note">تُحفظ الجلسة في علامة التبويب الحالية فقط. سجّل الدخول مجدداً بعد إغلاقها.</p>
           </form>
           <aside className="login-security-note">
             <ShieldCheck aria-hidden="true" size={29} />
-            <div><strong>ملاحظة أمان</strong><p>يرجى عدم مشاركة بيانات الدخول الخاصة بك مع أي شخص آخر</p></div>
+            <div><strong>دخول مخصص لفريق العمل</strong><p>إذا لم يكن لديك حساب أو تعذر الدخول، تواصل مع مسؤول النظام. لا تشارك كلمة المرور.</p></div>
           </aside>
         </div>
       </section>

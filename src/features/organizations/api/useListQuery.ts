@@ -4,6 +4,6 @@ import { getOrganizations } from './list';
 export const useOrganizations = () => {
   return useQuery({
     queryKey: ['organizations'],
-    queryFn: getOrganizations,
+    queryFn: ({ signal }) => getOrganizations(signal),
   });
 };

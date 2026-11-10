@@ -1,0 +1,10 @@
+.course-overview-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);}
+.course-overview-grid .enterprise-data {grid-template-columns:repeat(2,minmax(0,1fr));}
+.course-record-bar {display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);padding:var(--space-4) var(--space-5);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);}
+.course-record-bar>div:first-child {display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap;}
+.course-document-path {overflow-wrap:anywhere;}
+@media(max-width:750px){.course-overview-grid{grid-template-columns:1fr;}.course-record-bar{align-items:flex-start;flex-direction:column;}.enterprise-course-detail [role=tab]{min-height:48px;}.course-overview-grid .enterprise-data{grid-template-columns:1fr;}}
+.enterprise-course-detail {grid-template-columns:minmax(0,1fr);}
+.enterprise-course-detail > div {min-width:0;}
+.enterprise-course-detail [role=tabpanel] {animation:none!important;}
+.enterprise-course-detail td .enterprise-record-link {display:inline-flex;align-items:center;min-height:44px;}

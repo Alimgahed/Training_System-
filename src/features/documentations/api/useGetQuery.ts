@@ -4,7 +4,7 @@ import { getDocumentation } from './get';
 export const useDocumentation = (id: string | number) => {
   return useQuery({
     queryKey: ['documentation', id],
-    queryFn: () => getDocumentation(id),
+    queryFn: ({ signal }) => getDocumentation(id, signal),
     enabled: !!id,
   });
 };
