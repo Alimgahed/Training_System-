@@ -29,8 +29,9 @@ const { Routes, Route } = await import('react-router-dom');
 const { examScore, examStatus, summarizeExams } = await import('../src/features/course-participant-final-exams/utils/results.ts');
 const { sessionDay, sessionDate, sessionSummary, localToday } = await import('../src/features/course-sessions/utils/schedule.ts');
 for(const value of [null,undefined,'','  ','invalid',Infinity])assert.equal(examScore(value),null);
-assert.equal(examScore(0),0);assert.equal(examStatus(0),'failed');assert.equal(examStatus(null),'pending');assert.equal(examStatus(50),'passed');
+assert.equal(examScore(0),0);assert.equal(examStatus(0),'recorded');assert.equal(examStatus(null),'pending');assert.equal(examStatus(50),'recorded');
 assert.equal(summarizeExams([{exam_score:null},{exam_score:0},{exam_score:100}]).average,50);
+assert.equal(summarizeExams([{exam_score:null},{exam_score:0},{exam_score:100}]).recorded,2);
 assert.equal(sessionDay('2026-02-29'),null);assert.equal(sessionDay('2024-02-29'),'2024-02-29');assert.equal(sessionDay('2026-11-09T23:00:00Z'),'2026-11-09');
 assert.equal(sessionDate('invalid'),'تاريخ غير محدد');assert.equal(localToday(new Date(2026,10,9,23)),'2026-11-09');
 assert.deepEqual(sessionSummary([{session_date:'invalid'},{session_date:'2026-11-09'},{session_date:'2026-11-10'}],'2026-11-09'),{total:3,today:1,upcoming:1});
@@ -54,8 +55,9 @@ assert.ok(participant.includes('لم تُرصد'));assert.ok(participant.include
 const attendance=render(Attendance,'/course-session-participants?session=26','/course-session-participants',[[['course-session-participants'],fixtures['/course-session-participants']]]);
 assert.ok(attendance.includes('value="26" selected=""'));assert.ok(attendance.includes('لا يوجد حضور مطابق'));
 const sessions=render(Sessions,'/course-sessions','/course-sessions',[[['course-sessions'],fixtures['/course-sessions']]]);
-assert.equal((sessions.match(/class="schedule-date-mark"/g)||[]).length,12);
-const last=render(Sessions,'/course-sessions?page=3','/course-sessions',[[['course-sessions'],fixtures['/course-sessions']]]);
+assert.equal((sessions.match(/<tr/g)||[]).length,21);
+assert.ok(sessions.includes('وقت البداية'));
+const last=render(Sessions,'/course-sessions?page=2','/course-sessions',[[['course-sessions'],fixtures['/course-sessions']]]);
 assert.ok(last.includes('تاريخ غير محدد'));assert.ok(!last.includes('قاعة التدريب'));
 assert.ok(render(AttendanceForm,'/new','/new').includes('enterprise-skeleton'));
 assert.ok(render(SessionForm,'/new','/new').includes('enterprise-skeleton'));
@@ -76,9 +78,9 @@ const {DocumentationList}=await import('../src/features/documentations/component
 const {DocumentationCreate}=await import('../src/features/documentations/components/Create.tsx');
 const documentEntries=[[['documentations'],fixtures['/documentations']],[['documentation-types'],fixtures['/documentation-types']]];
 const archive=render(DocumentationList,'/documentations','/documentations',documentEntries);
-assert.equal((archive.match(/class="archive-card"/g)||[]).length,12);
+assert.equal((archive.match(/<tbody>[\s\S]*?<\/tbody>/)?.[0].match(/<tr/g)||[]).length,20);
 const missingFile=render(DocumentationList,'/documentations?file=missing','/documentations',documentEntries);
-assert.ok(missingFile.includes('href="/documentations/204"'));assert.equal((missingFile.match(/class="archive-card"/g)||[]).length,1);
+assert.ok(missingFile.includes('href="/documentations/204"'));assert.equal((missingFile.match(/<tbody>[\s\S]*?<\/tbody>/)?.[0].match(/<tr/g)||[]).length,1);
 const docEdit=render(DocumentationCreate,'/documentations/202/edit','/documentations/:id/edit',[...documentEntries,[['documentation','202'],fixtures['/documentation/202']],[['path-grade-subjects'],fixtures['/path-grade-subjects']]]);
 assert.ok(docEdit.includes('value="path_grade_subject_id" selected=""'));assert.ok(docEdit.includes('مادة مسار اختبار')); // Input value hydration is verified in the browser.
 const conflicting=render(DocumentationCreate,'/documentations/201/edit','/documentations/:id/edit',[...documentEntries,[['documentation','201'],fixtures['/documentation/201']]]);

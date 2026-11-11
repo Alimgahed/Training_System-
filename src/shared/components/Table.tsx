@@ -22,10 +22,14 @@ interface TableProps<T> {
   emptyIcon?: React.ReactNode;
   compact?: boolean;
   showOverview?: boolean;
+  page?: number;
+  onPageChange?: (page: number) => void;
 }
 
-export function Table<T extends Record<string, any>>({ columns, data, isLoading, onRowClick, emptyTitle, emptyDescription, emptyIcon, compact = false, showOverview = compact }: TableProps<T>) {
-  const [page, setPage] = useState(1);
+export function Table<T extends Record<string, any>>({ columns, data, isLoading, onRowClick, emptyTitle, emptyDescription, emptyIcon, compact = false, showOverview = compact, page: requestedPage, onPageChange }: TableProps<T>) {
+  const [localPage, setLocalPage] = useState(1);
+  const page = Number.isFinite(requestedPage) ? Math.max(1, Math.floor(requestedPage!)) : localPage;
+  const setPage = (value: number) => { setLocalPage(value); onPageChange?.(value); };
   const [pageSize, setPageSize] = useState(20);
   const [sort, setSort] = useState<{ index: number; descending: boolean } | null>(null);
   const sorted = useMemo(() => {
@@ -109,7 +113,7 @@ export function Table<T extends Record<string, any>>({ columns, data, isLoading,
               onClick={() => onRowClick?.(row)}
               tabIndex={onRowClick ? 0 : undefined}
               aria-label={onRowClick ? 'فتح تفاصيل السجل' : undefined}
-              onKeyDown={onRowClick ? (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); onRowClick(row); } } : undefined}
+              onKeyDown={onRowClick ? (event) => { if (event.target === event.currentTarget && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); onRowClick(row); } } : undefined}
               className={onRowClick ? 'is-clickable' : undefined}
             >
               {columns.map((col, colIndex) => (

@@ -35,13 +35,15 @@ function render(courses) {
   return html;
 }
 const empty = render([]);
-assert.ok(empty.includes('تأسيس أول دورة'));
+assert.ok(empty.includes('لم تُضف دورات بعد'));
 assert.ok(!empty.includes('class="course-card"'));
 const populated = render(Array.from({length:25}, (_,i)=>({ id:i+1, name:`اختبار معزول ${i+1}`, duration_in_days:0, learning_subject_id:7, is_planned:true })));
-assert.equal((populated.match(/class="course-card"/g)||[]).length,12);
+assert.equal((populated.match(/<tr/g)||[]).length,21);
 assert.ok(populated.includes('href="/courses/25"'));
-assert.ok(populated.includes('/training/technical-card.jpg'));
-assert.ok(populated.includes('loading="lazy"'));
-assert.ok(populated.includes('صفحات الدورات'));
-assert.ok(!populated.includes('خيارات الدورة'));
-console.log('PASS: catalog empty state, accessible course links, subject artwork, lazy images, 12-card rendering bound and pagination.');
+assert.ok(populated.includes('صيانة محطات المياه'));
+assert.ok(!populated.includes('-card.jpg'));
+assert.ok(populated.includes('صفحات الجدول'));
+assert.ok(!populated.includes('TRN-'));
+assert.ok(populated.includes('عدد المشاركين'));
+assert.ok(!populated.includes('0 مشارك'));
+console.log('PASS: API-backed course table, 20-row pagination, lookup names, empty state and no invented codes or imagery.');

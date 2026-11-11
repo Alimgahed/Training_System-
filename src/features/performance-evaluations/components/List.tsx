@@ -72,8 +72,8 @@ export function PerformanceEvaluationWorkspace() {
 
   const selectedItem = availableItems.find((entry) => Number(entry.id) === itemId);
   const item = selectedItem?.performance_evaluation_item || selectedItem;
-  const minimumScore = Number(item?.minimum_score ?? 0);
-  const maximumScore = Number(item?.maximum_score ?? 100);
+  const minimumScore = item?.minimum_score == null ? undefined : Number(item.minimum_score);
+  const maximumScore = item?.maximum_score == null ? undefined : Number(item.maximum_score);
   const selectedCategory = categories.find((category: any) => Number(category.id) === categoryId);
   const isExamEvaluation = /امتحان|اختبار/.test(selectedCategory?.name || '');
   const participantCategory = participantCategories.find(category => Number(category.id) === Number(selectedItem?.performance_evaluation_participant_category_id));
@@ -119,8 +119,8 @@ export function PerformanceEvaluationWorkspace() {
     if (requiresParticipant && !selectedCourseParticipants.some(entry => Number(entry.id) === Number(values.course_participant_id))) {
       setError('اختر المتدرب المسجل بالدورة لتقييم الامتحان.'); setMessage(''); return;
     }
-    const outOfRange = values.score < minimumScore || values.score > maximumScore;
-    if (outOfRange) { setError(`الدرجة يجب أن تكون بين ${minimumScore} و${maximumScore} لهذا البند.`); setMessage(''); return; }
+    const outOfRange = (minimumScore != null && values.score < minimumScore) || (maximumScore != null && values.score > maximumScore);
+    if (outOfRange) { setError(`الدرجة يجب أن تكون ضمن حدود البند: الحد الأدنى ${minimumScore ?? 'غير محدد'} والحد الأقصى ${maximumScore ?? 'غير محدد'} لهذا البند.`); setMessage(''); return; }
     if (!roleName) { setError('تعذر تحديد دور بند التقييم. أعد اختيار البند بعد تحميل البيانات.'); return; }
     if (editing && editing.type !== (target === 'participant' ? 'course-participant' : 'course')) { setError('لا يمكن نقل التقييم بين نطاق الدورة والمتدرب.'); return; }
     setError(''); setMessage(''); saveMutation.mutate({ values: { ...values, target, course_participant_id: requiresParticipant ? values.course_participant_id : undefined }, editingRecord: editing });
@@ -156,12 +156,12 @@ export function PerformanceEvaluationWorkspace() {
             <Select label="فئة التقييم *" error={errors.category_id?.message} isLoading={loadingCategories} options={categories.map((category: any) => ({ value: category.id ?? "", label: category.name || `فئة #${category.id}` }))} {...register('category_id')} />
             <p className="evaluation-hint">نطاق التقييم يتحدد تلقائياً حسب دورك والبند المحدد.</p>
             {requiresParticipant && <Select label="المتدرب محل التقييم *" error={errors.course_participant_id?.message} isLoading={loadingParticipants} options={selectedCourseParticipants.map((participant: any) => ({ value: participant.id ?? "", label: participant.person?.name || `مشارك #${participant.id}` }))} {...register('course_participant_id')} />}
-            <Select label="بند التقييم المتاح *" error={errors.item_id?.message} isLoading={loadingItems} disabled={!courseId || !categoryId} options={availableItems.map((entry) => { const detail = entry.performance_evaluation_item || entry; return { value: entry.id ?? "", label: `${detail.name || entry.name || `بند #${entry.id}`} (${detail.minimum_score ?? 0}–${detail.maximum_score ?? 100})` }; })} {...register('item_id')} />
+            <Select label="بند التقييم المتاح *" error={errors.item_id?.message} isLoading={loadingItems} disabled={!courseId || !categoryId} options={availableItems.map((entry) => { const detail = entry.performance_evaluation_item || entry; return { value: entry.id ?? "", label: `${detail.name || entry.name || `بند #${entry.id}`} (${detail.minimum_score ?? '—'}–${detail.maximum_score ?? '—'})` }; })} {...register('item_id')} />
             <Input label="الدرجة *" type="number" min={minimumScore} max={maximumScore} step="any" error={errors.score?.message} {...register('score')} />
             <Input label="ملاحظات" placeholder="ملاحظات إضافية (اختياري)" {...register('notes')} />
           </div>
           {target === 'participant' && (isExamEvaluation ? <p className="evaluation-hint">هذا تقييم امتحان مرتبط بمتدرب. اختر المشارك المسجل في الدورة.</p> : <p className="evaluation-hint">سيحدد النظام تسجيلك بالدورة تلقائياً حسب حسابك.</p>)}
-          {selectedItem && <p className="evaluation-hint">النطاق المسموح لهذا البند: من {minimumScore} إلى {maximumScore}. درجة النجاح تبدأ من {minimumScore}.</p>}
+          {selectedItem && <p className="evaluation-hint">حدود الدرجة المسجلة: الحد الأدنى {minimumScore ?? 'غير محدد'}، والحد الأقصى {maximumScore ?? 'غير محدد'}.</p>}
           <div className="evaluation-form-actions"><Button type="submit" isLoading={saveMutation.isPending || isSubmitting}><Save size={17} />{editing ? 'حفظ التعديلات' : 'حفظ التقييم'}</Button>{editing && <Button type="button" variant="ghost" onClick={cancelEdit}><X size={17} />إلغاء التعديل</Button>}</div>
         </form>
       </section>
