@@ -86,3 +86,62 @@ assert.ok(docEdit.includes('value="path_grade_subject_id" selected=""'));assert.
 const conflicting=render(DocumentationCreate,'/documentations/201/edit','/documentations/:id/edit',[...documentEntries,[['documentation','201'],fixtures['/documentation/201']]]);
 assert.ok(conflicting.includes('السجل الحالي مرتبط بأكثر من جهة'));
 console.log('PASS: archive rendering bound, missing-file filtering, saved document relationship selection and conflicting-relationship guidance.');
+const {CourseCreate}=await import('../src/features/courses/components/Create.tsx');
+const courseLookups = ['learning-subjects','rooms','persons','organizations'].map(resource=>[[resource],fixtures[`/${resource}`]||[]]);
+const courseEditor=render(CourseCreate,'/courses/new','/courses/new',courseLookups);
+assert.equal((courseEditor.match(/aria-controls="course-section-/g)||[]).length,5);
+assert.ok(courseEditor.includes('مدرب اختبار أول'));
+assert.ok(courseEditor.includes('قاعة اختبار أ'));
+for (const field of ['number_of_internal_participants','duration_in_days']) {
+ const input=courseEditor.match(new RegExp(`<input[^>]*name="${field}"[^>]*>`))?.[0];
+ assert.ok(input);
+ assert.ok(!/value="[^"]+"/.test(input));
+}
+const emptyCourseEditor=render(CourseCreate,'/courses/new','/courses/new',courseLookups.map(([key])=>[key,[]]));
+assert.ok(emptyCourseEditor.includes('لا توجد قاعات متاحة'));
+assert.ok(emptyCourseEditor.includes('لا يوجد موظف مسجل كمدرب'));
+assert.ok(emptyCourseEditor.includes('لا تتوفر خيارات لازمة للحفظ'));
+assert.ok(!emptyCourseEditor.includes('مدرب اختبار أول'));
+console.log('PASS: five course sections, API lookup options, blank numeric inputs and empty-lookup save guard.');
+const {LearningPathList}=await import('../src/features/learning-paths/components/List.tsx');
+const {LearningSubjectList}=await import('../src/features/learning-subjects/components/List.tsx');
+const {PathGradeList}=await import('../src/features/path-grades/components/List.tsx');
+const {PathGradeSubjectList}=await import('../src/features/path-grade-subjects/components/List.tsx');
+const {PathGradeSubjectTermList}=await import('../src/features/path-grade-subject-terms/components/List.tsx');
+for (const [Component,resource] of [[LearningPathList,'learning-paths'],[LearningSubjectList,'learning-subjects'],[PathGradeList,'path-grades'],[PathGradeSubjectList,'path-grade-subjects'],[PathGradeSubjectTermList,'path-grade-subject-terms']]) {
+ const directory=render(Component,`/${resource}`,`/${resource}`,[[[resource],[{id:111,name:'اسم مرسل من الخادم',code:'API-111',learning_path:{name:'مسار مرتبط من الخادم'}}]]]);
+ assert.ok(directory.includes('training-directory-toolbar'));
+ assert.ok(directory.includes(`href="/${resource}/111"`));
+ assert.ok(directory.includes('صفحات الجدول'));
+ assert.ok(!directory.includes('<img'));
+ const filtered=render(Component,`/${resource}?q=لايوجد`, `/${resource}`, [[[resource],[{id:111,name:'اسم مرسل من الخادم'}]]]);
+ assert.ok(filtered.includes('لا توجد نتائج مطابقة'));
+ const empty=render(Component,`/${resource}`,`/${resource}`,[[[resource],[]]]);
+ assert.ok(empty.includes('لا توجد سجلات بعد'));
+}
+const {EvaluationTypeCreate}=await import('../src/features/evaluation-types/components/Create.tsx');
+const {DocumentationTypeCreate}=await import('../src/features/documentation-types/components/Create.tsx');
+for(const Component of [EvaluationTypeCreate,DocumentationTypeCreate]) {
+ const form=render(Component,'/new','/new');
+ assert.ok(form.includes('training-editor'));
+ assert.ok(form.includes('إلغاء'));
+ assert.ok(form.includes('name="name"'));
+}
+const {PathGradeCandidateList}=await import('../src/features/path-grade-candidates/components/List.tsx');
+const candidates=render(PathGradeCandidateList,'/path-grade-candidates','/path-grade-candidates',[[['path-grade-candidates'],[{id:1,person:{name:'مرشح من الخادم'},path_grade:{learning_path:{name:'مسار من الخادم'},grade:{name:'درجة من الخادم'}}}]]]);
+assert.ok(candidates.includes('مرشح من الخادم'));
+assert.ok(candidates.includes('البحث في الترشيحات'));
+assert.ok(candidates.includes('صفحات الجدول'));
+console.log('PASS: five consistent training directories, API record links, filtering, empty states, no subject imagery, editor actions and candidate table.');
+const {PerformanceEvaluationWorkspace}=await import('../src/features/performance-evaluations/components/List.tsx');
+const evaluationEntries=[
+ [['performance-evaluation-course-details'],[{id:1,course:{name:'تقييم دورة من الخادم'},score:0,entered_by:9}]],
+ [['performance-evaluation-course-participant-details'],[{id:1,course_participant:{person:{name:'تقييم مشارك من الخادم'}},score:10,entered_by:9}]],
+];
+const evaluationWorkspace=render(PerformanceEvaluationWorkspace,'/performance-evaluations','/performance-evaluations',evaluationEntries);
+assert.ok(evaluationWorkspace.includes('تقييم دورة من الخادم'));
+assert.ok(evaluationWorkspace.includes('تقييم مشارك من الخادم'));
+assert.ok(evaluationWorkspace.includes('للعرض فقط'));
+assert.ok(evaluationWorkspace.includes('صفحات الجدول'));
+assert.ok(!evaluationWorkspace.includes('aria-label="حذف التقييم"'));
+console.log('PASS: combined evaluation sources retain separate records, zero scores and read-only permissions.');

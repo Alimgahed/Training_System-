@@ -1,3 +1,6 @@
+import '../../../shared/components/training-workspace.css';
+import { Table } from '../../../shared/components/Table';
+import { ErrorState } from '../../../shared/components/ErrorState';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation,useQuery,useQueryClient } from '@tanstack/react-query';
 import { Award,CheckCircle2,ClipboardCheck,Pencil,Save,Trash2,X } from 'lucide-react';
@@ -50,6 +53,7 @@ export function PerformanceEvaluationWorkspace() {
   const token = useAuthStore((state) => state.token);
   const userId = currentUserId(token);
   const [editing, setEditing] = useState<EditingRecord>(null);
+  const [search, setSearch] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const { register, handleSubmit, watch, setValue, reset, formState: { errors, isSubmitting } } = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { target: 'course' } });
@@ -57,18 +61,18 @@ export function PerformanceEvaluationWorkspace() {
   const categoryId = Number(watch('category_id')) || 0;
   const itemId = Number(watch('item_id')) || 0;
 
-  const { data: courses = [], isLoading: loadingCourses } = useExecutedCourses();
-  const { data: categories = [], isLoading: loadingCategories } = usePerformanceEvaluationCategorys();
+  const { data: courses = [], isLoading: loadingCourses, isError: coursesError, refetch: retryCourses } = useExecutedCourses();
+  const { data: categories = [], isLoading: loadingCategories, isError: categoriesError, refetch: retryCategories } = usePerformanceEvaluationCategorys();
   const { data: participantCategories = [] } = usePerformanceEvaluationParticipantCategorys();
   const { data: participantTypes = [] } = useParticipantTypes();
   const { data: participants = [], isLoading: loadingParticipants } = useCourseParticipants();
-  const { data: availableItems = [], isLoading: loadingItems } = useQuery({
+  const { data: availableItems = [], isLoading: loadingItems, isError: itemsError, refetch: retryItems } = useQuery({
     queryKey: ['available-performance-evaluation-items', courseId, categoryId],
     queryFn: () => getAvailableEvaluationItems({ course_id: courseId, performance_evaluation_category_id: categoryId }),
     enabled: courseId > 0 && categoryId > 0,
   });
-  const { data: courseRows = [] } = useQuery({ queryKey: ['performance-evaluation-course-details'], queryFn: getCourseEvaluationDetails });
-  const { data: participantRows = [] } = useQuery({ queryKey: ['performance-evaluation-course-participant-details'], queryFn: getCourseParticipantEvaluationDetails });
+  const { data: courseRows = [], isLoading: loadingCourseRows, isError: courseRowsError, refetch: retryCourseRows } = useQuery({ queryKey: ['performance-evaluation-course-details'], queryFn: getCourseEvaluationDetails });
+  const { data: participantRows = [], isLoading: loadingParticipantRows, isError: participantRowsError, refetch: retryParticipantRows } = useQuery({ queryKey: ['performance-evaluation-course-participant-details'], queryFn: getCourseParticipantEvaluationDetails });
 
   const selectedItem = availableItems.find((entry) => Number(entry.id) === itemId);
   const item = selectedItem?.performance_evaluation_item || selectedItem;
@@ -140,17 +144,18 @@ export function PerformanceEvaluationWorkspace() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const cancelEdit = () => { setEditing(null); reset({ target: 'course' }); };
-  const visibleRecords = records.filter((record) => !courseId || Number(record.course_id || record.course?.id || record.course_participant?.course_id) === courseId);
+  const visibleRecords = records.filter(record => (!courseId || Number(record.course_id || record.course?.id || record.course_participant?.course_id) === courseId) && [record.course?.name,record.course_participant?.person?.name,record.performance_evaluation_participant_category_item?.performance_evaluation_item?.name,record.score].join(' ').toLocaleLowerCase('ar').includes(search.trim().toLocaleLowerCase('ar')));
 
   return (
-    <div className="evaluation-workspace">
+    <div className="evaluation-workspace training-workspace">
       <nav className="people-breadcrumb"><a href="/">الرئيسية</a><span>‹</span><span>شئون المتدربين والتقييم</span><span>‹</span><strong>تقييم الأداء</strong></nav>
       <header className="people-header"><div><h1>تقييم الأداء التدريبي</h1><p>أدخل الدرجات ضمن البنود المتاحة لدورك في الدورة، وتابع التقييمات المسجلة.</p></div><span className="evaluation-access-note"><ClipboardCheck size={17} /> البنود المتاحة تتحدد حسب صلاحيتك</span></header>
       {message && <div className="user-feedback is-success" role="status">{message}</div>}{error && <div className="user-feedback is-error" role="alert">{error}</div>}
 
       <section className="evaluation-entry-card">
         <header><span><Award size={23} /></span><div><h2>{editing ? 'تعديل تقييم' : 'إضافة تقييم جديد'}</h2><p>اختر الدورة والفئة أولاً لعرض بنود التقييم المسموح بها.</p></div></header>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} aria-busy={saveMutation.isPending}><fieldset className="training-entry-fields" disabled={saveMutation.isPending}><legend className="visually-hidden">بيانات التقييم</legend>
+          {(coursesError||categoriesError||itemsError)&&<div className="enterprise-form-error" role="alert">تعذر تحميل بعض قوائم التقييم. <Button type="button" variant="outline" onClick={()=>{if(coursesError)void retryCourses();if(categoriesError)void retryCategories();if(itemsError)void retryItems();}}>إعادة تحميل القوائم</Button></div>}
           <div className="evaluation-form-grid">
             <Select label="الدورة التدريبية المنفذة *" error={errors.course_id?.message} isLoading={loadingCourses} options={courses.map((course: any) => ({ value: course.id ?? "", label: course.name || `دورة #${course.id}` }))} {...register('course_id')} />
             <Select label="فئة التقييم *" error={errors.category_id?.message} isLoading={loadingCategories} options={categories.map((category: any) => ({ value: category.id ?? "", label: category.name || `فئة #${category.id}` }))} {...register('category_id')} />
@@ -162,27 +167,23 @@ export function PerformanceEvaluationWorkspace() {
           </div>
           {target === 'participant' && (isExamEvaluation ? <p className="evaluation-hint">هذا تقييم امتحان مرتبط بمتدرب. اختر المشارك المسجل في الدورة.</p> : <p className="evaluation-hint">سيحدد النظام تسجيلك بالدورة تلقائياً حسب حسابك.</p>)}
           {selectedItem && <p className="evaluation-hint">حدود الدرجة المسجلة: الحد الأدنى {minimumScore ?? 'غير محدد'}، والحد الأقصى {maximumScore ?? 'غير محدد'}.</p>}
-          <div className="evaluation-form-actions"><Button type="submit" isLoading={saveMutation.isPending || isSubmitting}><Save size={17} />{editing ? 'حفظ التعديلات' : 'حفظ التقييم'}</Button>{editing && <Button type="button" variant="ghost" onClick={cancelEdit}><X size={17} />إلغاء التعديل</Button>}</div>
-        </form>
+          <div className="evaluation-form-actions"><Button type="submit" disabled={loadingCourses||loadingCategories||loadingItems||coursesError||categoriesError||itemsError||!selectedItem} isLoading={saveMutation.isPending || isSubmitting}><Save size={17} />{editing ? 'حفظ التعديلات' : 'حفظ التقييم'}</Button>{editing && <Button type="button" variant="ghost" onClick={cancelEdit}><X size={17} />إلغاء التعديل</Button>}</div>
+        </fieldset></form>
       </section>
 
       <section className="evaluation-records-card">
-        <header><div><h2>التقييمات المسجلة</h2><p>يمكن تعديل أو حذف السجلات التي أدخلتها أنت فقط.</p></div><span className="evaluation-count">{visibleRecords.length} سجل</span></header>
-        <div className="evaluation-table-scroll"><table className="evaluation-table"><thead><tr><th>الدورة</th><th>المتدرب</th><th>البند</th><th>الدرجة</th><th>مسجل بواسطة</th><th>التاريخ</th><th>إجراءات</th></tr></thead><tbody>
-          {visibleRecords.map((record) => {
-            const canManage = userId !== undefined && Number(record.entered_by) === userId;
-            const detail = record.performance_evaluation_participant_category_item?.performance_evaluation_item;
-            return <tr key={`${record.__type}-${record.id}`}>
-              <td>{record.course?.name || (record.course_id ? `دورة #${record.course_id}` : '—')}</td>
-              <td>{record.course_participant?.person?.name || (record.course_participant_id ? `مشارك #${record.course_participant_id}` : 'الدورة بالكامل')}</td>
-              <td>{detail?.name || `بند #${record.performance_evaluation_participant_category_item_id || '—'}`}</td>
-              <td><strong>{record.score}</strong></td><td>#{record.entered_by ?? '—'}</td>
-              <td>{record.entered_at ? new Date(record.entered_at).toLocaleDateString('ar-EG') : '—'}</td>
-              <td>{canManage ? <div className="evaluation-row-actions"><Button size="sm" variant="outline" aria-label="تعديل التقييم" onClick={() => beginEdit(record)}><Pencil size={15} /></Button><Button size="sm" variant="danger" aria-label="حذف التقييم" isLoading={deleteMutation.isPending} onClick={() => { if (window.confirm('هل تريد حذف هذا التقييم؟')) deleteMutation.mutate({ id: record.id, type: record.__type }); }}><Trash2 size={15} /></Button></div> : <span className="evaluation-readonly"><CheckCircle2 size={15} /> للعرض فقط</span>}</td>
-            </tr>;
-          })}
-          {!visibleRecords.length && <tr><td colSpan={7}><div className="evaluation-empty"><Award size={32} /><strong>لا توجد تقييمات مسجلة</strong><span>ستظهر التقييمات هنا بعد إدخالها.</span></div></td></tr>}
-        </tbody></table></div>
+        <header><div><h2>التقييمات المسجلة</h2><p>يمكن تعديل أو حذف السجلات التي أدخلتها أنت فقط.</p></div><span className="evaluation-count">{loadingCourseRows||loadingParticipantRows?'جارٍ التحميل…':courseRowsError||participantRowsError?'غير متاح':`${visibleRecords.length} سجل`}</span></header>
+        <div className="training-record-search"><label className="training-search"><span>البحث في التقييمات</span><input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder="الدورة أو المتدرب أو بند التقييم"/></label></div>
+        {courseRowsError || participantRowsError ? <ErrorState title="تعذر تحميل التقييمات" onRetry={()=>{void retryCourseRows();void retryParticipantRows();}}/> : <Table key={`${courseId}:${search}`} isLoading={loadingCourseRows||loadingParticipantRows} data={visibleRecords.map(record=>({...record,id:`${record.__type}-${record.id}`,recordId:record.id}))} compact showOverview={false} emptyTitle="لا توجد تقييمات مطابقة" columns={[
+          {header:'الدورة',accessor:r=>r.course?.name||r.course_id||'—'},
+          {header:'المتدرب',accessor:r=>r.course_participant?.person?.name||r.course_participant_id||(r.__type==='course'?'الدورة بالكامل':'—')},
+          {header:'البند',accessor:r=>r.performance_evaluation_participant_category_item?.performance_evaluation_item?.name||r.performance_evaluation_participant_category_item_id||'—'},
+          {header:'الدرجة',accessor:'score'},
+          {header:'مسجل بواسطة',accessor:r=>r.entered_by??'—'},
+          {header:'التاريخ',accessor:r=>r.entered_at&&Number.isFinite(Date.parse(r.entered_at))?new Date(r.entered_at).toLocaleDateString('ar-EG'):'—'},
+          {header:'إجراءات',accessor:r=>userId!==undefined&&Number(r.entered_by)===userId?<div className="evaluation-row-actions"><Button size="sm" variant="outline" disabled={saveMutation.isPending} aria-label="تعديل التقييم" onClick={()=>beginEdit({...r,id:r.recordId})}><Pencil size={16}/></Button><Button size="sm" variant="danger" aria-label="حذف التقييم" isLoading={deleteMutation.isPending} onClick={()=>{if(window.confirm('هل تريد حذف هذا التقييم؟'))deleteMutation.mutate({id:r.recordId,type:r.__type});}}><Trash2 size={16}/></Button></div>:<span className="evaluation-readonly"><CheckCircle2 size={15}/>للعرض فقط</span>},
+        ]}/>}
+
       </section>
     </div>
   );

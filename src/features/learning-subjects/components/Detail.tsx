@@ -1,3 +1,4 @@
+import '../../../shared/components/training-workspace.css';
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 import { Link,useParams } from 'react-router-dom';
@@ -23,7 +24,7 @@ export function LearningSubjectDetail() {
   if (isError) return <ErrorState onRetry={() => refetch()} />;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+    <div className="enterprise-page training-workspace training-record-detail">
       <PageHeader
         title={data?.name || 'موضوع تدريبي'}
         subtitle={'تفاصيل موضوع تدريبي — معرّف #' + id}

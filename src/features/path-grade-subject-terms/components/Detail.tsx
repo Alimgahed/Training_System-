@@ -1,3 +1,4 @@
+import '../../../shared/components/training-workspace.css';
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 import { Link,useParams } from 'react-router-dom';
@@ -24,7 +25,7 @@ export function PathGradeSubjectTermDetail() {
   if (isError) return <ErrorState onRetry={() => refetch()} />;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+    <div className="enterprise-page training-workspace training-record-detail">
       <PageHeader
         title={data?.path_grade_subject?.learning_subject?.name || data?.path_grade_subject?.name || 'مادة فصل'}
         subtitle={'تفاصيل مادة فصل — معرّف #' + id}

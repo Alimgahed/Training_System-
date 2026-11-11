@@ -1,3 +1,4 @@
+import '../../../shared/components/training-workspace.css';
 import { ArrowLeft,ArrowRight } from 'lucide-react';
 import React from 'react';
 import { Link,useParams } from 'react-router-dom';
@@ -24,7 +25,7 @@ export function PathGradeSubjectDetail() {
   if (isError) return <ErrorState onRetry={() => refetch()} />;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+    <div className="enterprise-page training-workspace training-record-detail">
       <PageHeader
         title={data?.name || 'مادة مسار'}
         subtitle={'تفاصيل مادة مسار — معرّف #' + id}
@@ -38,7 +39,7 @@ export function PathGradeSubjectDetail() {
         actions={
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <Link to="/path-grade-subject-terms">
-              <Button size="sm">عرض فصول المواد (Subject Terms) <ArrowLeft size={16} /></Button>
+              <Button size="sm">عرض مواد الترم <ArrowLeft size={16} /></Button>
             </Link>
             <Link to="/path-grade-subjects">
               <Button variant="outline" size="sm"><ArrowRight size={16} /> العودة للقائمة</Button>

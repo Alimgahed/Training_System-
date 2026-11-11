@@ -14,7 +14,7 @@ export function ReferenceEditor({ resource, singular, children }: { resource: st
   if (id && query.isPending) return <LoadingSkeleton variant="form" />;
   if (id && query.isError) return <ErrorState onRetry={() => query.refetch()} />;
   return <RecordContext.Provider value={{ resource, singular, id, data: query.data }}>
-    <div className="reference-editor"><p>{id ? 'تعديل السجل' : 'إضافة سجل'} · <Link to={`/${resource}`}>العودة للقائمة</Link></p>{children}</div>
+    <div className="reference-editor"><p className="reference-editor-context">{id ? 'تعديل السجل' : 'إضافة سجل'} · <Link to={`/${resource}`}>العودة للقائمة</Link></p>{children}</div>
   </RecordContext.Provider>;
 }
 

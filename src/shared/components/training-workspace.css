@@ -1,0 +1,71 @@
+@import '../enterprise/enterprise.css';
+
+.training-workspace { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.training-page-title { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.training-page-icon { display: grid; place-items: center; flex: 0 0 56px; height: 56px; border-radius: 16px; background: #dfeeff; color: #075aa3; }
+.training-workspace .enterprise-heading h1, .training-workspace .people-header h1 { margin: 0; color: #16365f; font-size: clamp(23px,2vw,29px); }
+.training-workspace .enterprise-heading p, .training-workspace .people-header p { margin: 5px 0 0; color: #526b8c; font-size: 14px; line-height: 1.8; }
+.training-related-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.training-related-links a { display: inline-flex; align-items: center; min-height: 42px; padding: 8px 16px; color: #10588e; background: #fff; border: 1px solid #d8e4f2; border-radius: 9px; font-weight: 600; font-size: 14px; }
+.training-related-links a:hover { background: #edf6ff; }
+.training-directory-toolbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 18px; padding: 18px; background: #fff; border: 1px solid #d9e5f3; border-radius: 14px; box-shadow: 0 3px 10px #204d7b08; }
+.training-search { display: grid; gap: 7px; flex: 1 1 260px; color: #324e73; font-size: 13px; font-weight: 600; min-width: 0; }
+.training-search > div { position: relative; }
+.training-search > div > svg { position: absolute; inset-inline-start: 13px; top: 14px; color: #55759a; }
+.training-search input, .training-sort select { min-height: 44px; width: 100%; min-width: 0; padding: 9px 12px; border: 1px solid #cadbee; border-radius: 9px; background: #fbfdff; color: #213e62; font: inherit; }
+.training-search > div > input { padding-inline-start: 40px; }
+.training-sort { display: grid; gap: 7px; flex: 0 1 190px; font-size: 13px; font-weight: 600; color: #324e73; }
+.training-result-count { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #526b8c; font-size: 14px; }
+.training-row-action { display: inline-flex; gap: 7px; align-items: center; justify-content: center; min-height: 38px; padding: 5px 10px; border: 1px solid #d7e5f5; border-radius: 8px; color: #0667b3; background: white; }
+.training-editor form { display: grid; gap: 20px; width: 100%; max-width: none; }
+.training-workspace.training-editor .ui-card, .training-workspace .candidate-form-card, .training-workspace .evaluation-entry-card, .training-workspace .candidate-table-card, .training-workspace .evaluation-records-card { overflow: hidden; border: 1px solid #d2e2f4; border-radius: 15px; background: #fff; box-shadow: 0 4px 12px #234b780d; }
+.training-editor .ui-card__header { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 10px; padding: 14px 22px; background: linear-gradient(100deg,#fafcff,#edf5ff); border-bottom: 1px solid #dce8f5; }
+.training-editor .ui-card__header h2 { font-size: 17px; font-weight: 700; color: #193d6a; }
+.training-editor .ui-card__action { display: flex; color: #0568b3; }
+.training-editor .ui-card__body { padding: 0; }
+.training-form-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; padding: 24px; margin: 0; border: 0; min-width: 0; }
+.training-workspace .ui-field { gap: 8px; }
+.training-workspace .ui-field__label { color: #243f62; font-weight: 700; font-size: 14px; }
+.training-workspace .ui-input, .training-workspace .ui-select { min-height: 44px; border-radius: 9px; border-color: #cbdcf0; background-color: #fbfdff; }
+.training-editor .ui-field:has([required]) .ui-field__label::after { content: ' *'; color: #c43a35; }
+.training-editor .enterprise-form-footer { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; gap: 14px; border-top: 1px solid #d9e6f5; padding: 18px 0; }
+.training-editor .enterprise-form-footer > div { display: flex; flex-direction: row-reverse; gap: 10px; }
+.training-editor .enterprise-form-footer > span { font-size: 13px; color: #526b8c; }
+.training-editor button[type='submit'] { background: linear-gradient(#0868bb,#00519e); border-color: #0055a4; min-height: 44px; }
+.training-editor--compact .enterprise-country-field { padding: 26px; display: grid; gap: 22px; max-width: 760px; }
+.training-editor--compact .evaluation-repeat { display: flex; gap: 12px; align-items: center; padding: 16px; border: 1px solid #d7e5f4; border-radius: 10px; background: #f5f9ff; line-height: 1.7; }
+.training-editor--compact .evaluation-repeat input { width: 19px; height: 19px; accent-color: #075a9e; }
+.reference-editor:has(.training-editor) > .reference-editor-context { display: none; }
+.training-workspace .people-breadcrumb { display: flex; flex-wrap: wrap; gap: 9px; }
+.training-workspace .people-header > div:first-child { display: block; }
+.training-workspace .people-header { padding: 0; margin: 0; min-height: 0; background: transparent; border: 0; box-shadow: none; }
+.training-workspace .candidate-form-card > header, .training-workspace .evaluation-entry-card > header, .training-workspace .candidate-table-card > header, .training-workspace .evaluation-records-card > header { display: flex; align-items: center; gap: 14px; padding: 18px 22px; background: linear-gradient(100deg,#fff,#edf5ff); border-bottom: 1px solid #dce8f5; }
+.training-workspace .candidate-form-card header h2, .training-workspace .evaluation-entry-card header h2, .training-workspace .candidate-table-card header h2, .training-workspace .evaluation-records-card header h2 { font-size: 18px; color: #183b67; margin: 0; }
+.training-workspace .candidate-form-card header p, .training-workspace .evaluation-entry-card header p { font-size: 13px; color: #526b8c; margin: 5px 0 0; }
+.training-workspace .candidate-form-card form, .training-workspace .evaluation-entry-card form { padding: 24px; }
+.training-entry-fields { padding: 0; margin: 0; min-width: 0; border: 0; }
+.training-workspace .candidate-form-grid, .training-workspace .evaluation-form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
+.training-workspace .evaluation-hint { grid-column: 1 / -1; padding: 10px 14px; border-radius: 8px; background: #f3f7fc; color: #526b8c; line-height: 1.7; font-size: 13px; }
+.training-workspace .candidate-form-actions, .training-workspace .evaluation-form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; padding-top: 18px; border-top: 1px solid #e0e9f4; }
+.training-workspace .candidate-table-card > header { justify-content: space-between; flex-wrap: wrap; }
+.training-workspace .candidate-table-card > header .training-search { flex: 0 1 380px; }
+.training-record-search { padding: 16px 20px; }
+.training-workspace .candidate-table-card .ui-table-wrap, .training-workspace .evaluation-records-card .ui-table-wrap { margin: 12px 16px 0; }
+.training-workspace .table-pagination { padding-inline: 20px; }
+.training-record-detail .page-heading__main { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.training-record-detail .page-heading__actions > div { flex-wrap: wrap; }
+.training-record-detail .ui-card__header { background: #f0f6ff; border-bottom: 1px solid #dce8f5; }
+.training-workspace :focus-visible { outline: 3px solid #278bca; outline-offset: 3px; }
+@media(max-width:700px) {
+  .training-directory-toolbar { align-items: stretch; gap: 14px; }
+  .training-sort { flex: 1 1 100%; }
+  .training-form-fields, .training-workspace .candidate-form-grid, .training-workspace .evaluation-form-grid { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  .training-workspace .candidate-form-card form, .training-workspace .evaluation-entry-card form, .training-form-fields, .training-editor--compact .enterprise-country-field { padding: 18px; }
+  .training-editor .enterprise-form-footer { flex-direction: column; align-items: stretch; }
+  .training-editor .enterprise-form-footer > div { justify-content: flex-start; }
+  .training-page-icon { flex-basis: 44px; height: 44px; }
+  .training-record-detail .page-heading__actions { width: 100%; }
+}
+.training-editor.training-editor--compact > form { max-width: 960px; }
+.training-editor--compact .enterprise-country-field { max-width: none; }
+.training-workspace .candidate-form-card, .training-workspace .evaluation-entry-card { padding: 0; }

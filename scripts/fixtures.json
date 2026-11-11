@@ -5302,5 +5302,318 @@
     "name": "درجة وظيفية اختبار 27",
     "code": 26,
     "grade_interval": 1
-  }
+  },
+  "/learning-paths": [
+    {
+      "id": 1,
+      "code": 1,
+      "name": "مسار اختبار 1",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 2,
+      "code": 2,
+      "name": "مسار اختبار 2",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 3,
+      "code": 3,
+      "name": "مسار اختبار 3",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 4,
+      "code": 4,
+      "name": "مسار اختبار 4",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 5,
+      "code": 5,
+      "name": "مسار اختبار 5",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 6,
+      "code": 6,
+      "name": "مسار اختبار 6",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 7,
+      "code": 7,
+      "name": "مسار اختبار 7",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 8,
+      "code": 8,
+      "name": "مسار اختبار 8",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 9,
+      "code": 9,
+      "name": "مسار اختبار 9",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 10,
+      "code": 10,
+      "name": "مسار اختبار 10",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 11,
+      "code": 11,
+      "name": "مسار اختبار 11",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 12,
+      "code": 12,
+      "name": "مسار اختبار 12",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 13,
+      "code": 13,
+      "name": "مسار اختبار 13",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 14,
+      "code": 14,
+      "name": "مسار اختبار 14",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 15,
+      "code": 15,
+      "name": "مسار اختبار 15",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 16,
+      "code": 16,
+      "name": "مسار اختبار 16",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 17,
+      "code": 17,
+      "name": "مسار اختبار 17",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 18,
+      "code": 18,
+      "name": "مسار اختبار 18",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 19,
+      "code": 19,
+      "name": "مسار اختبار 19",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 20,
+      "code": 20,
+      "name": "مسار اختبار 20",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 21,
+      "code": 21,
+      "name": "مسار اختبار 21",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 22,
+      "code": 22,
+      "name": "مسار اختبار 22",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    },
+    {
+      "id": 23,
+      "code": 23,
+      "name": "مسار اختبار 23",
+      "qualification_type_id": 1,
+      "qualification_type": {
+        "id": 1,
+        "name": "مؤهل اختبار"
+      }
+    }
+  ],
+  "/path-grades": [
+    {
+      "id": 1,
+      "learning_path_id": 1,
+      "grade_id": 1,
+      "learning_path": {
+        "name": "مسار اختبار 1"
+      },
+      "grade": {
+        "name": "درجة اختبار"
+      }
+    },
+    {
+      "id": 2,
+      "learning_path_id": 2,
+      "grade_id": 1,
+      "learning_path": {
+        "name": "مسار اختبار 2"
+      },
+      "grade": {
+        "name": "درجة اختبار"
+      }
+    },
+    {
+      "id": 3,
+      "learning_path_id": 3,
+      "grade_id": 1,
+      "learning_path": {
+        "name": "مسار اختبار 3"
+      },
+      "grade": {
+        "name": "درجة اختبار"
+      }
+    },
+    {
+      "id": 4,
+      "learning_path_id": 4,
+      "grade_id": 1,
+      "learning_path": {
+        "name": "مسار اختبار 4"
+      },
+      "grade": {
+        "name": "درجة اختبار"
+      }
+    }
+  ],
+  "/qualification-types": [
+    {
+      "id": 1,
+      "name": "مؤهل اختبار"
+    }
+  ],
+  "/path-grade-candidates": [
+    {
+      "id": 1,
+      "person_id": 1,
+      "person": {
+        "name": "مرشح اختبار"
+      },
+      "path_grade_id": 1,
+      "path_grade": {
+        "id": 1,
+        "learning_path_id": 1,
+        "grade_id": 1,
+        "learning_path": {
+          "name": "مسار اختبار 1"
+        },
+        "grade": {
+          "name": "درجة اختبار"
+        }
+      },
+      "term_id": 1,
+      "term": {
+        "name": "فصل اختبار"
+      },
+      "final_evaluation_id": 1,
+      "final_evaluation": {
+        "name": "تقييم اختبار"
+      }
+    }
+  ]
 }
